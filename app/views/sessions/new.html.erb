@@ -21,5 +21,10 @@
     <p>
       ユーザー登録がまだの場合は<%= link_to "こちら", new_user_path %>
     </p>
+    <p>
+      <%= link_to '/auth/facebook', class: "btn btn-social btn-facebook" do %>
+        <span class="fa fa-facebook"></span> Facebookアカウントでログイン
+      <% end %>
+    </p>
   </div>
 </div>

@@ -2,27 +2,24 @@ class User < ApplicationRecord
   before_save { self.email = email.downcase }
   
   validates :password, presence: true, length: {minimum: 8}, on: :facebook_login
-  validates :name, presence: true, length: { maximum: 50 }
+  validates :name, presence: true, length: { maximum: 50 }, unless: :uid?
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 100 },
                     format: { with: VALID_EMAIL_REGEX },
-                    uniqueness: true
-  has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
+                    uniqueness: true,
+                    unless: :uid?
+  has_secure_password validations: false
+  validates :password, presence: true, length: { minimum: 6 }, unless: :uid?
 
-  validates :password, presence: false, on: :facebook_login
-
-    def self.from_omniauth(auth)
-      # emailの提供は必須とする
-      user = User.where('email = ?', auth.info.email).first
-      if user.blank?
-        user = User.new
+    def self.find_or_create_from_auth(auth)
+      provider = auth[:provider]
+      uid = auth[:uid]
+      name = auth[:info][:name]
+      #必要に応じて情報追加してください
+    
+      #ユーザはSNSで登録情報を変更するかもしれので、毎回データベースの情報も更新する
+      self.find_or_create_by(provider: provider, uid: uid) do |user|
+        user.name = name
       end
-      user.uid   = auth.uid
-      user.name  = auth.info.name
-      user.email = auth.info.email
-      user.oauth_token      = auth.credentials.token
-      user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-      user
     end
 end

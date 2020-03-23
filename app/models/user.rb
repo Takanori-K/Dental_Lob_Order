@@ -1,14 +1,12 @@
 class User < ApplicationRecord
   attr_accessor :remember_token
   before_save { self.email = email.downcase }
+
   
   validates :password, presence: true, length: {minimum: 8}, on: :facebook_login
   validates :name, presence: true, unless: :uid?
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true, length: { maximum: 100 },
-                    format: { with: VALID_EMAIL_REGEX },
-                    uniqueness: true,
-                    unless: :uid?
+  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: true, unless: :uid?
   has_secure_password validations: false
   validates :password, presence: true, unless: :uid?
   
@@ -59,4 +57,5 @@ class User < ApplicationRecord
       user.email = email
     end
   end
+  
 end

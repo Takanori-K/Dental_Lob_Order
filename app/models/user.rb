@@ -8,7 +8,7 @@ class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: true, unless: :uid?
   has_secure_password validations: false
-  validates :password, presence: true, unless: :uid?
+  validates :password, presence: true, allow_nil: true, unless: :uid?
   
   # 渡された文字列のハッシュ値を返します。
   def User.digest(string)

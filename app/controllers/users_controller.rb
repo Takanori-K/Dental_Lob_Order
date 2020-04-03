@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in_user, only: [:edit, :update]
+  before_action :logged_in_user, only: [:index, :show, :edit, :update]
   before_action :correct_user, only: [:edit, :update]
   
   def index
@@ -17,7 +17,9 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(user_params)
+    @user.image = "no-image-2.png"
     if @user.save
+      log_in @user
       redirect_to user_url(@user), notice: "新規作成に成功しました。"
     else
       render :new
@@ -41,7 +43,7 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :image)
     end
     
     def set_user

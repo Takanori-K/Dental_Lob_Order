@@ -1,0 +1,39 @@
+<section class="hero is-info is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title has-text-centered">
+        歯科医院一覧
+      </h1>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-multiline">
+      <% @users.each do |user| %>
+        <div class="column is-3">
+          <div class="card">
+            <div class="card-content">
+              <div class="card-image">
+                <figure class="image">
+                  <%= image_tag "/user_images/#{user.image}" %>
+                </figure>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <div class="title"><%=link_to user.name, user_path(user) %></div>
+                </div>
+              </div>
+              <div class="content">
+                投稿数：
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

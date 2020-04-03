@@ -1,14 +1,17 @@
 class User < ApplicationRecord
   attr_accessor :remember_token
-  before_save { self.email = email.downcase }
-
+  before_save :downcase_email, unless: :uid?
   
-  validates :password, presence: true, length: {minimum: 8}, on: :facebook_login
   validates :name, presence: true, unless: :uid?
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: true, unless: :uid?
   has_secure_password validations: false
   validates :password, presence: true, allow_nil: true, unless: :uid?
+  
+  
+  def downcase_email
+    self.email = email.downcase
+  end
   
   # 渡された文字列のハッシュ値を返します。
   def User.digest(string)

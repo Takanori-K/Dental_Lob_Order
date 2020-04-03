@@ -1,24 +1,49 @@
 <% provide(:title, "Edit") %>
-<h1>ユーザー情報の更新</h1>
-
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_with(model: @user, local: true) do |f| %>
-      <%= render 'shared/error_messages' %>
-
-      <%= f.label :name, class: "label-user--edit" %>
-      <%= f.text_field :name, class: "form-control" %>
-
-      <%= f.label :email, class: "label-user--edit" %>
-      <%= f.email_field :email, class: "form-control" %>
-
-      <%= f.label :password, class: "label-user--edit" %>
-      <%= f.password_field :password, class: "form-control" %>
-
-      <%= f.label :password_confirmation, "Confirmation", class: "label-user--edit" %>
-      <%= f.password_field :password_confirmation, class: "form-control" %>
-
-      <%= f.submit "更新", class: "btn btn-primary btn-block btn-user--edit" %>
-    <% end %>
+<section class="hero is-success">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title has-text-centered">
+        ユーザー編集
+      </h1>
+    </div>
   </div>
-</div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-6">
+        <%= form_with(model: @user, local: true) do |f| %>
+        <%= render 'shared/error_messages' %>
+        
+          <div class="field">
+            <%= f.label :name, class: "label" %>
+            <%= f.text_field :name, class: "input" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :email, class: "label" %>
+            <%= f.email_field :email, class: "input" %>
+          </div>
+          
+          <div class="field">
+            <%= f.label :password, class: "label" %>
+            <%= f.password_field :password, class: "input" %>
+          </div>
+          
+          <div class="field">
+            <%= f.label :password_confirmation, class: "label" %>
+            <%= f.password_field :password_confirmation, class: "input" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :image, class: "label" %>
+            <%= f.file_field :image, class: "input" %>
+          </div>
+
+          <%= f.submit "更新", class: "button is-success" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

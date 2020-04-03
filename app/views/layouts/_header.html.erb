@@ -1,0 +1,70 @@
+<div id="app">
+  <nav class="navbar is-warning">
+    <div class="navbar-brand">
+      <%= link_to root_path, class: "navbar-item" do %>
+        <h1 class="title is-3" style="font-family: arial black;">Dental Lab Order</h1>
+      <% end %>
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarExampleTransparentExample" @click="isOpen = !isOpen" v-bind:class="{'is-active': isOpen}">  <!-- 変更する行 -->
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <% if logged_in? %>
+      <div id="navbarExampleTransparentExample" class="navbar-menu" v-bind:class="{'is-active': isOpen}">
+        <div class="navbar-end" class="navbar-menu">
+          <div class="navbar-item">
+            
+              <p class="control">
+                <%= link_to "TOP", root_path, :style=>"color:#887938;", class: " button is-warning is-light" %>
+              </p>
+              <p class="control">
+                <%= link_to "指示書一覧", '#', :style=>"color:#887938;", class: " button is-warning is-light" %>
+              </p>
+              <div class="navbar-item has-dropdown is-hoverable">
+                <p class="navbar-link button is-warning is-light "><font color="#887938">Account</font></p>
+                  <div class="navbar-dropdown">
+                    <p class="control">
+                      <%= link_to "マイページ", '#', :style=>"color:#887938;", class: "button is-warning is-light" %>
+                    </p>
+                    <p class="control">
+                      <%= link_to "指示書作成", '#', :style=>"color:#887938;", class: "button is-warning is-light" %>
+                    </p>
+                    <hr class="navbar-divider">
+                    <p class="control">
+                      <%= link_to "ログアウト", logout_path, method: :delete, :style=>"color:#887938;", class: "button is-warning is-light" %>
+                    </p>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <div id="navbarExampleTransparentExample" class="navbar-menu" v-bind:class="{'is-active': isOpen}">
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <p class="control">
+              <%= link_to "TOP", root_path, :style=>"color:#887938;", class: " button is-warning is-light" %>
+            </p>
+            <p class="control">
+              <%= link_to "ログイン", login_path, :style=>"color:#887938;", class: "button is-warning is-light" %>
+            </p>
+            <p class="control">
+              <%= link_to "新規登録", new_user_path, :style=>"color:#887938;", class: "button is-warning is-light" %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </nav>
+</div>
+    
+    <script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            isOpen: false
+        }
+    })
+    </script>

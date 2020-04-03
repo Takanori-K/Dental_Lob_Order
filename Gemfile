@@ -5,6 +5,7 @@ gem 'bootstrap-sass'
 gem 'bcrypt'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem "bulma-rails"
 gem 'bootstrap-social-rails'
 gem 'font-awesome-rails'
 gem 'dotenv-rails'

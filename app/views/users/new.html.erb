@@ -1,24 +1,67 @@
 <% provide(:title, 'Sign up') %>
-<h1>ユーザー登録</h1>
-
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_with(model: @user, local: true) do |f| %>
-      <%= render 'shared/error_messages' %>
-      
-      <%= f.label :name, class: "label-signup" %>
-      <%= f.text_field :name, class: "form-control" %>
-
-      <%= f.label :email, class: "label-signup" %>
-      <%= f.email_field :email, class: "form-control" %>
-
-      <%= f.label :password, class: "label-signup" %>
-      <%= f.password_field :password, class: "form-control" %>
-
-      <%= f.label :password_confirmation, "Confirmation", class: "label-signup" %>
-      <%= f.password_field :password_confirmation, class: "form-control" %>
-
-      <%= f.submit "新規作成", class: "btn btn-primary btn-block btn-signup" %>
-    <% end %>
+<section class="hero is-info is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title has-text-centered">
+        新規登録画面
+      </h1>
+    </div>
   </div>
-</div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-5">
+        <%= form_with(model: @user, local: true) do |f| %>
+        <%= render 'shared/error_messages' %>
+
+
+        <div class="field">
+          <%= f.label :name, class: "label" %>
+          <p class="control has-icons-left">
+            <%= f.text_field :name, autofocus: true, autocomplete: "email", :placeholder => "name", class: "input" %>
+            <span class="icon is-small is-left">
+              <i class="fas fa-user"></i>
+            </span>
+          </p>
+        </div>
+
+        <div class="field">
+          <%= f.label :email, class: "label" %>
+          <p class="control has-icons-left">
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "email", class: "input" %>
+            <span class="icon is-small is-left">
+              <i class="fas fa-envelope"></i>
+            </span>
+          </p>
+        </div>
+
+        <div class="field">
+          <%= f.label :password, class: "label" %>
+          <p class="control has-icons-left">
+          <%= f.password_field :password, autocomplete: "new-password", :placeholder => "password", class: "input" %>
+            <span class="icon is-small is-left">
+              <i class="fas fa-lock"></i>
+            </span>
+          </p>
+        </div>
+
+        <div class="field">
+          <%= f.label :password_confirmation, class: "label" %>
+          <p class="control has-icons-left">
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", :placeholder => "password confirmation", class: "input" %>
+            <span class="icon is-small is-left">
+              <i class="fas fa-lock"></i>
+            </span>
+          </p>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Sign up", class: "button is-success" %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

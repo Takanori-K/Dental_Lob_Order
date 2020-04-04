@@ -30,8 +30,12 @@ class UsersController < ApplicationController
   end
   
   def update
-    if @user.update_attributes(user_params)
-      redirect_to @user, alert: "ユーザー情報を更新しました。"
+    if params[:user][:image]
+      @user.image = "user_#{@user.id}.png"
+      File.binwrite("public/user_images/#{@user.image}", params[:user][:image].read)
+    end
+    if @user.save(user_params)
+      redirect_to @user, notice: "ユーザー情報を更新しました。"
     else
       render :edit      
     end

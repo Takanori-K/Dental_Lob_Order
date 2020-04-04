@@ -13,8 +13,14 @@
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-6">
-        <%= form_with(model: @user, local: true) do |f| %>
+        <%= form_with(model: @user, local: true, multipart: true) do |f| %>
         <%= render 'shared/error_messages' %>
+        
+          <div class="field has-text-centered">
+            <%= image_tag "/user_images/#{@user.image}", size: "200x200", onClick:"$('#upfile').click()" %>
+            <%= f.label :image, class: "label" %>
+            <%= f.file_field :image, style:"display:none;", id:"upfile", class: "input"%>
+          </div>
         
           <div class="field">
             <%= f.label :name, class: "label" %>
@@ -34,11 +40,6 @@
           <div class="field">
             <%= f.label :password_confirmation, class: "label" %>
             <%= f.password_field :password_confirmation, class: "input" %>
-          </div>
-
-          <div class="field">
-            <%= f.label :image, class: "label" %>
-            <%= f.file_field :image, class: "input" %>
           </div>
 
           <%= f.submit "更新", class: "button is-success" %>

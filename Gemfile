@@ -8,6 +8,8 @@ gem 'omniauth-facebook'
 gem "bulma-rails"
 gem 'bootstrap-social-rails'
 gem 'font-awesome-rails'
+gem 'carrierwave'
+gem 'mini_magick'
 gem 'dotenv-rails'
 gem 'puma',         '~> 3.7'
 gem 'sass-rails',   '~> 5.0'

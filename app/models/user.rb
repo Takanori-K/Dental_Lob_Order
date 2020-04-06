@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  
+  mount_uploader :image, ImageUploader
   attr_accessor :remember_token
   before_save :downcase_email, unless: :uid?
   

@@ -16,9 +16,11 @@
           <div class="card">
             <div class="card-content">
               <div class="card-image">
-                <figure class="image">
-                  <%= image_tag "/user_images/#{user.image}" %>
-                </figure>
+                <% if user.image.present? %>
+                  <figure class="image">
+                    <%= image_tag user.image %>
+                  </figure>
+                <% end %>
               </div>
             </div>
             <div class="card-content">

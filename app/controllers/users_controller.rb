@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   end
   
   def update
-    if @user.save(user_params)
+    if @user.update_attributes(user_params)
       redirect_to @user, notice: "ユーザー情報を更新しました。"
     else
       render :edit      

@@ -17,7 +17,7 @@
         <%= render 'shared/error_messages' %>
         
           <div class="field has-text-centered">
-            <%= image_tag @user.image.thumb.url, size: "120x120", onClick:"$('#upfile').click()" %>
+            <%= image_tag @user.image.thumb.url, size: "120x120", onClick:"$('#upfile').click()" unless @user.image.url.blank? %>
             <%= f.label :image, class: "label" %>
             <%= f.file_field :image, style:"display:none;", id:"upfile", class: "input"%>
           </div>

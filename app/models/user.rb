@@ -54,12 +54,14 @@ class User < ApplicationRecord
     uid = auth[:uid]
     name = auth[:info][:name]
     email = auth[:info][:email]
+    image = auth[:info][:image]
     #必要に応じて情報追加してください
     
     #ユーザはSNSで登録情報を変更するかもしれので、毎回データベースの情報も更新する
     self.find_or_create_by(provider: provider, uid: uid) do |user|
       user.name = name
       user.email = email
+      user.remote_image_url = image.gsub("picture","picture?type=large") if user.provider == "facebook"
     end
   end
   

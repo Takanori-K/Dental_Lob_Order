@@ -6,6 +6,8 @@ gem 'bcrypt'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem "bulma-rails"
+gem 'will_paginate'
+gem 'will_paginate-bulma'
 gem 'bootstrap-social-rails'
 gem 'font-awesome-rails'
 gem 'carrierwave'

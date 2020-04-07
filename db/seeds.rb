@@ -9,4 +9,4 @@ User.create!(name: "Sample User",
              email: "sample@email.com",
              password: "password",
              password_confirmation: "password",
-             image: 'no-image-2.png')
+             admin: true)

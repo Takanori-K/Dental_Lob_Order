@@ -17,7 +17,11 @@
         <%= render 'shared/error_messages' %>
         
           <div class="field has-text-centered">
-            <%= image_tag @user.image.thumb.url, size: "120x120", onClick:"$('#upfile').click()" unless @user.image.url.blank? %>
+            <% if @user.image.present? %>
+              <%= image_tag @user.image.thumb.url, size: "120x120", onClick:"$('#upfile').click()" %>
+            <% else %>
+              <%= image_tag "/user_images/no-image-2.png", size: "120x120", onClick:"$('#upfile').click()" %>
+            <% end %>
             <%= f.label :image, class: "label" %>
             <%= f.file_field :image, style:"display:none;", id:"upfile", class: "input"%>
           </div>

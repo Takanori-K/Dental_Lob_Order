@@ -17,7 +17,6 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(user_params)
-    @user.image = "no-image-2.png"
     if @user.save
       log_in @user
       redirect_to user_url(@user), notice: "新規作成に成功しました。"

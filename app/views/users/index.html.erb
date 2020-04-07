@@ -20,6 +20,10 @@
                   <figure class="image">
                     <%= image_tag user.image.thumb.url, :q => 100 %>
                   </figure>
+                <% else %>
+                  <figure class="image">
+                    <%= image_tag "/user_images/no-image-2.png" %>
+                  </figure>
                 <% end %>
               </div>
             </div>

@@ -19,14 +19,18 @@
               <p class="control">
                 <%= link_to "TOP", root_path, :style=>"color:#887938;", class: " button is-warning is-light" %>
               </p>
-              <% unless current_user.admin? %>
+              <% if current_user.admin? %>
+                <p class="control">
+                  <%= link_to "歯科医院一覧", users_path, :style=>"color:#887938;", class: " button is-warning is-light" %>
+                </p>
+              <% else %>  
                 <p class="control">
                   <%= link_to "指示書作成", '#', :style=>"color:#887938;", class: " button is-warning is-light" %>
                 </p>
+                <p class="control">
+                  <%= link_to "指示書一覧", '#', :style=>"color:#887938;", class: " button is-warning is-light" %>
+                </p>
               <% end %>  
-              <p class="control">
-                <%= link_to "指示書一覧", '#', :style=>"color:#887938;", class: " button is-warning is-light" %>
-              </p>
               <div class="navbar-item has-dropdown is-hoverable">
                 <p class="navbar-link button is-warning is-light "><font color="#887938">Account</font></p>
                   <div class="navbar-dropdown">

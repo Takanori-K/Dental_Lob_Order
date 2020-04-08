@@ -1,0 +1,14 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+    attributes:
+        user:
+          id: ID
+          name: 歯科医院名
+          email: メールアドレス
+          password: パスワード
+          password_confirmation: パスワード再入力
+          image: プロフィール画像
+          created_at: 作成日
+          updated_at: 更新日

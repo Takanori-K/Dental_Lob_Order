@@ -19,6 +19,11 @@
               <p class="control">
                 <%= link_to "TOP", root_path, :style=>"color:#887938;", class: " button is-warning is-light" %>
               </p>
+              <% unless current_user.admin? %>
+                <p class="control">
+                  <%= link_to "指示書作成", '#', :style=>"color:#887938;", class: " button is-warning is-light" %>
+                </p>
+              <% end %>  
               <p class="control">
                 <%= link_to "指示書一覧", '#', :style=>"color:#887938;", class: " button is-warning is-light" %>
               </p>
@@ -27,9 +32,6 @@
                   <div class="navbar-dropdown">
                     <p class="control">
                       <%= link_to "マイページ", edit_user_path(current_user), :style=>"color:#887938;", class: "button is-warning is-light" %>
-                    </p>
-                    <p class="control">
-                      <%= link_to "指示書作成", '#', :style=>"color:#887938;", class: "button is-warning is-light" %>
                     </p>
                     <hr class="navbar-divider">
                     <p class="control">

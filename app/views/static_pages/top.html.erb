@@ -4,19 +4,21 @@
       <div class="media-content">
         <div class="content has-text-centered">
           <p>
-            <strong class="is-size-1" style="font-family: arial black;">Dental Lab Order</strong>
+            <strong class="is-size-1" style="font-family: Georgia;">Dental Lab Order</strong>
           </p>
         </div>
-        <div class="button-position">
-          <div class="columns is-centered">
-            <div class="column is-2">
-              <br>
-              <%= link_to "ログイン", login_path, class: "button is-warning is-fullwidth" %>
-              <br>
-              <%= link_to "新規登録", new_user_path, class: "button is-warning is-fullwidth" %>
+        <% unless logged_in? %>
+          <div class="button-position">
+            <div class="columns is-centered">
+              <div class="column is-3">
+                <br>
+                <%= link_to "ログイン", login_path, class: "btn-flat-border" %>
+                <br>
+                <%= link_to "新規登録", new_user_path, class: "btn-flat-border-new" %>
+              </div>
             </div>
           </div>
-        </div>
+        <% end %>
       </div>
     </article>
     <div class="columns is-centered">

@@ -26,7 +26,7 @@
   background-repeat: no-repeat;
   background-position: center 50%;
   background-size: cover;
-	background-image: url("/user_images/dental.jpg");
+	background-image: url("/user_images/dental-2.jpg");
 }
 
 .button-position {
@@ -34,6 +34,10 @@
 }
 
 .navbar-item p {
+  padding-right: 35px;
+}
+
+.navbar-item.has-dropdown {
   padding-right: 10px;
 }
 
@@ -51,4 +55,44 @@
 	padding-bottom: 20px;
 	margin-left: 200px;
 	margin-right: 750px;
+}
+
+.btn-flat-border {
+  width: 250px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align:center;
+  display: inline-block;
+  padding: 0.3em 1em;
+  text-decoration: none;
+  color: #67c5ff;
+  border: solid 2px #67c5ff;
+  border-radius: 3px;
+  transition: .4s;
+  margin-bottom: 50px;
+}
+
+.btn-flat-border:hover {
+  background: #67c5ff;
+  color: white;
+}
+
+.btn-flat-border-new {
+  width: 250px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align:center;
+  display: inline-block;
+  padding: 0.3em 1em;
+  text-decoration: none;
+  color: #32CD32;
+  border: solid 2px #32CD32;
+  border-radius: 3px;
+  transition: .4s;
+  margin-bottom: 50px;
+}
+
+.btn-flat-border-new:hover {
+  background: #32CD32;
+  color: white;
 }

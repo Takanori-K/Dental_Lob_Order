@@ -9,6 +9,11 @@
 	margin-bottom: 0;
 }
 
+#flash-alert {
+  background: #FFB6C1;
+  color: #FF0000;
+}
+
 .image img{
  border-radius: 50%;
 }
@@ -41,12 +46,24 @@
   padding-right: 35px;
 }
 
+.navbar-menu {
+  background: #ADD8E6;
+}
+
 .navbar-item.has-dropdown {
   padding-right: 10px;
 }
 
+.dropdown-content {
+  background: #ADD8E6;
+}
+
 .section {
 	padding-top: 30px;
+}
+
+#edit-hero {
+  background: #00FF7F;
 }
 
 .field img {

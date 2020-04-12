@@ -1,2 +1,67 @@
 <% provide(:title, @user.name) %>
-<h1><%= @user.name %>, <%= @user.email %></h1>
+<section class="hero is-small is-success">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title has-text-centered">
+        マイページ
+      </h1>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="columns is-centered">
+          <div class="column is-4">
+            <% if @user.image.present? %>
+              <figure class="image-tag">
+                <%= image_tag @user.image.thumb.url, size: "200x200" %>
+              </figure>
+            <% else %>
+              <figure class="image-tag">
+                <%= image_tag "/user_images/no-image-2.png", size: "120x120" %>
+              </figure>
+            <% end %>
+          </div>
+          <div class="column is-10">
+            <table class="table is-fullwidth">
+              <tr>
+                <td class="is-size-5">
+                  <strong>医院名</strong>
+                </td>
+                <td class="is-size-5">
+                  <strong>メールアドレス</strong>
+                </td>
+                <td class="is-size-5">
+                  
+                </td>
+              </tr>
+              <tr></tr>
+              <tr>
+                <td class="is-size-5">
+                  <%= @user.name %>
+                </td>
+                <% if @user.id == current_user.id %>
+                <td class="is-size-5">
+                  <%= @user.email %>
+                </td>
+                <td>
+                    <%= link_to "編集", edit_user_path(current_user), class: "button is-primary" %>
+                </td>
+                <% end %>
+              </tr>
+            </table>
+            <table class="table is-fullwidth">
+              <tr>
+                <td>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

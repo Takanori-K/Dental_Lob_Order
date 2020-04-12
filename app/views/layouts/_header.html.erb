@@ -39,7 +39,8 @@
                   </span>
                   <div class="dropdown-menu" id="dropdown-menu" role="menu">
                     <div class="dropdown-content">
-                      <%= link_to "マイページ", edit_user_path(current_user), :style=>"color:#887938;", class: "has-text-grey-darker dropdown-item" %>
+                      <%= link_to "マイページ", user_path(current_user), :style=>"color:#887938;", class: "has-text-grey-darker dropdown-item" %>
+                      <%= link_to "編集", edit_user_path(current_user), :style=>"color:#887938;", class: "has-text-grey-darker dropdown-item" %>
                     <hr class="dropdown-divider">
                       <%= link_to "ログアウト", logout_path, method: :delete, :style=>"color:#887938;", class: "has-text-grey-darker dropdown-item" %>
                     </div>  

@@ -14,8 +14,20 @@
   color: #FF0000;
 }
 
+.image {
+  padding-left: 20px;
+}
+
 .image img{
- border-radius: 50%;
+  border-radius: 50%;
+  width: 180px;
+  height: 180px;
+}
+
+.image-tag img {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
 }
 
 #main-image {
@@ -60,10 +72,6 @@
 
 .section {
 	padding-top: 30px;
-}
-
-#edit-hero {
-  background: #00FF7F;
 }
 
 .field img {

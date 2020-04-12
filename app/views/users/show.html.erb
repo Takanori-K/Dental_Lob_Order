@@ -53,12 +53,6 @@
                 <% end %>
               </tr>
             </table>
-            <table class="table is-fullwidth">
-              <tr>
-                <td>
-                </td>
-              </tr>
-            </table>
           </div>
         </div>
       </div>
@@ -66,8 +60,46 @@
   </div>
 </section>
 
+<div class="container">
+  <div class="columns is-centered">
+    <div class="buttons are-medium">
+      <% unless current_user.admin? %>
+        <div class="button-new">
+          <%= link_to "指示書新規作成", '#', class: "button is-warning" %>
+        </div>
+      <% end %>  
+      <div class="button-index">
+        <%= link_to "指示書一覧（完）", '#', class: "button is-info" %>
+      </div>
+    </div>
+  </div>
+</div>
 <section class="section">
-  <div class="containe">
-    
+  <div class="container">
+    <h2 class="title-order has-text-centered is-3">
+      申請中の技工物
+    </h2>
+    <div class="columns is-centered">
+      <div class="table-container">
+        <table class="table is-bordered is-hoverable is-fullwidth">
+          <tr>
+            <th>日付</th>
+            <th>曜日</th>
+            <th>患者名</th>
+            <th>試適1</th>
+            <th>試適2</th>
+            <th>完成日</th>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </table>
+      </div>
+    </div>
   </div>
 </section>

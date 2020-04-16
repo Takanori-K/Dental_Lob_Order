@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  patient_name: MyString
+  sex: MyString
+  color: 1
+  note: MyText
+  user: one
+
+two:
+  patient_name: MyString
+  sex: MyString
+  color: 1
+  note: MyText
+  user: two

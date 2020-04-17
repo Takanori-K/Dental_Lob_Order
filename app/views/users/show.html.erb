@@ -65,8 +65,25 @@
     <div class="buttons are-medium">
       <% unless current_user.admin? %>
         <div class="button-new">
-          <%= link_to "指示書新規作成", '#', class: "button is-warning" %>
+         <button class="button is-warning" id="open">指示書新規作成</button>
         </div>
+        
+        <div class="modal">
+          <div class="modal-background"></div>
+            <div class="modal-card">
+              <header class="modal-card-head">
+                <p class="modal-card-title">モーダルウィンドウ</p>
+                <button class="delete" aria-label="close" id="close"></button>
+              </header>
+              <section class="modal-card-body">
+                コンテンツ欄
+              </section>
+              <footer class="modal-card-foot">
+                <button class="button is-success"><a href=#>リンク</a></button>
+              </footer>
+            </div>
+          </div>
+          
         <div class="button-index">
           <%= link_to "指示書一覧（完）", '#', class: "button is-info" %>
         </div>
@@ -118,3 +135,15 @@
     </div>
   </div>
 </section>
+
+<script>
+  $(document).ready(function() {
+    $("#open").on("click", function() {
+      $("div.modal").addClass("is-active");
+    })
+
+    $("#close, div.modal-background").on("click", function() {
+      $("div.modal").removeClass("is-active");
+    })
+  });
+</script>

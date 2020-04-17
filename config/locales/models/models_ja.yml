@@ -2,6 +2,7 @@ ja:
   activerecord:
     models:
       user: ユーザー
+      order: 技工指示書
     attributes:
         user:
           id: ID
@@ -12,3 +13,10 @@ ja:
           image: プロフィール画像
           created_at: 作成日
           updated_at: 更新日
+        order:
+          patient_name: 患者名
+          sex: 性別
+          color: シェード
+          note: 詳細
+          user: ユーザーID
+          created_at: 日付

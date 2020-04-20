@@ -1,5 +1,5 @@
 <% provide(:title, 'Order_up') %>
-<section class="hero is-info is-bold">
+<section class="hero is-info is-bold is-small">
   <div class="hero-body">
     <div class="container">
       <h1 class="title has-text-centered">
@@ -12,7 +12,7 @@
 <section class="section">
   <div class="container">
     <div class="columns is-centered">
-      <div class="column is-10">
+      <div class="column is-9">
          <div class="table-container">
            <table class="table is-bordered is-hoverable is-fullwidth" id="order-table">
              <tr>
@@ -20,37 +20,52 @@
                <th colspan = "5">
                  デンタルラボラトリー
                </th>
-               <th colspan = "4">口腔内写真</th>
              </tr>
              <tr>
                <th>医院名</th>
                <td colspan = "5">
                  <%= current_user.name %>&ensp;様
                </td>
-               <td colspan = "2" rowspan = "5"></td>
-               <td colspan = "2" rowspan = "5"></td>
              </tr>
              <tr>
-               <th>患者名</th>
-               <td>
-                 <%= f.text_field :patient_name, class: "input" %>
+               <th class="select-table">患者名</th>
+               <td colspan = "3">
+                 <%= f.text_field :patient_name, class: "input is-info" %>
                </td>
-               <th>性別</th>
-               <td>
-                 <%= f.select :sex, [['男', 1], ['女', 2]], { include_blank: true }, class: "select" %>
+               <th class="select-table">性別</th>
+               <td class="select-table">
+                 <div class="select is-info is-small">
+                   <%= f.select :sex, [['男', '男'], ['女', '女']], { include_blank: '選択してください' } %>
+                 </div>
                </td>
-               <th>シェード</th>
-               <td>
-                
+             </tr>
+             <tr>
+               <th class="select-tag">受付日</th>
+               <td class="select-date">
+                 <%= f.date_field :reception_date, class: "input is-small is-info" %>
+               </td>
+               <th class="select-tag">色</th>
+               <td class="select-order">
+                <div class="select is-info is-small">
+                  <%= f.select :color, Order.colors_i18n.invert, {include_blank: '選択してください'} %>
+                </div>  
+               </td>
+               <th class="select-tag">単冠 or 連結</th>
+               <td class="select-order">
+                 <div class="select is-info is-small">
+                   <%= f.select :crown, [['単冠', '単冠'], ['連結', '連結']], { include_blank: '選択してください' }%>
+                 </div> 
                </td>
              </tr>
              <tr>
                <th colspan = "6">
-                 ・部位 ・備考
+                 ・部位 ・注意事項
                </th>
              </tr>
              <tr>
-               <td colspan = "6"></td>
+               <td colspan = "6">
+                 <%= f.text_area :note, :placeholder => "部位・注意事項", class: "textarea is-info is-medium" %>
+               </td>
              </tr>
              <tr>
                <th colspan = "6">
@@ -59,22 +74,17 @@
              </tr>
              <tr>
                <td colspan = "6"></td>
-               <th>試適１</th>
-               <th>試適２</th>
-               <th>完成日</th>
-               <th>完了㊞</th>
              </tr>
              <tr>
-               <th>単冠 or 連結</th>
-               <td></td>
-               <th>使用金属</th>
-               <td></td>
-               <th>グラム</th>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
+               <th class="select-metal">使用金属</th>
+               <td>
+                 <%= f.text_field :metal, :placeholder => "金属名", class: "input is-info is-small" %>
+               </td>
+               <th class="select-metal">グラム</th>
+               <td>
+                 <%= f.number_field :weight, step: '0.1', :placeholder => "g", class: "input is-info is-small" %>
+               </td>
+               <td colspan = "2"></td>
              </tr>
            </table>
           </div>

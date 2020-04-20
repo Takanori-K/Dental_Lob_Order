@@ -136,10 +136,34 @@
   padding-right: 70px;
 }
 
+#order-table {
+  background: #F5F5F5;
+}
+
 #order-table th {
   text-align: center;
 }
 
 #order-table td {
   text-align: center;
+}
+
+#order-table .select-table {
+  padding-top: 15px;
+}
+
+#order-table .select-date {
+  padding-top: 10px;
+}
+
+#order-table .select-order {
+  padding-top: 10px;
+}
+
+#order-table .select-metal {
+  padding-top: 12px;
+}
+
+#order-table .select-tag {
+  padding-top: 13px;
 }

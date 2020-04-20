@@ -20,3 +20,12 @@ ja:
           note: 詳細
           user: ユーザーID
           created_at: 日付
+  enums:
+    order:
+      color:
+        a1: "A1"
+        a2: "A2"
+        a3: "A3"
+        a35: "A3.5"
+        a4: 'A4'
+        photo: '写真あり'        

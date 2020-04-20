@@ -8,6 +8,7 @@
     </div>
   </div>
 </section>
+<%= form_with(model: @order, url: user_orders_path(@user), local: true) do |f| %>
 <section class="section">
   <div class="container">
     <div class="columns is-centered">
@@ -24,18 +25,24 @@
              <tr>
                <th>医院名</th>
                <td colspan = "5">
-                 市川歯科医院　様
+                 <%= current_user.name %>&ensp;様
                </td>
                <td colspan = "2" rowspan = "5"></td>
                <td colspan = "2" rowspan = "5"></td>
              </tr>
              <tr>
                <th>患者名</th>
-               <td>テスト</td>
-               <th>男・女</th>
-               <td></td>
+               <td>
+                 <%= f.text_field :patient_name, class: "input" %>
+               </td>
+               <th>性別</th>
+               <td>
+                 <%= f.select :sex, [['男', 1], ['女', 2]], { include_blank: true }, class: "select" %>
+               </td>
                <th>シェード</th>
-               <td></td>
+               <td>
+                
+               </td>
              </tr>
              <tr>
                <th colspan = "6">
@@ -75,4 +82,5 @@
       </div>
     </div>
   </div>
-</section>  
+</section>
+<% end %>

@@ -65,7 +65,7 @@
     <div class="buttons are-medium">
       <% unless current_user.admin? %>
         <div class="button-new">
-         <%= link_to "指示書作成", new_user_order_path(@user), class: "button is-warning" %>
+         <%= link_to "指示書作成", new_user_order_path(@user), class: "button is-warning", :style=>"width:140%;" %>
         </div>
           
         <div class="button-index">

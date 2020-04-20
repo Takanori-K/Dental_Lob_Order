@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200420141258) do
+ActiveRecord::Schema.define(version: 20200420141918) do
 
   create_table "orders", force: :cascade do |t|
     t.string "patient_name"
@@ -26,6 +26,9 @@ ActiveRecord::Schema.define(version: 20200420141258) do
     t.datetime "first_try"
     t.datetime "second_try"
     t.datetime "complete_day"
+    t.date "reception_date"
+    t.float "weight"
+    t.string "finished"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 

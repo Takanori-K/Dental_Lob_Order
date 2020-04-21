@@ -18,19 +18,26 @@
              <tr>
                <th>技工所名</th>
                <th colspan = "5">
-                 デンタルラボラトリー
+                 <div class="has-text-weight-semibold is-size-5">デンタルラボラトリー</div>
                </th>
              </tr>
              <tr>
                <th>医院名</th>
                <td colspan = "5">
-                 <%= current_user.name %>&ensp;様
+                 <div class="has-text-weight-semibold is-size-5"><%= current_user.name %>&ensp;様</div>
                </td>
              </tr>
              <tr>
                <th class="select-table">患者名</th>
                <td colspan = "3">
-                 <%= f.text_field :patient_name, class: "input is-info" %>
+                 <div class="field">
+                   <p class="control has-icons-left">
+                     <%= f.text_field :patient_name, class: "input is-info" %>
+                     <span class="icon is-small is-left">
+                       <i class="fas fa-user"></i>
+                     </span>
+                   </p> 
+                 </div>   
                </td>
                <th class="select-table">性別</th>
                <td class="select-table">
@@ -84,10 +91,10 @@
                    <div class="control-order">
                      その他
                    </div>
-                   <div class="control-order">
+                   <div class="control-field">
                      <%= f.text_field :content, class: "input is-small is-info" %>
                    </div>
-                   <div class="control-order">
+                   <div class="control-field">
                      <font color="red"><p class="warning-text is-size-7">※その他記入の場合チェック欄にチェックしないでください。</p></font>
                    </div>
                  </div>
@@ -98,7 +105,7 @@
                <td>
                  <%= f.text_field :metal, :placeholder => "金属名", class: "input is-info is-small" %>
                </td>
-               <th class="select-metal">金属量</th>
+               <th></th>
                <td>
                  <%= f.number_field :weight, step: '0.1', min: "0.0", :placeholder => "g", class: "input is-info is-small" %>
                </td>

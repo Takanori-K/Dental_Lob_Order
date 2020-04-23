@@ -9,7 +9,14 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section" id="image-layout">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title has-text-centered">
+        新規登録画面
+      </h1>
+    </div>
+  </div>
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-5">
@@ -20,41 +27,41 @@
         <div class="field">
           <%= f.label :name, class: "label" %>
           <p class="control has-icons-left">
-            <%= f.text_field :name, autofocus: true, autocomplete: "name", :placeholder => "name", class: "input" %>
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", :placeholder => "name", class: "input is-success" %>
             <span class="icon is-small is-left">
               <i class="fas fa-user"></i>
             </span>
-          </p>
+          </p><br>
         </div>
 
         <div class="field">
           <%= f.label :email, class: "label" %>
           <p class="control has-icons-left">
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "email", class: "input" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "email", class: "input is-success" %>
             <span class="icon is-small is-left">
               <i class="fas fa-envelope"></i>
             </span>
-          </p>
+          </p><br>
         </div>
 
         <div class="field">
           <%= f.label :password, class: "label" %>
           <p class="control has-icons-left">
-          <%= f.password_field :password, :placeholder => "password", class: "input" %>
+          <%= f.password_field :password, :placeholder => "password", class: "input is-success" %>
             <span class="icon is-small is-left">
               <i class="fas fa-lock"></i>
             </span>
-          </p>
+          </p><br>
         </div>
 
         <div class="field">
           <%= f.label :password_confirmation, class: "label" %>
           <p class="control has-icons-left">
-            <%= f.password_field :password_confirmation, :placeholder => "password confirmation", class: "input" %>
+            <%= f.password_field :password_confirmation, :placeholder => "password confirmation", class: "input is-success" %>
             <span class="icon is-small is-left">
               <i class="fas fa-lock"></i>
             </span>
-          </p>
+          </p><br>
         </div>
 
         <div class="actions">

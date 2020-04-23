@@ -23,7 +23,7 @@
 .hero-body {
   flex-grow: 1;
   flex-shrink: 0;
-  padding: 5rem 1.5rem;
+  padding: 4rem 1.5rem;
 }
 
 .image {
@@ -42,7 +42,7 @@
   height: 150px;
 }
 
-.section {
+#image-layout {
   position: absolute;
   top: 0;
   width: 100%;
@@ -54,6 +54,18 @@
   background-position: center 50%;
   background-size: cover;
 	background-image: url("/user_images/dental-2.jpg");
+}
+
+#image-layout::before{
+	/* 透過した黒を重ねる */
+	background-color: rgba(0,0,0,0.1);
+	/* どの範囲に重ねるかを指定 */
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	content: ' ';
 }
 
 #main-image {

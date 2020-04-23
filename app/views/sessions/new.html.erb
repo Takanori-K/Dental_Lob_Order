@@ -1,5 +1,6 @@
 <% provide(:title, "login") %>
-<section class="hero is-info ">
+
+<section class="section">
   <div class="hero-body">
     <div class="container">
       <h1 class="title has-text-centered">
@@ -7,9 +8,6 @@
       </h1>
     </div>
   </div>
-</section>
-
-<section class="section">
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-5">
@@ -18,32 +16,32 @@
           <div class="field">
             <%= f.label :email, "メールアドレス",  class: "label" %>
             <p class="control has-icons-left">
-              <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "email", class: "input" %>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "email", class: "input is-info" %>
               <span class="icon is-small is-left">
                 <i class="fas fa-envelope"></i>
               </span>
-            </p>
+            </p><br>
           </div>
     
           <div class="field">
             <%= f.label :password, "パスワード", class: "label" %>
             <p class="control has-icons-left">
-              <%= f.password_field :password, :placeholder => "password", class: "input" %>
+              <%= f.password_field :password, :placeholder => "password", class: "input is-info" %>
               <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
               </span>
-            </p>
+            </p><br>
           </div>
     
           <div class="field">
-            <%= f.label :remember_me, class: "checkbox is-left", for: "remember-me" do %>
-            <%= f.check_box :remember_me, id: "remember-me" %>
-            <span>ログイン情報を記憶する</span>
-          <% end %>
-          </div>
+            <%= f.label :remember_me, class: "checkbox is-left is-info", for: "remember-me" do %>
+              <%= f.check_box :remember_me, id: "remember-me" %>
+              <font color="black"><span>ログイン情報を記憶する</span></font>
+            <% end %>
+          </div><br>
 
           <div class="actions">
-            <%= f.submit "ログイン", class: "button is-success" %>
+            <%= f.submit "ログイン", :style=>"background: #67c5ff; color: white;", class: "button" %>
           </div><br>
         <% end %>
         
@@ -58,7 +56,14 @@
           <% end %>
         </p></br>
         <p class="is-size-4 has-text-grey-dark has-text-weight-semibold">
-          ユーザー登録がまだの場合は<%= link_to "こちら", new_user_path %>
+          ユーザー登録がまだの場合は<%= link_to new_user_path, :style=>"background: #32CD32;  color: white;", class: "button" do %>
+            <span class="icon">
+              <i class="fa fa-chevron-right"></i>
+            </span>
+            <span>
+              こちら
+            </span>
+          <% end %>  
         </p>
         
       </div>

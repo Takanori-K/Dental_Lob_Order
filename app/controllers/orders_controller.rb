@@ -35,7 +35,7 @@ class OrdersController < ApplicationController
   
     def order_params
       params.require(:order).permit(:patient_name, :sex, :color, :note, :content, :crown, :metal, :first_try, :second_try,
-                                    :complete_day, :reception_date, :weight, :finished)
+                                    :complete_day, :reception_date, :weight, :finished, :image_1, :image_2, :image_3)
     end                                
     
     def set_user

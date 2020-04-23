@@ -9,7 +9,14 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section" id="image-layout">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title has-text-centered">
+        ユーザー編集
+      </h1>
+    </div>
+  </div>
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-6">
@@ -28,23 +35,43 @@
         
           <div class="field">
             <%= f.label :name, class: "label" %>
-            <%= f.text_field :name, class: "input" %>
+            <p class="control has-icons-left">
+              <%= f.text_field :name, class: "input" %>
+              <span class="icon is-small is-left">
+                <i class="fas fa-user"></i>
+              </span>
+            </p>
           </div>
 
           <div class="field">
             <%= f.label :email, class: "label" %>
-            <%= f.email_field :email, class: "input" %>
+            <p class="control has-icons-left">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "email", class: "input" %>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </p>
           </div>
           
           <div class="field">
             <%= f.label :password, class: "label" %>
-            <%= f.password_field :password, class: "input" %>
+            <p class="control has-icons-left">
+            <%= f.password_field :password, :placeholder => "password", class: "input" %>
+              <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
+            </p>
           </div>
           
           <div class="field">
             <%= f.label :password_confirmation, class: "label" %>
-            <%= f.password_field :password_confirmation, class: "input" %>
-          </div>
+            <p class="control has-icons-left">
+              <%= f.password_field :password_confirmation, :placeholder => "password confirmation", class: "input" %>
+              <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
+            </p>
+          </div><br>
 
           <%= f.submit "更新", class: "button is-success" %>
         <% end %>

@@ -131,9 +131,22 @@
                <th colspan = "6">口腔内写真</th>
              </tr>
              <tr>
-               <td colspan = "2"></td>
-               <td colspan = "2"></td>
-               <td colspan = "2"></td>
+               <td colspan = "2">
+                 <div class="field tooth-image has-text-centered">
+                    <% if @order.image_1.present? %>
+                      <%= image_tag @user.orders.image_1.thumb.url, size: "120x120", onClick:"$('#upfile').click()" %>
+                    <% else %>
+                      <%= image_tag "/user_images/no-image-2.png", size: "250x250", onClick:"$('#upfile').click()" %>
+                    <% end %>
+                    <%= f.file_field :image_1, style:"display:none;", id:"upfile", class: "input"%>
+                  </div>
+               </td>
+               <td colspan = "2">
+                 <%= f.file_field :image_2, class: "input" %>
+               </td>
+               <td colspan = "2">
+                 <%= f.file_field :image_3, class: "input" %>
+               </td>
              </tr>
              <tr>
                <th class="select-tag">試適１</th>
@@ -150,6 +163,10 @@
                </td>
              </tr>
            </table>
+          </div>
+          <div class="has-text-centered">
+            <%= f.submit "指示書作成", class: "button is-warning is-medium" %>&emsp;&nbsp;
+            <%= link_to "キャンセル", '#', class: "button is-outlined is-medium" %>
           </div>
         </div>
       </div>

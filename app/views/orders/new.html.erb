@@ -14,6 +14,14 @@
     <div class="columns is-centered">
       <div class="column is-10">
          <div class="table-container">
+           <div class="field is-grouped">
+             <div class="control">
+               <font color="#FF6666"><i class="fas fa-tooth"></i></font>
+             </div>
+             <div class="control">
+               <font color="#FF6666"<p class="warning-text is-size-7">マークは必須項目になります。</p></font>
+             </div>
+           </div> 
            <table class="table is-bordered is-hoverable is-fullwidth" id="order-table">
              <tr>
                <th>技工所名</th>
@@ -28,7 +36,9 @@
                </td>
              </tr>
              <tr>
-               <th class="select-table">患者名</th>
+               <th class="select-table">
+                 <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;患者名
+               </th>
                <td colspan = "3">
                  <div class="field">
                    <p class="control has-icons-left">
@@ -39,7 +49,9 @@
                    </p> 
                  </div>   
                </td>
-               <th class="select-table">性別</th>
+               <th class="select-table">
+                 <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;性別
+               </th>
                <td class="select-table">
                  <div class="select is-info is-small">
                    <%= f.select :sex, [['男', '男'], ['女', '女']], { include_blank: '選択してください' } %>
@@ -47,7 +59,9 @@
                </td>
              </tr>
              <tr>
-               <th class="select-tag">受付日</th>
+               <th class="select-tag">
+                 <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;受付日
+               </th>
                <td class="select-date">
                  <%= f.date_field :reception_date, class: "input is-small is-info" %>
                </td>
@@ -57,7 +71,9 @@
                   <%= f.select :color, Order.colors_i18n.invert, {include_blank: '選択してください'} %>
                 </div>  
                </td>
-               <th class="select-tag">単冠 or 連結</th>
+               <th class="select-tag">
+                 <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;単冠 or 連結
+               </th>
                <td class="select-order">
                  <div class="select is-info is-small">
                    <%= f.select :crown, [['単冠', '単冠'], ['連結', '連結']], { include_blank: '選択してください' }%>
@@ -66,7 +82,7 @@
              </tr>
              <tr>
                <th colspan = "6">
-                 ・部位 ・注意事項
+                 <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;部位 ・注意事項
                </th>
              </tr>
              <tr>
@@ -76,7 +92,7 @@
              </tr>
              <tr>
                <th colspan = "6">
-                 注文内容
+                 <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;注文内容
                </th>
              </tr>
              <tr>

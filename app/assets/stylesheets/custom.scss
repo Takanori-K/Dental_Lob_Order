@@ -180,3 +180,17 @@
 #order-table .warning-text {
   padding-top: 10px;
 }
+
+.field .control p {
+  padding-top: 5px;
+  padding-right: 5px;
+}
+
+.field:not(:last-child) {
+  margin-bottom: 0px;
+}
+
+.field.is-grouped > .control:not(:last-child) {
+  margin-bottom: 0;
+  margin-right: 0px;
+}

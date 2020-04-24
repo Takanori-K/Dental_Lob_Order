@@ -9,12 +9,12 @@
   </div>
 </section>
 <%= form_with(model: @order, url: user_orders_path(@user), local: true) do |f| %>
-  <%= render partial: 'shared/error_messages', locals: { obj: @order } %>
 <section class="section">
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-10">
          <div class="table-container">
+           <%= render partial: 'shared/error_messages', locals: { obj: @order } %>
            <div class="field is-grouped">
              <div class="control">
                <font color="#FF6666"><i class="fas fa-tooth"></i></font>
@@ -66,14 +66,14 @@
                <td class="select-date">
                  <%= f.date_field :reception_date, class: "input is-small is-info" %>
                </td>
-               <th class="select-tag">色</th>
+               <th class="select-tag">シェード</th>
                <td class="select-order">
                 <div class="select is-info is-small">
                   <%= f.select :color, Order.colors_i18n.invert, {include_blank: '選択してください'} %>
                 </div>  
                </td>
                <th class="select-tag">
-                 <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;単冠 or 連結
+                 <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;単 or 連
                </th>
                <td class="select-order">
                  <div class="select is-info is-small">
@@ -98,10 +98,10 @@
              </tr>
              <tr>
                <td colspan = "6">
-                 <div class="checkbox">
+                 <div class="checkbox is-flex-desktop">
                    <% ["AC","MB","e-max","CAD/CAM冠", "前装冠", "FCK", "インレー", "総義歯", "部分床義歯"].each do |order| %>
-                     <%= f.check_box :content, {multiple: true}, order, nil %>
-                     <%= order %>&emsp;&nbsp;
+                   <div class="checkbox-content"><%= f.check_box :content, {multiple: true}, order, nil %></div>&nbsp;
+                     <%= order %>&emsp;&nbsp;&emsp;&nbsp;
                    <% end %>
                  </div>
                  <div class="field is-grouped">

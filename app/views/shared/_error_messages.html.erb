@@ -1,9 +1,9 @@
 <% if obj.errors.any? %>
-  <div id="message is-danger">
+  <div class="message is-danger">
     <div class="notification is-danger">
       入力エラーが<%= obj.errors.count %>件ありました。
     </div>
-    <ul class="has-text-danger">
+    <ul class="has-text-danger is-size-7">
     <% obj.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>

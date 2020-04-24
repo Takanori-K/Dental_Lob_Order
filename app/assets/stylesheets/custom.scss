@@ -26,6 +26,16 @@
   padding: 4rem 1.5rem;
 }
 
+.message ul {
+  padding-left: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.message li {
+  font-size: 14px;
+}
+
 .image {
   padding-left: 20px;
 }
@@ -229,6 +239,10 @@
 
 #order-table .tooth-image img {
   border-radius: 0%;
+}
+
+#order-table .checkbox-content {
+  padding-top: 0px;
 }
 
 .field .control p {

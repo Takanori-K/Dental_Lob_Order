@@ -18,6 +18,18 @@ ja:
           sex: 性別
           color: シェード
           note: 詳細
+          content: 注文内容
+          crown: 単 or 連
+          metal: 使用金属
+          first_try: 試適１
+          second_try: 試適２
+          complete_day: 完成日
+          reception_date: 受付日
+          weight: 金属量
+          finished: 完了
+          image_1: 写真１
+          image_2: 写真２
+          image_3: 写真３
           user: ユーザーID
           created_at: 日付
   enums:

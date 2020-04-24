@@ -1,10 +1,10 @@
-<% if @user.errors.any? %>
+<% if obj.errors.any? %>
   <div id="message is-danger">
     <div class="notification is-danger">
-      入力エラーが<%= @user.errors.count %>件ありました。
+      入力エラーが<%= obj.errors.count %>件ありました。
     </div>
     <ul class="has-text-danger">
-    <% @user.errors.full_messages.each do |msg| %>
+    <% obj.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>
     </ul>

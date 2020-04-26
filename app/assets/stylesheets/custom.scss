@@ -268,3 +268,79 @@
 .modal-card-head, .modal-card-foot {
   background-color: #ADD8E6;
 }
+
+/* 画像表示切り替え */
+
+.sample {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-image: url(/user_images/dental-2.jpg)
+    z-index: -1;
+}
+.sample li {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: none;
+    opacity: 0;
+    -webkit-animation: anime 30s linear 0s ;
+    animation: anime 20s linear 0s ;
+}
+.sample li:nth-child(1) { 
+    background-image: url(/user_images/dental-2.jpg)   /* 背景画像を入力して下さい */
+}
+.sample li:nth-child(2) {
+    background-image: url(/user_images/no-image-2.png);
+    -webkit-animation-delay: 7s;
+    animation-delay: 7s;
+}
+
+@-webkit-keyframes anime { 
+    0% {
+        -webkit-animation-timing-function: ease-in;
+        opacity: 0;
+    }
+    1% {
+        -webkit-transform: scale(1.1);
+        opacity: 1;
+    }
+    40% {
+        -webkit-transform: scale(1.2);
+            -webkit-animation-timing-function: ease-out;
+        opacity: 1;
+    }
+    50% {
+        -webkit-transform: scale(1.3);
+        opacity: 0;
+    }
+    100% { opacity: 0 }
+}
+@keyframes anime { 
+    0% {
+        animation-timing-function: ease-in;
+        opacity: 0;
+    }
+    25% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    40% {
+        transform: scale(1.2);
+            animation-timing-function: ease-in;
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.3);
+        opacity: 0;
+    }
+    100% { opacity: 0 }
+}

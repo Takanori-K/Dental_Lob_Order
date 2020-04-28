@@ -12,11 +12,12 @@ class Order < ApplicationRecord
   validate :content_is_invalid_without_content_other
   validate :content_other_is_invalid_without_other_text
   validate :other_text_is_invalid_without_content_other
+  validate :first_try_and_second_try_and_complete_day_is_presense
   
   enum color: { a1: 0, a2: 1, a3: 2, a35: 3, a4: 4, photo: 5 }
   
   def content_is_invalid_without_content_other
-    if content.blank? && (other_text.present? || content_other.present?) || content.blank? && (other_text.blank? || content_other.present?)
+    if content.blank? && content_other.blank? && other_text.blank?
       errors.add(:content, "にレ点チェックを入れてください。")
     end
   end
@@ -26,6 +27,12 @@ class Order < ApplicationRecord
   end
   
   def other_text_is_invalid_without_content_other
-   errors.add(:content_other, "にレ点チェックを入れてください。") if content_other.blank? && other_text.present?
+    errors.add(:content_other, "にレ点チェックを入れてください。") if content_other.blank? && other_text.present?
+  end
+  
+  def first_try_and_second_try_and_complete_day_is_presense
+    if first_try.blank? && second_try.blank? && complete_day.blank?
+      errors.add( :first_try, "、試適２、完成日のどれかに日付を入れてください。")
+    end
   end
 end

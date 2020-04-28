@@ -19,6 +19,8 @@ ja:
           color: シェード
           note: 詳細
           content: 注文内容
+          content_other: その他
+          other_text: その他記入欄
           crown: 単 or 連
           metal: 使用金属
           first_try: 試適１

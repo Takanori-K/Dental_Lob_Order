@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200428010645) do
+ActiveRecord::Schema.define(version: 20200428021230) do
 
   create_table "orders", force: :cascade do |t|
     t.string "patient_name"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20200428010645) do
     t.string "image_2"
     t.string "image_3"
     t.string "content_other"
+    t.string "other_text"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 

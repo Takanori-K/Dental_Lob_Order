@@ -95,17 +95,17 @@
              <tr>
                <td colspan = "6">
                  <div class="checkbox is-flex-desktop">
-                   <% ["AC","MB","e-max","CAD/CAM", "前装冠", "FCK", "インレー", "総義歯", "部分床義歯", "その他"].each do |order| %>
+                   <% ["AC","MB","e-max","CAD/CAM", "前装冠", "FCK", "インレー", "総義歯", "部分床義歯"].each do |order| %>
                    <div class="checkbox-content"><%= f.check_box :content, {multiple: true}, order, nil %></div>&nbsp;
                      <%= order %>&emsp;&nbsp;&emsp;&nbsp;
                    <% end %>
                  </div>
                  <div class="field is-grouped">
                    <div class="control-order">
-                     その他
+                     <%= f.check_box :content_other, "その他 " %>
                    </div>
                    <div class="control-field">
-                     <%= f.text_field :content_other,  class: "input is-info" %>
+                     <%= f.text_field :other_text,  class: "input is-info" %>
                    </div>
                    <div class="control-field">
                      <font color="red"><p class="warning-text is-size-7">※その他記入の場合その他にチェックしてください。</p></font>

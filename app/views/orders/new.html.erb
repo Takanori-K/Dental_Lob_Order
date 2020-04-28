@@ -95,14 +95,17 @@
              <tr>
                <td colspan = "6">
                  <div class="checkbox is-flex-desktop">
-                   <% ["AC","MB","e-max","CAD/CAM", "前装冠", "FCK", "インレー", "総義歯", "部分床義歯"].each do |order| %>
+                   <% ["AC","MB","e-max","CAD冠", "前装冠", "FCK", "In", "総義歯", "部分床義歯"].each do |order| %>
                    <div class="checkbox-content"><%= f.check_box :content, {multiple: true}, order, nil %></div>&nbsp;
                      <%= order %>&emsp;&nbsp;&emsp;&nbsp;
                    <% end %>
-                 </div>
+                 </div><br>
                  <div class="field is-grouped">
                    <div class="control-order">
-                     <%= f.check_box :content_other, "その他 " %>
+                      <div class="checkbox">
+                         <%= f.label :content_other, "その他" %>
+                         <%= f.check_box :content_other, {}, "その他", nil %>
+                      </div>     
                    </div>
                    <div class="control-field">
                      <%= f.text_field :other_text,  class: "input is-info" %>

@@ -1,11 +1,11 @@
-<% provide(:title, 'Order_up') %>
+<% provide(:title, 'Order_show') %>
 <ul class="order-image">
 </ul>
 <%= form_with(model: @order, url: user_orders_path(@user), local: true) do |f| %>
 <section class="section">
   <div class="container">
       <h1 class="title has-text-centered">
-        指示書作成
+        指示書詳細
       </h1>
     <div class="columns is-centered">
       <div class="column is-10">
@@ -17,12 +17,6 @@
              </div>
              <div class="control">
                <font color="red"><p class="warning-text is-size-7">マークは【必須】になります。</p></font>
-             </div>&ensp;
-             <div class="control">
-               <font color="#FF6666"><i class="fas fa-calendar-check"></i></font>
-             </div>
-             <div class="control">
-               <font color="red"><p class="warning-text is-size-7">マークの 試適１、試適２、完成日、どれか一つには日付を入れてください。</p></font>
              </div>
            </div> 
            <table class="table is-bordered is-hoverable is-fullwidth" id="order-table">
@@ -40,84 +34,59 @@
              </tr>
              <tr>
                <th class="select-table">
-                 <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;患者名
+                 患者名
                </th>
                <td colspan = "3">
-                 <div class="field">
-                   <p class="control has-icons-left">
-                     <%= f.text_field :patient_name, class: "input is-info" %>
-                     <span class="icon is-small is-left">
-                       <i class="fas fa-user"></i>
-                     </span>
-                   </p> 
-                 </div>   
+                 <div class="has-text-weight-semibold is-size-5"><%= @order.patient_name %>&ensp;様</div>   
                </td>
                <th class="select-table">
-                 <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;性別
+                 性別
                </th>
                <td class="select-table">
-                 <div class="select is-info is-small">
-                   <%= f.select :sex, [['男', '男'], ['女', '女']], { include_blank: '選択してください' } %>
-                 </div>
+                 <div class="has-text-weight-normal is-size-5"><%= @order.sex %></div>
                </td>
              </tr>
              <tr>
                <th class="select-tag">
-                 <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;受付日
+                 受付日
                </th>
                <td class="select-date">
-                 <%= f.date_field :reception_date, class: "input is-small is-info" %>
+                 <div class="has-text-weight-normal is-size-6"><%= l(@order.reception_date, format: :long) %></div>
                </td>
                <th class="select-tag">シェード</th>
                <td class="select-order">
-                <div class="select is-info is-small">
-                  <%= f.select :color, Order.colors_i18n.invert, {include_blank: '選択してください'} %>
-                </div>  
+                 <div class="has-text-weight-normal is-size-6"><%= @order.color %></div>  
                </td>
                <th class="select-tag">
-                 <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;単 or 連
+                 単 or 連
                </th>
                <td class="select-order">
-                 <div class="select is-info is-small">
-                   <%= f.select :crown, [['単冠', '単冠'], ['連結', '連結']], { include_blank: '選択してください' }%>
-                 </div> 
+                 <div class="has-text-weight-normal is-size-6"><%= @order.crown %></div> 
                </td>
              </tr>
              <tr>
                <th colspan = "6">
-                 <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;部位 ・注意事項
+                 部位 ・注意事項
                </th>
              </tr>
              <tr>
                <td colspan = "6">
-                 <%= f.text_area :note, :placeholder => "部位・注意事項", class: "textarea is-info is-medium" %>
+                 <div class="has-text-weight-normal is-size-6"><%= @order.note %></div>
                </td>
              </tr>
              <tr>
                <th colspan = "6">
-                 <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;注文内容
+                 注文内容
                </th>
              </tr>
              <tr>
                <td colspan = "6">
-                 <div class="checkbox is-flex-desktop">
-                   <% ["AC","MB","e-max","CAD冠", "前装冠", "FCK", "In", "総義歯", "部分床義歯"].each do |order| %>
-                   <div class="checkbox-content"><%= f.check_box :content, {multiple: true}, order, nil %></div>&nbsp;
-                     <%= order %>&emsp;&nbsp;&emsp;&nbsp;
-                   <% end %>
-                 </div><br>
                  <div class="field is-grouped">
-                   <div class="control-order">
-                      <div class="checkbox">
-                         <%= f.label :content_other, "その他" %>
-                         <%= f.check_box :content_other, {}, "その他", nil %>
-                      </div>     
+                   <div class="control">
+                      <div class="has-text-weight-normal is-size-6"><%= @order.content %></div>     
                    </div>
-                   <div class="control-field">
-                     <%= f.text_field :other_text,  class: "input is-info" %>
-                   </div>
-                   <div class="control-field">
-                     <font color="red"><p class="warning-text is-size-7">※その他記入の場合、その他にチェックしてください。</p></font>
+                   <div class="control">
+                     <div class="has-text-weight-normal is-size-6"><%= @order.other_text %></div>
                    </div>
                  </div>
                </td>

@@ -119,10 +119,8 @@
                           <td></td>
                         <% end %>  
                         <td><%= link_to "編集", '#', class: "button is-primary" %></td>
-                        <td><%= link_to '#',  method: :delete,
-                            data: { confirm: "削除してよろしいですか？" }, class: "button is-danger" do %>
-                              <i class="far fa-trash-alt fa-2x"></i>
-                            <% end %>
+                        <td><%= link_to "削除", '#',  method: :delete,
+                            data: { confirm: "削除してよろしいですか？" }, class: "button is-danger" %>
                         </td>
                       </tr>
                     <% end %>

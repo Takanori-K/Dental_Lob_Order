@@ -1,16 +1,12 @@
 <% provide(:title, 'Order_up') %>
-<section class="hero is-info is-bold is-small">
-  <div class="hero-body">
-    <div class="container">
-      <h1 class="title has-text-centered">
-        指示書作成
-      </h1>
-    </div>
-  </div>
-</section>
+<ul class="order-image">
+</ul>
 <%= form_with(model: @order, url: user_orders_path(@user), local: true) do |f| %>
 <section class="section">
   <div class="container">
+      <h1 class="title has-text-centered">
+        指示書作成
+      </h1>
     <div class="columns is-centered">
       <div class="column is-10">
          <div class="table-container">
@@ -99,7 +95,7 @@
              <tr>
                <td colspan = "6">
                  <div class="checkbox is-flex-desktop">
-                   <% ["AC","MB","e-max","CAD/CAM冠", "前装冠", "FCK", "インレー", "総義歯", "部分床義歯"].each do |order| %>
+                   <% ["AC","MB","e-max","CAD/CAM", "前装冠", "FCK", "インレー", "総義歯", "部分床義歯", "その他"].each do |order| %>
                    <div class="checkbox-content"><%= f.check_box :content, {multiple: true}, order, nil %></div>&nbsp;
                      <%= order %>&emsp;&nbsp;&emsp;&nbsp;
                    <% end %>
@@ -109,10 +105,10 @@
                      その他
                    </div>
                    <div class="control-field">
-                     
+                     <%= f.text_field :content_other,  class: "input is-info" %>
                    </div>
                    <div class="control-field">
-                     <font color="red"><p class="warning-text is-size-7">※その他記入の場合チェック欄にチェックしないでください。</p></font>
+                     <font color="red"><p class="warning-text is-size-7">※その他記入の場合その他にチェックしてください。</p></font>
                    </div>
                  </div>
                </td>

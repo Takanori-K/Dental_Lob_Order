@@ -12,7 +12,7 @@ class OrdersController < ApplicationController
       flash[:notice] = "技工指示書を新規作成しました。"
       redirect_to @user
     else
-      render :new
+        render :new
     end
   end
   
@@ -34,7 +34,7 @@ class OrdersController < ApplicationController
   private
   
     def order_params
-      params.require(:order).permit(:patient_name, :sex, :color, :note, {content: [].join(",")}, :crown, :metal, :first_try, :second_try,
+      params.require(:order).permit(:patient_name, :sex, :color, :note, {content: [].join(",")}, :content_other, :crown, :metal, :first_try, :second_try,
                                     :complete_day, :reception_date, :weight, :finished,:image_1, :image_2, :image_3)
     end                                
     

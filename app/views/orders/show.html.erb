@@ -94,9 +94,11 @@
              <tr>
                <th class="select-metal">使用金属</th>
                <td>
-                 <%= f.text_field :metal, :placeholder => "金属名", class: "input is-info is-small" %>
+                 <div class="has-text-weight-normal is-size-6"><%= @order.metal %></div>
                </td>
-               <th></th>
+               <th class="select-metal">
+                 <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;金属量
+               </th>
                <td>
                  <%= f.number_field :weight, step: '0.1', min: "0.0", :placeholder => "g", class: "input is-info is-small" %>
                </td>
@@ -107,33 +109,30 @@
              </tr>
              <tr>
                <td colspan = "2">
-                 <div class="field tooth-image has-text-centered">
+                 <div class="field tooth-image has-text-centered show-modal" data-target="modalA">
                     <% if @order.image_1.present? %>
-                      <%= image_tag @order.image_1.thumb.url, size: "250x250", onClick:"$('#upfile').click()" %>
+                      <%= image_tag @order.image_1.thumb.url, size: "250x250" %>
                     <% else %>
-                      <%= image_tag "/user_images/no-image-2.png", size: "250x250", onClick:"$('#upfile').click()" %>
+                      <%= image_tag "/user_images/no-image-2.png", size: "250x250" %>
                     <% end %>
-                    <%= f.file_field :image_1, style:"display:none;", id:"upfile", class: "input"%>
                   </div>
                </td>
                <td colspan = "2">
-                 <div class="field tooth-image has-text-centered">
+                 <div class="field tooth-image has-text-centered show-modal-2" data-target="modalB">
                     <% if @order.image_2.present? %>
-                      <%= image_tag @order.image_2.thumb.url, size: "250x250", onClick:"$('#upfile2').click()" %>
+                      <%= image_tag @order.image_2.thumb.url, size: "250x250" %>
                     <% else %>
-                      <%= image_tag "/user_images/no-image-2.png", size: "250x250", onClick:"$('#upfile2').click()" %>
+                      <%= image_tag "/user_images/no-image-2.png", size: "250x250" %>
                     <% end %>
-                    <%= f.file_field :image_2, style:"display:none;", id:"upfile2", class: "input"%>
                   </div>
                </td>
                <td colspan = "2">
-                 <div class="field tooth-image has-text-centered">
+                 <div class="field tooth-image has-text-centered" id="open-3">
                     <% if @order.image_3.present? %>
-                      <%= image_tag @order.image_3.thumb.url, size: "250x250", onClick:"$('#upfile3').click()" %>
+                      <%= image_tag @order.image_3.thumb.url, size: "250x250" %>
                     <% else %>
-                      <%= image_tag "/user_images/no-image-2.png", size: "250x250", onClick:"$('#upfile3').click()" %>
+                      <%= image_tag "/user_images/no-image-2.png", size: "250x250" %>
                     <% end %>
-                    <%= f.file_field :image_3, style:"display:none;", id:"upfile3", class: "input"%>
                   </div>
                </td>
              </tr>
@@ -163,3 +162,70 @@
   </div>
 </section>
 <% end %>
+
+<div class="modal" id="modalA">
+  <div class="modal-background">
+    <button class="delete is-large" aria-label="close" data-target="show-modal"></button>
+  </div>
+    <div class="modal-content">
+      <p class="images-orders is-4by3">
+          <% if @order.image_1.present? %>
+            <%= image_tag @order.image_1.thumb.url %>
+          <% else %>
+            <%= image_tag "/user_images/no-image-2.png" %>
+          <% end %>
+      </p>
+    </div>
+</div>
+
+
+<script>
+  for (const element of document.querySelectorAll('.modal .delete, .show-modal')) {
+    element.addEventListener('click', e => {
+      const modalId = element.dataset.target;
+      const modal = document.getElementById(modalId);
+      modal.classList.toggle('is-active');
+    });
+  }
+</script>
+
+<div class="modal" id="modalB">
+  <div class="modal-background">
+    <button class="delete is-large" aria-label="close" data-target="show-modal-2"></button>
+  </div>
+    <div class="modal-content">
+      <p class="images-orders is-4by3">
+          <% if @order.image_2.present? %>
+            <%= image_tag @order.image_2.thumb.url %>
+          <% else %>
+            <%= image_tag "/user_images/no-image-2.png" %>
+          <% end %>
+      </p>
+    </div>
+</div>
+
+
+
+<script>
+  for (const element of document.querySelectorAll('.modal .delete, .show-modal-2')) {
+    element.addEventListener('click', e => {
+      const modalId = element.dataset.target;
+      const modal = document.getElementById(modalId);
+      modal.classList.toggle('is-active');
+    });
+  }
+</script>
+
+<script>
+  $(document).ready(function() {
+    $("#open_3").on("click", function() {
+      $("div.modal").addClass("is-active");
+    })
+
+    $("#close, div.modal-background").on("click", function() {
+      $("div.modal").removeClass("is-active");
+    })
+  });
+</script>
+    
+    

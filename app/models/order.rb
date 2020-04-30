@@ -1,8 +1,8 @@
 class Order < ApplicationRecord
   belongs_to :user
-  mount_uploader :image_1, ImageUploader
-  mount_uploader :image_2, ImageUploader
-  mount_uploader :image_3, ImageUploader
+  mount_uploader :image_1, ImagesUploader
+  mount_uploader :image_2, ImagesUploader
+  mount_uploader :image_3, ImagesUploader
   validates :patient_name, presence: true
   validates :sex,            presence: true
   validates :note,           presence: true, length: { maximum: 100 }
@@ -17,7 +17,7 @@ class Order < ApplicationRecord
   enum color: { a1: 0, a2: 1, a3: 2, a35: 3, a4: 4, photo: 5 }
   
   def content_is_invalid_without_content_other
-    if content.blank? && content_other.blank? && other_text.blank?
+    if (content.blank? && content_other.blank? && other_text.blank?)
       errors.add(:content, "にレ点チェックを入れてください。")
     end
   end

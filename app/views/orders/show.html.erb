@@ -81,14 +81,8 @@
              </tr>
              <tr>
                <td colspan = "6">
-                 <div class="field is-grouped">
-                   <div class="control">
-                      <div class="has-text-weight-normal is-size-6"><%= @order.content %></div>     
-                   </div>
-                   <div class="control">
-                     <div class="has-text-weight-normal is-size-6"><%= @order.other_text %></div>
-                   </div>
-                 </div>
+                  <div class="has-text-weight-normal is-size-6"><%= @order.content %></div>     
+                  <div class="has-text-weight-normal is-size-6"><%= @order.other_text %></div>
                </td>
              </tr>
              <tr>
@@ -109,7 +103,7 @@
              </tr>
              <tr>
                <td colspan = "2">
-                 <div class="field tooth-image has-text-centered show-modal" data-target="modalA">
+                 <div class="field tooth-image has-text-centered js-modal-open" data-target="modal01">
                     <% if @order.image_1.present? %>
                       <%= image_tag @order.image_1.thumb.url, size: "250x250" %>
                     <% else %>
@@ -118,7 +112,7 @@
                   </div>
                </td>
                <td colspan = "2">
-                 <div class="field tooth-image has-text-centered show-modal-2" data-target="modalB">
+                 <div class="field tooth-image has-text-centered js-modal-open" data-target="modal02">
                     <% if @order.image_2.present? %>
                       <%= image_tag @order.image_2.thumb.url, size: "250x250" %>
                     <% else %>
@@ -127,7 +121,7 @@
                   </div>
                </td>
                <td colspan = "2">
-                 <div class="field tooth-image has-text-centered" id="open-3">
+                 <div class="field tooth-image has-text-centered js-modal-open" data-target="modal03">
                     <% if @order.image_3.present? %>
                       <%= image_tag @order.image_3.thumb.url, size: "250x250" %>
                     <% else %>
@@ -137,23 +131,28 @@
                </td>
              </tr>
              <tr>
-               <th class="select-tag"><font color="#FF6666"><i class="fas fa-calendar-check"></i></font>&nbsp;試適１</th>
+               <th class="select-tag">試適１</th>
                <td class="select-date">
-                 <%= f.datetime_field :first_try, class: "input is-small is-info" %>
+                 <div class="has-text-weight-normal is-size-6"><%= @order.first_try if @order.first_try.present? %></div>
                </td>
-               <th class="select-tag"><font color="#FF6666"><i class="fas fa-calendar-check"></i></font>&nbsp;試適２</th>
+               <th class="select-tag">試適２</th>
                <td class="select-date">
-                <%= f.datetime_field :second_try, class: "input is-small is-info" %>  
+                <div class="has-text-weight-normal is-size-6"><%= @order.second_try if @order.second_try.present? %></div>  
                </td>
-               <th class="select-tag"><font color="#FF6666"><i class="fas fa-calendar-check"></i></font>&nbsp;完成日</th>
+               <th class="select-tag">完成日</th>
                <td class="select-date">
-                <%= f.datetime_field :complete_day, class: "input is-small is-info" %>  
+                <div class="has-text-weight-normal is-size-6"><%= l(@order.complete_day) if @order.complete_day.present? %></div>  
                </td>
+             </tr>
+             <tr>
+               <td colspan = "4"></td>
+               <th><font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;完了</th>
+               <td></td>
              </tr>
            </table>
           </div>
           <div class="has-text-centered">
-            <%= f.submit "指示書作成", class: "button is-warning is-medium" %>&emsp;&nbsp;
+            <%= f.submit "製作完了", class: "button is-primary is-medium" %>&emsp;&nbsp;
             <%= link_to "キャンセル", '#', class: "button is-outlined is-medium" %>
           </div>
         </div>
@@ -163,69 +162,68 @@
 </section>
 <% end %>
 
-<div class="modal" id="modalA">
-  <div class="modal-background">
-    <button class="delete is-large" aria-label="close" data-target="show-modal"></button>
-  </div>
-    <div class="modal-content">
+<!--モーダルA-->
+
+<div class="modal js-modal" id="modal01">
+  <div class="modal__bg js-modal-close"></div>
+    <div class="modal__content">
       <p class="images-orders is-4by3">
-          <% if @order.image_1.present? %>
-            <%= image_tag @order.image_1.thumb.url %>
-          <% else %>
-            <%= image_tag "/user_images/no-image-2.png" %>
-          <% end %>
+        <% if @order.image_1.present? %>
+          <%= image_tag @order.image_1.thumb.url %>
+        <% else %>
+          <%= image_tag "/user_images/no-image-2.png" %>
+        <% end %>
+        <a class="js-modal-close" href="">閉じる</a>
       </p>
     </div>
 </div>
 
+<!--モーダルB-->
 
-<script>
-  for (const element of document.querySelectorAll('.modal .delete, .show-modal')) {
-    element.addEventListener('click', e => {
-      const modalId = element.dataset.target;
-      const modal = document.getElementById(modalId);
-      modal.classList.toggle('is-active');
-    });
-  }
-</script>
-
-<div class="modal" id="modalB">
-  <div class="modal-background">
-    <button class="delete is-large" aria-label="close" data-target="show-modal-2"></button>
-  </div>
-    <div class="modal-content">
+<div class="modal js-modal" id="modal02">
+  <div class="modal__bg js-modal-close"></div>
+    <div class="modal__content">
       <p class="images-orders is-4by3">
-          <% if @order.image_2.present? %>
-            <%= image_tag @order.image_2.thumb.url %>
-          <% else %>
-            <%= image_tag "/user_images/no-image-2.png" %>
-          <% end %>
+        <% if @order.image_2.present? %>
+          <%= image_tag @order.image_2.thumb.url %>
+        <% else %>
+          <%= image_tag "/user_images/no-image-2.png" %>
+        <% end %>
+        <a class="js-modal-close" href="">閉じる</a>
       </p>
     </div>
 </div>
 
+<!--モーダルC-->
 
+<div class="modal js-modal" id="modal03">
+  <div class="modal__bg js-modal-close"></div>
+    <div class="modal__content">
+      <p class="images-orders is-4by3">
+        <% if @order.image_3.present? %>
+          <%= image_tag @order.image_3.thumb.url %>
+        <% else %>
+          <%= image_tag "/user_images/no-image-2.png" %>
+        <% end %>
+        <a class="js-modal-close" href="">閉じる</a>
+      </p>
+    </div>
+</div>
 
 <script>
-  for (const element of document.querySelectorAll('.modal .delete, .show-modal-2')) {
-    element.addEventListener('click', e => {
-      const modalId = element.dataset.target;
-      const modal = document.getElementById(modalId);
-      modal.classList.toggle('is-active');
+  $(function(){
+    $('.js-modal-open').each(function(){
+        $(this).on('click',function(){
+            var target = $(this).data('target');
+            var modal = document.getElementById(target);
+            $(modal).fadeIn();
+            return false;
+        });
     });
-  }
-</script>
-
-<script>
-  $(document).ready(function() {
-    $("#open_3").on("click", function() {
-      $("div.modal").addClass("is-active");
-    })
-
-    $("#close, div.modal-background").on("click", function() {
-      $("div.modal").removeClass("is-active");
-    })
+    $('.js-modal-close').on('click',function(){
+        $('.js-modal').fadeOut();
+        return false;
+    }); 
   });
-</script>
-    
+</script>    
     

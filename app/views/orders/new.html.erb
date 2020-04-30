@@ -8,7 +8,7 @@
         指示書作成
       </h1>
     <div class="columns is-centered">
-      <div class="column is-10">
+      <div class="column is-11">
          <div class="table-container">
            <%= render partial: 'shared/error_messages', locals: { obj: @order } %>
            <div class="field is-grouped">
@@ -101,16 +101,16 @@
              <tr>
                <td colspan = "6">
                  <div class="checkbox is-flex-desktop">
-                   <% ["AC","MB","e-max","CAD冠", "前装冠", "FCK", "In", "総義歯", "部分床義歯"].each do |order| %>
+                   <% ["AC","　MB","　e-max","　CAD冠", "　前装冠", "　FCK", "　In", "　総義歯", "　部分床義歯"].each do |order| %>
                    <div class="checkbox-content"><%= f.check_box :content, {multiple: true}, order, nil %></div>&nbsp;
-                     <%= order %>&emsp;&nbsp;&emsp;&nbsp;
+                     <%= order %>&emsp;
                    <% end %>
                  </div><br>
                  <div class="field is-grouped">
                    <div class="control-order">
                       <div class="checkbox">
-                         <%= f.label :content_other, "その他" %>
-                         <%= f.check_box :content_other, {}, "その他", nil %>
+                        <%= f.check_box :content_other, {}, "その他", nil %>
+                        <%= f.label :content_other, "その他" %>
                       </div>     
                    </div>
                    <div class="control-field">

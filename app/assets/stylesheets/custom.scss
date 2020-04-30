@@ -207,6 +207,10 @@
   text-align: center;
 }
 
+#order-table .checkbox {
+  padding-left: 72px;
+}
+
 #order-table .select-table {
   padding-top: 15px;
 }
@@ -228,7 +232,7 @@
 }
 
 #order-table .control-order {
-  padding-left: 56px;
+  padding-left: 0px;
   padding-top: 5px;
 }
 
@@ -237,7 +241,7 @@
 }
 
 #order-table .warning-text {
-  padding-top: 10px;
+  padding-top: 20px;
 }
 
 #order-table .tooth-image img {

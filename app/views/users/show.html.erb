@@ -94,6 +94,7 @@
                 <table class="table is-bordered is-hoverable is-fullwidth" id="order-table">
                   <thead>
                     <tr>
+                      <th class="is-size-5">詳細</th>
                       <th class="is-size-5">日付</th>
                       <th class="is-size-5">曜日</th>
                       <th class="is-size-5">患者名</th>
@@ -109,6 +110,11 @@
                   <tbody>
                     <% @orders.each do |order| %>
                       <tr>
+                        <td>
+                          <%= link_to user_order_path(@user, order), class: "button is-info" do %>
+                            <i class="fas fa-teeth-open"></i>
+                          <% end %>
+                        </td>
                         <td></td>
                         <td></td>
                         <td></td>

@@ -192,6 +192,10 @@
   padding-right: 70px;
 }
 
+.update-button {
+  font-weight: bold;
+}
+
 /* table */
 
 #order-table {
@@ -264,6 +268,23 @@
 .field.is-grouped > .control:not(:last-child) {
   margin-bottom: 0;
   margin-right: 0px;
+}
+
+/* Order-show-table */
+
+#order-show-table th {
+  text-align: center;
+  background: #FFEFD5;
+}
+
+#order-show-table td {
+  text-align: center;
+  font-weight: bold;
+}
+
+#order-show-table .show-td {
+  text-align: center;
+  padding-top: 17px;
 }
 
 /* モーダル */

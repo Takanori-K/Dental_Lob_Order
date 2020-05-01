@@ -1,8 +1,8 @@
 <% provide(:title, 'Order_up') %>
-<ul class="order-image">
-</ul>
 <%= form_with(model: @order, url: user_orders_path(@user), local: true) do |f| %>
 <section class="section">
+  <ul class="order-image">
+  </ul>
   <div class="container">
       <h1 class="title has-text-centered">
         指示書作成

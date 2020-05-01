@@ -8,11 +8,16 @@ class OrdersController < ApplicationController
   
   def create
     @order = @user.orders.build(order_params)
-    if @order.save
-      flash[:notice] = "技工指示書を新規作成しました。"
-      redirect_to @user
-    else
+    if params[:order][:first_try].present? && params[:order][:complete_day].present?
+      flash.now[:alert] = "試適１ または 完成日 一つに日付を入れてください。"
+      render :new
+    else  
+      if @order.save
+        flash[:notice] = "技工指示書を新規作成しました。"
+        redirect_to @user
+      else
         render :new
+      end
     end
   end
   

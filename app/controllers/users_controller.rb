@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   
   def show
     @orders = Order.where(user_id: current_user.id).order(id: "DESC")
+    @notification = Order.where.not(reception_date: nil).where(finished: nil).count
   end
   
   def new

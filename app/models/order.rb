@@ -15,7 +15,10 @@ class Order < ApplicationRecord
   validate :content_is_invalid_without_content_other
   validate :content_other_is_invalid_without_other_text
   validate :other_text_is_invalid_without_content_other
-  validate :first_try_and_second_try_and_complete_day_is_presense
+  validate :first_try_and_complete_day_is_blank
+  validate :first_try_and_complete_day_presence
+  validate :first_try_is_late_second_try_and_complete_day
+  validate :second_try_is_late_complete_day
   
   enum color: { a1: 0, a2: 1, a3: 2, a35: 3, a4: 4, photo: 5 }
   
@@ -33,9 +36,27 @@ class Order < ApplicationRecord
     errors.add(:content_other, "にレ点チェックを入れてください。") if content_other.blank? && other_text.present?
   end
   
-  def first_try_and_second_try_and_complete_day_is_presense
+  def first_try_and_complete_day_is_blank
     if first_try.blank? && second_try.blank? && complete_day.blank?
-      errors.add( :first_try, "、試適２、完成日のどれかに日付を入れてください。")
+      errors.add( :first_try, " または 完成日 に日付を入れてください。")
+    end
+  end
+  
+  def first_try_and_complete_day_presence
+    if first_try.present? && complete_day.present?
+      errors.add( :first_try, " または 完成日 一つに日付を入れてください。")
+    end
+  end
+  
+  def first_try_is_late_second_try_and_complete_day
+    if first_try.present? && (second_try.present? || complete_day.present?)
+      errors.add( :first_try, " より早い時間の入力は無効です") if first_try > (second_try || complete_day) 
+    end
+  end
+  
+  def second_try_is_late_complete_day
+    if second_try.present? && complete_day.present?
+      errors.add( :second_try, " より早い時間の入力は無効です") if second_try > complete_day
     end
   end
   

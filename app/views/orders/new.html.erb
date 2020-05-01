@@ -22,7 +22,7 @@
                <font color="#FF6666"><i class="fas fa-calendar-check"></i></font>
              </div>
              <div class="control">
-               <font color="red"><p class="warning-text is-size-7">マークの 試適１、試適２、完成日、どれか一つには日付を入れてください。</p></font>
+               <font color="red"><p class="warning-text is-size-7">マーク 【試適１】または 【完成日】 に日付を入れてください。</p></font>
              </div>
            </div> 
            <table class="table is-bordered is-hoverable is-fullwidth" id="order-table">
@@ -127,10 +127,7 @@
                <td>
                  <%= f.text_field :metal, :placeholder => "金属名", class: "input is-info is-small" %>
                </td>
-               <th></th>
-               <td>
-                 <%= f.number_field :weight, step: '0.1', min: "0.0", :placeholder => "g", class: "input is-info is-small" %>
-               </td>
+               <td colspan = "2"></td>
                <td colspan = "2"></td>
              </tr>
              <tr>
@@ -173,9 +170,7 @@
                <td class="select-date">
                  <%= f.datetime_field :first_try, class: "input is-small is-info" %>
                </td>
-               <th class="select-tag"><font color="#FF6666"><i class="fas fa-calendar-check"></i></font>&nbsp;試適２</th>
-               <td class="select-date">
-                <%= f.datetime_field :second_try, class: "input is-small is-info" %>  
+               <td class="select-date" colspan = "2">
                </td>
                <th class="select-tag"><font color="#FF6666"><i class="fas fa-calendar-check"></i></font>&nbsp;完成日</th>
                <td class="select-date">

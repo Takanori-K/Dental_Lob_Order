@@ -72,11 +72,25 @@
     <div class="buttons are-medium">
       <% unless current_user.admin? %>
         <div class="button-new">
-         <%= link_to "指示書作成", new_user_order_path(@user), class: "button is-warning", :style=>"width:140%;" %>
+         <%= link_to new_user_order_path(@user), class: "button is-warning", :style=>"width:120%;" do %>
+           <span class="icon">
+             <i class="far fa-edit"></i>
+           </span>
+           <span>
+             指示書作成
+           </span>
+         <% end %> 
         </div>
           
         <div class="button-index">
-          <%= link_to "指示書一覧（完）",'#',class: "button is-info" %>
+          <%= link_to '#',class: "button is-info" do %>
+            <span class="icon">
+              <i class="far fa-list-alt"></i>
+            </span>
+            <span>
+              指示書一覧 (完)
+            </span>
+          <% end %>
         </div>
       <% end %>  
     </div>

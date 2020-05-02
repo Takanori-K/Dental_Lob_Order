@@ -20,6 +20,8 @@ class Order < ApplicationRecord
   validate :first_try_is_late_second_try_and_complete_day
   validate :second_try_is_late_complete_day
   validate :first_try_is_late_date_current
+  validate :second_try_is_late_date_current
+  validate :complete_day_is_late_date_current
   
   enum color: { a1: 0, a2: 1, a3: 2, a35: 3, a4: 4, photo: 5 }
   
@@ -63,9 +65,22 @@ class Order < ApplicationRecord
   
   def first_try_is_late_date_current
     if first_try.present?
-      errors.add( :first_try, " 今日より早い時間の入力は無効です") if first_try > Date.current
+      errors.add( :first_try, " は今日より早い時間の入力は無効です") if first_try < Date.current
     end
   end
+  
+  def second_try_is_late_date_current
+    if second_try.present?
+      errors.add( :second_try, " は今日より早い時間の入力は無効です") if second_try < Date.current
+    end
+  end
+  
+  def complete_day_is_late_date_current
+    if complete_day.present?
+      errors.add( :complete_day, " は今日より早い時間の入力は無効です") if complete_day < Date.current
+    end
+  end
+      
   
   def content_slim
     self.content.gsub!(/[\[\]\"]/, "").gsub!(" ","") if attribute_present?("content")

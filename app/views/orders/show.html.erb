@@ -99,17 +99,17 @@
                <td>
                  <div class="has-text-weight-normal is-size-6"><%= @order.metal %></div>
                </td>
-               <th class="select-metal">
-                 <% if current_user.admin? %>       
+               <% if current_user.admin? %>
+                 <th class="select-metal">
                    <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;金属量
-                 <% end %>  
-               </th>
-               <td>
-                 <% if current_user.admin? %> 
+                 </th>
+                 <td>
                    <%= f.number_field :weight, step: '0.1', min: "0.0", :placeholder => "g", class: "input is-info is-small" %>
-                 <% end %>  
-               </td>
-               <td colspan = "2"></td>
+                 </td>
+                 <td colspan = "2"></td>
+               <% else %>
+                 <td colspan = "4"></td>
+               <% end %>     
              </tr>
              <tr>
                <th colspan = "6">口腔内写真</th>
@@ -146,30 +146,20 @@
              <tr>
                <th class="select-tag">試適１</th>
                <td class="select-date">
-                 <div class="has-text-weight-normal is-size-6"><%= l(@order.first_try) if @order.first_try.present? %></div>
+                 <div class="has-text-weight-normal is-size-6">
+                     <%= l(@order.first_try) if @order.first_try.present? %>
+                 </div>
                </td>
                <th class="select-tag">試適２</th>
                <td class="select-date">
                  <div class="has-text-weight-normal is-size-6">
-                  <% unless current_user.admin? %>
-                    <% if @order.first_try.present? %>
-                      <%= f.datetime_field :second_try, class: "input is-small is-info" %>
-                    <% else %>
-                      <%= l(@order.second_try) if @order.second_try.present? %>
-                    <% end %>
-                  <% end %>
+                   <%= l(@order.second_try) if @order.second_try.present? %>
                  </div>  
                </td>
                <th class="select-tag">完成日</th>
                <td class="select-date">
                 <div class="has-text-weight-normal is-size-6">
-                  <% unless current_user.admin? %>
-                    <% if @order.first_try.present? || @order.second_try.present? %>
-                      <%= f.datetime_field :complete_day, class: "input is-small is-info" %>
-                    <% else %>
-                      <%= l(@order.complete_day) if @order.complete_day.present? %>
-                    <% end %>
-                  <% end %>
+                  <%= l(@order.complete_day) if @order.complete_day.present? %>
                 </div>  
                </td>
              </tr>

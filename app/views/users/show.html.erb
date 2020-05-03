@@ -1,5 +1,5 @@
 <% provide(:title, @user.name) %>
-<section class="hero is-small is-success">
+<section class="hero is-small">
   <div class="hero-body">
     <div class="container">
       <h1 class="title has-text-centered">
@@ -8,6 +8,8 @@
     </div>
   </div>
 </section>
+
+<ul class="user-show"></ul>
 
 <section class="section">
   <div class="container">
@@ -100,12 +102,12 @@
   <div class="container">
     <h2 class="title-order has-text-centered is-3" id="open">
       <% if current_user.admin? %>
+        新着技工物
         <% if @notification.present? %>
           <a class="button is-rounded is-danger"><span class="icon"><i class="fas fa-bell"></i></span><span><%= @notification %></span></a>
         <% end %>
-        新着技工物
       <% else %>
-        申請中の技工物
+        <button class="button is-medium is-black">申請中の技工物</button>
       <% end %>  
     </h2>
     
@@ -113,8 +115,8 @@
       <div class="modal-background"></div>
         <div class="modal-card">
           <header class="modal-card-head">
-            <p class="modal-card-title has-text-centered has-text-weight-semibold"></i>申請中の技工物</p>
-            <button class="delete" aria-label="close" id="close"></button>
+            <p class="modal-card-title has-text-centered has-text-weight-semibold">申請中の技工物</p>
+            <button class="delete is-large" aria-label="close" id="close"></button>
           </header>
           <section class="modal-card-body">
             <div class="columns is-centered">
@@ -154,7 +156,7 @@
                         <td class="show-td">
                           <%= l(order.complete_day, format: :short) if order.complete_day.present? %>
                         </td>
-                        <td><%= link_to "編集", '#', class: "button is-primary" %></td>
+                        <td><%= link_to "編集", edit_user_order_path(@user, @order), class: "button is-primary" %></td>
                         <td><%= link_to "削除", '#',  method: :delete,
                             data: { confirm: "削除してよろしいですか？" }, class: "button is-danger" %>
                         </td>

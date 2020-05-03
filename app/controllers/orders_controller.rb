@@ -29,6 +29,7 @@ class OrdersController < ApplicationController
   end
   
   def edit
+    @order = @user.orders.find_by(id: params[:id])
   end
   
   def update

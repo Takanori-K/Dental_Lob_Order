@@ -412,3 +412,19 @@
   background-image: url(/user_images/dental-5.jpg);
   background-size: cover;
 }
+
+/* User_詳細 */
+
+.user-show {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: -1;
+  background-position: center 50%;
+  background-repeat: no-repeat;
+  background-image: url(/user_images/dental-8.jpg);
+  background-size: cover;
+}

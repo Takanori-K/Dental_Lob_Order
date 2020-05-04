@@ -156,7 +156,7 @@
                         <td class="show-td">
                           <%= l(order.complete_day, format: :short) if order.complete_day.present? %>
                         </td>
-                        <td><%= link_to "編集", edit_user_order_path(@user, @order), class: "button is-primary" %></td>
+                        <td><%= link_to "編集", edit_user_order_path(@user, order), class: "button is-primary" %></td>
                         <td><%= link_to "削除", '#',  method: :delete,
                             data: { confirm: "削除してよろしいですか？" }, class: "button is-danger" %>
                         </td>

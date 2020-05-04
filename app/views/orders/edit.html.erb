@@ -1,5 +1,5 @@
 <% provide(:title, 'Order_edit') %>
-<%= form_with(model: @order, url: user_orders_path(@user), local: true) do |f| %>
+<%= form_with(model: @order, url: user_order_path(@user, @order), local: true, method: :patch) do |f| %>
 <section class="section">
   <ul class="order-image">
   </ul>
@@ -102,7 +102,7 @@
                <td colspan = "6">
                  <div class="checkbox is-flex-desktop">
                    <% ["AC","　MB","　e-max","　CAD冠", "　前装冠", "　FCK", "　In", "　総義歯", "　部分床義歯"].each do |order| %>
-                   <div class="checkbox-content"><%= f.check_box :content, {multiple: true}, order, nil %></div>&nbsp;
+                   <div class="checkbox-content"><%= f.check_box :content, {multiple: true, :checked => @content.present? ? @content.include?(order) : false}, order, nil %></div>&nbsp;
                      <%= order %>&emsp;
                    <% end %>
                  </div><br>
@@ -172,11 +172,15 @@
                </td>
                <th class="select-tag"><font color="#FF6666"><i class="fas fa-calendar-check"></i></font>&nbsp;試適２</th>
                <td class="select-date">
-                 <%= f.datetime_field :second_try, class: "input is-small is-info" if @order.second_try.present? %>
+                 <% if @order.second_try.present? || @order.first_try.present? %>
+                   <%= f.datetime_field :second_try, class: "input is-small is-info" %>
+                 <% end %> 
                </td>
                <th class="select-tag"><font color="#FF6666"><i class="fas fa-calendar-check"></i></font>&nbsp;完成日</th>
                <td class="select-date">
-                <%= f.datetime_field :complete_day, class: "input is-small is-info" if @order.complete_day.present? %>  
+                 <% if @order.complete_day.present? || @order.first_try.present? %>
+                   <%= f.datetime_field :complete_day, class: "input is-small is-info" %>
+                 <% end %>  
                </td>
              </tr>
            </table>

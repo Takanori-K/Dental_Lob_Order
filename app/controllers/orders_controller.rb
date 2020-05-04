@@ -30,9 +30,17 @@ class OrdersController < ApplicationController
   
   def edit
     @order = @user.orders.find_by(id: params[:id])
+    @content = @order.content
   end
   
   def update
+    @order = @user.orders.find_by(id: params[:id])
+    if @order.update_attributes(order_params)
+      flash[:notice] = "指示書を更新しました。"
+      redirect_to user_order_url @user, @order
+    else
+      render :edit
+    end
   end
   
   def destroy

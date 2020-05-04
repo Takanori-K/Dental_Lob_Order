@@ -8,7 +8,7 @@
 .title-order.is-3 {
   font-size: 30px;
   font-weight: bold;
-  padding-top: 50px;
+  padding-left: 35px;
 }
 
 .notification:not(:last-child){
@@ -425,6 +425,16 @@
   z-index: -1;
   background-position: center 50%;
   background-repeat: no-repeat;
-  background-image: url(/user_images/dental-8.jpg);
+  background-image: url(/user_images/dental-4.jpg);
   background-size: cover;
+}
+
+/* カレンダー */
+
+#calendar-info {
+  background: white;
+}
+
+#calendar-info .calendar-th {
+  background: #87CEEB;
 }

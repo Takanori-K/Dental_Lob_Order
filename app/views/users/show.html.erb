@@ -94,10 +94,39 @@
             </span>
           <% end %>
         </div>
+      <% end %>
+      <h2 class="title-order has-text-centered is-3" id="open">
+      <% if current_user.admin? %>
+        新着技工物
+        <% if @notification.present? %>
+          <a class="button is-rounded is-danger"><span class="icon"><i class="fas fa-bell"></i></span><span><%= @notification %></span></a>
+        <% end %>
+      <% else %>
+        <button class="button is-medium is-black">申請中の技工物</button>
       <% end %>  
+      </h2>
     </div>
   </div>
-</div>
+</div><br><br>
+
+<section>
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-11">
+        <%= month_calendar(attribute: :reception_date, events: @orders) do |date, orders| %>
+          <%= l(date, format: :short) %>
+        
+          <% orders.each do |order| %>
+            <div>
+              <%= order.patient_name %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section">
   <div class="container">
     <h2 class="title-order has-text-centered is-3" id="open">

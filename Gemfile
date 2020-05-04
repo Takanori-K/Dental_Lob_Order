@@ -10,6 +10,7 @@ gem 'omniauth-facebook'
 gem "bulma-rails"
 gem 'will_paginate'
 gem 'will_paginate-bulma'
+gem 'simple_calendar', '~> 2.0'
 gem 'bootstrap-social-rails'
 gem 'font-awesome-rails'
 gem 'carrierwave'

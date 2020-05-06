@@ -80,7 +80,6 @@ class Order < ApplicationRecord
       errors.add( :complete_day, " は今日より早い時間の入力は無効です") if complete_day < Date.current
     end
   end
-      
   
   def content_slim
     self.content.gsub!(/[\[\]\"]/, "").gsub!(" ","") if attribute_present?("content")

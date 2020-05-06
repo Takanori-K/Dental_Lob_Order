@@ -43,11 +43,10 @@
               <tr></tr>
               <tr>
                 <td class="is-size-5">
-                  <%= @user.name %>
+                  <%= current_user.name %>
                 </td>
-                <% if @user.id == current_user.id %>
                 <td class="is-size-5">
-                  <%= @user.email %>
+                  <%= current_user.email %>
                 </td>
                 <td class="has-text-weight-semibold">
                   <%= link_to edit_user_path(current_user), class: "button is-primary" do %>
@@ -59,7 +58,6 @@
                     </span>
                   <% end %>
                 </td>
-                <% end %>
               </tr>
             </table>
           </div>
@@ -117,18 +115,25 @@
           <%= month_calendar(attribute: :reception_date, events: @calendar_orders) do |date, orders| %>
             <%= l(date, format: :short) %>
             <% orders.each do |order| %>
-                <div class="is-size-7">
-                  <%= link_to order.patient_name, user_order_path(@user, order) %>
-                </div>
+              <div class="is-size-7">
+                <% if order.finished.blank? %>
+                  <%= link_to order.patient_name, user_order_path(order.user, order) %>
+                <% else %>
+                  <%= order.patient_name %>
+                <% end %>  
+              </div>
             <% end %>
           <% end %>
         <% else %>  
           <%= month_calendar(attribute: :reception_date, events: @orders) do |date, orders| %>
             <%= l(date, format: :short) %>
-          
             <% orders.each do |order| %>
               <div class="is-size-7">
-                <%= link_to order.patient_name, user_order_path(@user, order) %>
+                <% if order.finished.blank? %>
+                  <%= link_to order.patient_name, user_order_path(@user, order) %>
+                <% else %>
+                  <%= order.patient_name %>
+                <% end %> 
               </div>
             <% end %>
           <% end %>
@@ -176,7 +181,7 @@
                           <th class="is-size-5">試適1</th>
                           <th class="is-size-5">試適2</th>
                           <th class="is-size-5">完成日</th>
-                          <th colspan = "2"></th>
+                          <th></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -184,7 +189,7 @@
                         <% new_order.each do |order| %>
                           <tr>
                             <td>
-                              <%= link_to user_order_path(@user, order), class: "button is-info" do %>
+                              <%= link_to user_order_path(user, order), class: "button is-info" do %>
                                 <i class="fas fa-teeth-open"></i>
                               <% end %>
                             </td>
@@ -203,7 +208,6 @@
                             <td class="show-td">
                               <%= l(order.complete_day, format: :short) if order.complete_day.present? %>
                             </td>
-                            <td><%= link_to "編集", edit_user_order_path(@user, order), class: "button is-primary" %></td>
                             <td><%= link_to "削除", '#',  method: :delete,
                                   data: { confirm: "削除してよろしいですか？" }, class: "button is-danger" %>
                             </td>

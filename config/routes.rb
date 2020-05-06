@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :orders
   end
   
+  patch '/users/:user_id/orders/:id/admin_update', to: 'orders#admin_update', as: :admin_update
   get 'auth/:provider/callback', to: 'sessions#create'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

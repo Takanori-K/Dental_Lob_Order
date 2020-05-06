@@ -23,6 +23,7 @@ class OrdersController < ApplicationController
   
   def show
     @order = @user.orders.find_by(id: params[:id])
+    @content = @order.content
   end
   
   def index
@@ -43,15 +44,25 @@ class OrdersController < ApplicationController
     end
   end
   
+  def admin_update
+    @order = @user.orders.find_by(id: params[:id])
+      if @order.update_attributes(order_params)
+        flash[:notice] = "技工物の製作が完了しました。"
+        redirect_to user_order_url @user, @order
+      else
+        render :show
+      end
+  end
+  
   def destroy
   end
   
   private
   
     def order_params
-      params.require(:order).permit(:patient_name, :sex, :color, :note, {content: []}, :content_other, :other_text, :crown, :metal, :first_try, :second_try,
-                                    :complete_day, :reception_date, :weight, :finished,:image_1, :image_2, :image_3)
-    end                                
+      params.require(:order).permit(:patient_name, :sex, :color, :note, {content: []}, :content_other, :other_text, :crown, :metal, :weight, :first_try, :second_try,
+                                    :complete_day, :reception_date, :finished,:image_1, :image_2, :image_3)
+    end
     
     def set_user
       @user = User.find(params[:user_id])

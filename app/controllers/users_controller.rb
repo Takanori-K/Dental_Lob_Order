@@ -14,6 +14,7 @@ class UsersController < ApplicationController
     @notification = Order.where.not(reception_date: nil).where(finished: nil).count
     @order = @user.orders.find_by(id: params[:id])
     @users = User.where(admin: false)
+    @calendar_orders = Order.where.not(reception_date: nil).where(finished: [nil, "false"])
   end
   
   def new

@@ -1,8 +1,8 @@
 <div class="simple-calendar">
   <div class="calendar-heading">
-    <%= link_to t('simple_calendar.previous', default: 'Previous'), calendar.url_for_previous_view, class: "button is-small is-link" %>
+    <%= link_to t('simple_calendar.previous', default: 'Previous'), calendar.url_for_previous_view, class: "button is-small is-link is-rounded" %>
     <font color="black"><span class="calendar-title has-text-weight-semibold"><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></span></font>
-    <%= link_to t('simple_calendar.next', default: 'Next'), calendar.url_for_next_view, class: "button is-small is-link" %>
+    <%= link_to t('simple_calendar.next', default: 'Next'), calendar.url_for_next_view, class: "button is-small is-link is-rounded" %>
   </div>
 
   <table class="table table-striped table is-bordered is-hoverable" id="calendar-info">

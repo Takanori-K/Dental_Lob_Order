@@ -117,8 +117,8 @@
           <%= l(date, format: :short) %>
         
           <% orders.each do |order| %>
-            <div>
-              <%= order.patient_name %>
+            <div class="is-size-7">
+              <%= link_to order.patient_name, user_order_path(@user, order) %>
             </div>
           <% end %>
         <% end %>

@@ -397,6 +397,33 @@
     100% { opacity: 0 }
 }
 
+/* Userログインと新規登録ページ */
+.image-login-new {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: -1;
+  background-position: center 50%;
+  background-repeat: no-repeat;
+  background-image: url(/user_images/dental-2.jpg);
+  background-size: cover;
+}
+
+.image-login-new::before {
+  /* 透過した黒を重ねる */
+	background-color: rgba(0,0,0,0.1);
+	/* どの範囲に重ねるかを指定 */
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	content: ' ';
+}
+
 /* Oredr新規作成view */
 
 .order-image {

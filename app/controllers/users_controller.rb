@@ -11,10 +11,11 @@ class UsersController < ApplicationController
   
   def show
     @orders = Order.where(user_id: current_user.id).order(id: "DESC")
-    @notification = Order.where.not(reception_date: nil).where(finished: nil).count
+    @notification = Order.where.not(reception_date: nil).where(finished: [nil, "false"]).count
     @order = @user.orders.find_by(id: params[:id])
     @users = User.where(admin: false)
-    @calendar_orders = Order.where.not(reception_date: nil).where(finished: [nil, "false"])
+    @calendar_orders = Order.where.not(reception_date: nil)
+    @new = Order.where(user_id: @user.id).where(finished: [nil, "false"])
   end
   
   def new
@@ -58,20 +59,4 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     end
     
-    def logged_in_user
-      unless logged_in?
-        store_location
-        redirect_to login_url, alert: "ログインしてください。"
-      end
-    end
-
-    # アクセスしたユーザーが現在ログインしているユーザーか確認します。
-    def correct_user
-      @user = User.find(params[:id])
-      redirect_to(root_url) unless current_user?(@user)
-    end
-    
-    def admin_user
-      redirect_to root_url unless current_user.admin?
-    end
 end

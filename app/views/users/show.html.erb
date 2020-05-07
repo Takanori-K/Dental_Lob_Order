@@ -97,7 +97,7 @@
       <% if current_user.admin? %>
         新着技工物
         <% if @notification.present? %>
-          <a class="button is-rounded is-danger"><span class="icon"><i class="fas fa-bell"></i></span><span><%= @notification %></span></a>
+          <a class="button is-rounded is-danger is-small "><span class="icon"><i class="fas fa-bell"></i></span><span><%= @notification %></span></a>
         <% end %>
       <% else %>
         <button class="button is-medium is-black">申請中の技工物</button>
@@ -110,30 +110,35 @@
 <section>
   <div class="container">
     <div class="columns is-centered">
-      <div class="column is-11">
+      <div class="column is-12">
         <% if current_user.admin? %>
           <%= month_calendar(attribute: :reception_date, events: @calendar_orders) do |date, orders| %>
             <%= l(date, format: :short) %>
             <% orders.each do |order| %>
-              <div class="is-size-7">
-                <% if order.finished.blank? %>
-                  <%= link_to order.patient_name, user_order_path(order.user, order) %>
-                <% else %>
+              <% if order.finished.blank? || order.finished == "false" %>
+                <div class="is-size-7">
+                  <button class="button is-danger is-small" style="font-size:1px;width:25px;height:15px">NEW</button><%= link_to order.patient_name, user_order_path(order.user, order) %>
+                </div>
+              <% else %>
+                <div class="is-size-7">
                   <%= order.patient_name %>
-                <% end %>  
-              </div>
+                </div>
+              <% end %>  
             <% end %>
           <% end %>
         <% else %>  
           <%= month_calendar(attribute: :reception_date, events: @orders) do |date, orders| %>
             <%= l(date, format: :short) %>
             <% orders.each do |order| %>
-              <div class="is-size-7">
-                <% if order.finished.blank? %>
+              <% if order.finished.blank? || order.finished == "false" %>
+                <div class="is-size-7">
                   <%= link_to order.patient_name, user_order_path(@user, order) %>
-                <% else %>
+                </div>
+              <% else %>
+                <div class="is-size-7">
                   <%= order.patient_name %>
-                <% end %> 
+                </div>  
+              <% end %> 
               </div>
             <% end %>
           <% end %>
@@ -160,7 +165,11 @@
       <div class="modal-background"></div>
         <div class="modal-card">
           <header class="modal-card-head">
-            <p class="modal-card-title has-text-centered has-text-weight-semibold">申請中の技工物</p>
+            <% if current_user.admin? %>
+              <p class="modal-card-title has-text-centered has-text-weight-semibold">新着技工物</p>
+            <% else %>  
+              <p class="modal-card-title has-text-centered has-text-weight-semibold">申請中の技工物</p>
+            <% end %>  
             <button class="delete is-large" aria-label="close" id="close"></button>
           </header>
           <section class="modal-card-body">
@@ -168,54 +177,57 @@
               <div class="table-container">
                 <% if current_user.admin? %>
                   <% @users.each do |user| %>
-                  <% if Order.where(user_id: user.id).where(finished: [nil, "false"]).present? %>
-                    <div class="is-size-5 has-text-weight-semibold">
-                      【<%= user.name %>】
-                    </div>
-                    <table class="table is-bordered is-hoverable is-fullwidth" id="order-show-table">
-                      <thead>
-                        <tr>
-                          <th class="is-size-5">詳細</th>
-                          <th class="is-size-5">受付日</th>
-                          <th class="is-size-5">患者名</th>
-                          <th class="is-size-5">試適1</th>
-                          <th class="is-size-5">試適2</th>
-                          <th class="is-size-5">完成日</th>
-                          <th></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <% new_order = Order.where(user_id: user.id) %>
-                        <% new_order.each do |order| %>
+                    <% new_orders = Order.where(user_id: user.id, finished: [nil, "false"]) %>
+                    <% if new_orders.present? %>
+                      <div class="is-size-5 has-text-weight-semibold">
+                        【<%= user.name %>】
+                      </div>
+                      <table class="table is-bordered is-hoverable is-fullwidth" id="order-show-table">
+                        <thead>
                           <tr>
-                            <td>
-                              <%= link_to user_order_path(user, order), class: "button is-info" do %>
-                                <i class="fas fa-teeth-open"></i>
-                              <% end %>
-                            </td>
-                            <td class="show-td">
-                              <%= l(order.reception_date, format: :short) %>
-                            </td>
-                            <td class="show-td">
-                              <%= order.patient_name %>
-                            </td>
-                            <td class="show-td">
-                              <%= l(order.first_try, format: :short) if order.first_try.present? %>
-                            </td>
-                            <td class="show-td">
-                              <%= l(order.second_try, format: :short) if order.second_try.present? %>
-                            </td>
-                            <td class="show-td">
-                              <%= l(order.complete_day, format: :short) if order.complete_day.present? %>
-                            </td>
-                            <td><%= link_to "削除", '#',  method: :delete,
-                                  data: { confirm: "削除してよろしいですか？" }, class: "button is-danger" %>
-                            </td>
+                            <th class="is-size-5">詳細</th>
+                            <th class="is-size-5">受付日</th>
+                            <th class="is-size-5">患者名</th>
+                            <th class="is-size-5">試適1</th>
+                            <th class="is-size-5">試適2</th>
+                            <th class="is-size-5">完成日</th>
+                            <th></th>
                           </tr>
-                        <% end %>
-                      </tbody>
-                    </table>
-                  <% end %>
+                        </thead>
+                        <tbody>
+                          <% new_order = Order.where(user_id: user.id) %>
+                          <% new_order.each do |order| %>
+                            <% if order.finished.blank? || order.finished == "false" %>
+                              <tr>
+                                <td>
+                                  <%= link_to user_order_path(user, order), class: "button is-info" do %>
+                                    <i class="fas fa-teeth-open"></i>
+                                  <% end %>
+                                </td>
+                                <td class="show-td">
+                                  <%= l(order.reception_date, format: :short) %>
+                                </td>
+                                <td class="show-td">
+                                  <%= order.patient_name %>
+                                </td>
+                                <td class="show-td">
+                                  <%= l(order.first_try, format: :short) if order.first_try.present? %>
+                                </td>
+                                <td class="show-td">
+                                  <%= l(order.second_try, format: :short) if order.second_try.present? %>
+                                </td>
+                                <td class="show-td">
+                                  <%= l(order.complete_day, format: :short) if order.complete_day.present? %>
+                                </td>
+                                <td><%= link_to "削除", '#',  method: :delete,
+                                      data: { confirm: "削除してよろしいですか？" }, class: "button is-danger" %>
+                                </td>
+                              </tr>
+                            <% end %>  
+                          <% end %>
+                        </tbody>
+                      </table>
+                    <% end %>
                   <% end %>
                 <% else %>
                   <table class="table is-bordered is-hoverable is-fullwidth" id="order-show-table">
@@ -232,32 +244,34 @@
                       </thead>
                       <tbody>
                         <% @orders.each do |order| %>
-                          <tr>
-                            <td>
-                              <%= link_to user_order_path(@user, order), class: "button is-info" do %>
-                                <i class="fas fa-teeth-open"></i>
-                              <% end %>
-                            </td>
-                            <td class="show-td">
-                              <%= l(order.reception_date, format: :short) %>
-                            </td>
-                            <td class="show-td">
-                              <%= order.patient_name %>
-                            </td>
-                            <td class="show-td">
-                              <%= l(order.first_try, format: :short) if order.first_try.present? %>
-                            </td>
-                            <td class="show-td">
-                              <%= l(order.second_try, format: :short) if order.second_try.present? %>
-                            </td>
-                            <td class="show-td">
-                              <%= l(order.complete_day, format: :short) if order.complete_day.present? %>
-                            </td>
-                            <td><%= link_to "編集", edit_user_order_path(@user, order), class: "button is-primary" %></td>
-                            <td><%= link_to "削除", '#',  method: :delete,
-                                  data: { confirm: "削除してよろしいですか？" }, class: "button is-danger" %>
-                            </td>
-                          </tr>
+                          <% if order.finished.blank? && order.finished = "false" %>
+                            <tr>
+                              <td>
+                                <%= link_to user_order_path(@user, order), class: "button is-info" do %>
+                                  <i class="fas fa-teeth-open"></i>
+                                <% end %>
+                              </td>
+                              <td class="show-td">
+                                <%= l(order.reception_date, format: :short) %>
+                              </td>
+                              <td class="show-td">
+                                <%= order.patient_name %>
+                              </td>
+                              <td class="show-td">
+                                <%= l(order.first_try, format: :short) if order.first_try.present? %>
+                              </td>
+                              <td class="show-td">
+                                <%= l(order.second_try, format: :short) if order.second_try.present? %>
+                              </td>
+                              <td class="show-td">
+                                <%= l(order.complete_day, format: :short) if order.complete_day.present? %>
+                              </td>
+                              <td><%= link_to "編集", edit_user_order_path(@user, order), class: "button is-primary" %></td>
+                              <td><%= link_to "削除", '#',  method: :delete,
+                                    data: { confirm: "削除してよろしいですか？" }, class: "button is-danger" %>
+                              </td>
+                            </tr>
+                          <% end %>  
                         <% end %>
                       </tbody>
                     </table>

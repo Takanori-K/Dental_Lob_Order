@@ -84,4 +84,9 @@ class Order < ApplicationRecord
   def content_slim
     self.content.gsub!(/[\[\]\"]/, "").gsub!(" ","") if attribute_present?("content")
   end
+  
+  def self.search(search)
+    return Order.all unless search
+    Order.where(['content LIKE ?', "%#{search}%"])
+  end
 end

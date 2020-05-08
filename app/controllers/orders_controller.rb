@@ -27,6 +27,10 @@ class OrdersController < ApplicationController
   end
   
   def index
+    @first_day = Date.current.beginning_of_month
+    @last_day = @first_day.end_of_month
+    @orders_finished = Order.where(user_id: @user.id, finished: "true")
+    @search = @orders_finished.search(params[:search])
   end
   
   def edit

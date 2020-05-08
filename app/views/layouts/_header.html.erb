@@ -28,7 +28,7 @@
                   <%= link_to "指示書作成", new_user_order_path(current_user), :style=>"color:#887938;", class: "has-text-grey-darker" %>
                 </p>
                 <p class="control">
-                  <%= link_to "指示書一覧", '#', :style=>"color:#887938;", class: "has-text-grey-darker" %>
+                  <%= link_to "指示書一覧", user_orders_path(current_user), :style=>"color:#887938;", class: "has-text-grey-darker" %>
                 </p>
               <% end %>  
               <div class="dropdown is-hoverable" aria-controls="dropdown-menu">

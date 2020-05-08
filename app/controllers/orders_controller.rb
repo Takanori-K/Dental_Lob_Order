@@ -27,10 +27,14 @@ class OrdersController < ApplicationController
   end
   
   def index
-    @first_day = Date.current.beginning_of_month
-    @last_day = @first_day.end_of_month
-    @orders_finished = Order.where(user_id: @user.id, finished: "true")
-    @search = @orders_finished.search(params[:search])
+    @orders_finished = Order.where(user_id: @user.id, finished: "true").paginate(page: params[:page], per_page: 60).order(id: "DESC")
+    if params[:search].present? && params[:search_day].blank?
+      @orders_finished = @orders_finished.where('patient_name LIKE ?', "%#{params[:search]}%").order(:complete_day)
+    elsif params[:search].present? && params[:search_day].present?
+      @orders_finished = @orders_finished.where('patient_name LIKE ?', "%#{params[:search]}%").where(complete_day: Date.parse("#{params[:search_day]}-01").all_month).order(:complete_day)
+    elsif params[:search].blank? && params[:search_day].present?
+      @orders_finished = @orders_finished.where(complete_day: Date.parse("#{params[:search_day]}-01").all_month).order(:complete_day)
+    end
   end
   
   def edit
@@ -68,6 +72,10 @@ class OrdersController < ApplicationController
     def order_params
       params.require(:order).permit(:patient_name, :sex, :color, :note, {content: []}, :content_other, :other_text, :crown, :metal, :weight, :first_try, :second_try,
                                     :complete_day, :reception_date, :finished,:image_1, :image_2, :image_3)
+    end
+    
+    def reservation_search_params
+      params.fetch(:search, {}).permit(:patient_name, :complete_day)
     end
     
     def set_user

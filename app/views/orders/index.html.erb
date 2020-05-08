@@ -14,15 +14,26 @@
 </section>
 
 <%= form_with(url: user_orders_path(@user), method: :get, local: true) do |f| %>
-<div class="field has-addons">
+<div class="text-search field has-addons">
   <div class="control">
-    <%= f.text_field :search, :placeholder => "患者名", class: "input" %>
+    <%= f.label :patient_name, '患者名', class: "label" %>
+    <%= f.text_field :search, :placeholder => "キーワード検索", class: "input is-small" %>
   </div>  
-  <div class="control">  
-    <%= f.submit "検索", class: "button is-info" %>
-  </div>    
-</div><br>
+</div>
+<div class="month-search field is-grouped">
+  <div class="control">
+    <%= f.label :complete_day, '完成日', class: "label" %>
+    <%= f.month_field :search_day, class: "input is-small" %>
+  </div>&emsp; 
+  <div class="control-submit">
+    <%= f.submit '検索', class: "button is-info is-small" %>
+  </div>
+</div>  
 <% end %>
+
+<div class="paginate columns is-multiline">
+  <%= will_paginate @orders_finished, renderer: BulmaPagination::Rails %>
+</div>
 
 <div class="columns is-centered">
   <div class="column is-9">
@@ -40,11 +51,15 @@
             <td><%= l(order.complete_day, format: :long) if order.complete_day.present? %></td>
             <td></td>
             <td><%= link_to "削除", '#',  method: :delete,
-                                data: { confirm: "削除してよろしいですか？" }, class: "button is-small is-danger" %>
+                    data: { confirm: "削除してよろしいですか？" }, class: "button is-small is-danger" %>
             </td>
           </tr>
-        <% end %>  
+        <% end %>
       </table>
     </div>
   </div>
-</div>      
+</div>
+
+<div class="paginate columns is-multiline">
+  <%= will_paginate @orders_finished, renderer: BulmaPagination::Rails %>
+</div>

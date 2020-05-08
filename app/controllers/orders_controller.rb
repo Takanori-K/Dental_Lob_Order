@@ -27,6 +27,7 @@ class OrdersController < ApplicationController
   end
   
   def index
+    @order = @user.orders.find_by(id: params[:id])
     @orders_finished = Order.where(user_id: @user.id, finished: "true").paginate(page: params[:page], per_page: 60).order(id: "DESC")
     if params[:search].present? && params[:search_day].blank?
       @orders_finished = @orders_finished.where('patient_name LIKE ?', "%#{params[:search]}%").order(:complete_day)
@@ -35,6 +36,9 @@ class OrdersController < ApplicationController
     elsif params[:search].blank? && params[:search_day].present?
       @orders_finished = @orders_finished.where(complete_day: Date.parse("#{params[:search_day]}-01").all_month).order(:complete_day)
     end
+  end
+  
+  def destroy_all
   end
   
   def edit

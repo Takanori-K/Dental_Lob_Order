@@ -35,6 +35,7 @@
   <%= will_paginate @orders_finished, renderer: BulmaPagination::Rails %>
 </div>
 
+<%= form_with(model: @order, url: destroy_index_path(@user), local: true, method: :delete) do |f| %>
 <div class="columns is-centered">
   <div class="column is-9">
     <div class="table-container">
@@ -42,24 +43,26 @@
         <tr>
           <th>患者名</th>
           <th>完成日</th>
-          <th></th>
-          <th></th>
+          <th>詳細</th>
+          <th>削除確認</th>
         </tr>
         <% @orders_finished.each do |order| %>
           <tr>
             <td><%= order.patient_name %></td>
             <td><%= l(order.complete_day, format: :long) if order.complete_day.present? %></td>
-            <td></td>
-            <td><%= link_to "削除", '#',  method: :delete,
-                    data: { confirm: "削除してよろしいですか？" }, class: "button is-small is-danger" %>
+            <td>
+              <%= link_to user_order_path(@user, order), class: "button is-info is-small" do %>
+                <i class="fas fa-teeth-open"></i>
+              <% end %>
             </td>
+            <td><%= f.check_box :check_delete, {:checked => false}, "true", "false" %></td>
           </tr>
         <% end %>
       </table>
     </div>
   </div>
 </div>
-
+<% end %>
 <div class="paginate columns is-multiline">
   <%= will_paginate @orders_finished, renderer: BulmaPagination::Rails %>
 </div>

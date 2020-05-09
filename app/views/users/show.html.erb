@@ -43,13 +43,13 @@
               <tr></tr>
               <tr>
                 <td class="is-size-5">
-                  <%= current_user.name %>
+                  <%= @user.name %>
                 </td>
                 <td class="is-size-5">
-                  <%= current_user.email %>
+                  <%= @user.email %>
                 </td>
                 <td class="has-text-weight-semibold">
-                  <%= link_to edit_user_path(current_user), class: "button is-primary" do %>
+                  <%= link_to edit_user_path(@user), class: "button is-primary" do %>
                     <span class="icon">
                       <i class="fas fa-user-edit"></i>
                     </span>

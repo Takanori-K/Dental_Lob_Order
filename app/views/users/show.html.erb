@@ -3,7 +3,7 @@
   <div class="hero-body">
     <div class="container">
       <h1 class="title has-text-centered">
-        マイページ
+        <font color="white">マイページ</font>
       </h1>
     </div>
   </div>
@@ -95,7 +95,7 @@
       <% end %>
       <h2 class="title-order has-text-centered is-3" id="open">
       <% if current_user.admin? %>
-        新着技工物
+        <font color="white">新着技工物</font>
         <% if @notification.present? %>
           <a class="button is-rounded is-danger is-small "><span class="icon"><i class="fas fa-bell"></i></span><span><%= @notification %></span></a>
         <% end %>
@@ -200,7 +200,7 @@
                               <% end %>
                             </td>
                             <td class="show-td">
-                              <%= l(order.reception_date, format: :short) %>
+                              <%= l(order.reception_date, format: :long) if order.reception_date.present? %>
                             </td>
                             <td class="show-td">
                               <%= order.patient_name %>
@@ -247,7 +247,7 @@
                             <% end %>
                           </td>
                           <td class="show-td">
-                            <%= l(order.reception_date, format: :short) %>
+                            <%= l(order.reception_date, format: :long) %>
                           </td>
                           <td class="show-td">
                             <%= order.patient_name %>

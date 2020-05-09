@@ -1,12 +1,15 @@
-<section class="hero is-small is-primary">
+<section class="hero is-small">
   <div class="hero-body">
-    <div class="container">
+    <div class="container"><br>
       <h1 class="title has-text-centered">
-        歯科医院一覧
+        <font color="white">歯科医院一覧</font>
       </h1>
     </div>
   </div>
 </section>
+
+<ul class="user-index"></ul>
+
 <div class="paginate columns is-multiline">
   <%= will_paginate @collection, renderer: BulmaPagination::Rails %>
 </div>

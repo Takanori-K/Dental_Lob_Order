@@ -69,6 +69,10 @@ class OrdersController < ApplicationController
   end
   
   def destroy
+    @order = @user.orders.find_by(id: params[:id])
+    @order.destroy
+    flash[:notice] = "指示書を削除しました。"
+    redirect_to @user
   end
   
   private

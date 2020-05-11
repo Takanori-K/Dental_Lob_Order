@@ -16,12 +16,34 @@
         
           <div class="field has-text-centered">
             <% if @user.image.present? %>
-              <%= image_tag @user.image.thumb.url, id: :img_prev, size: "120x120", onClick:"$('#upfile').click()" %>
+              <%= image_tag @user.image.thumb.url, id: :img_prev, size: "120x120", onClick:"$('#user_img').click()" %>
             <% else %>
-              <%= image_tag "/user_images/no-image-2.png", size: "120x120", onClick:"$('#upfile').click()" %>
+              <%= image_tag "/user_images/no-image-2.png", id: :img_prev, size: "120x120", onClick:"$('#user_img').click()" %>
             <% end %>
+            
             <%= f.label :image, class: "label" %>
-            <%= f.file_field :image, style:"display:none;", id:"upfile", class: "input"%>
+            <%= f.file_field :image, style:"display:none;", id: :user_img , class: "input"%>
+            <%= f.hidden_field :image_cache %>
+            
+            <script type="text/javascript">
+              $(function() {
+               function readURL(input) {
+                 if (input.files && input.files[0]) {
+                   var reader = new FileReader();
+                   reader.onload = function (e) {
+                     $('#img_prev').attr({
+                      src: e.target.result
+                     });
+                   }
+                   reader.readAsDataURL(input.files[0]);
+                 }
+               }
+               $("#user_img").change(function(){
+                 readURL(this);
+               });
+              });
+            </script>
+            
             <% if @user.image.present? %>
               <p><%= f.check_box :remove_image %>&nbsp;<font color="black">画像を削除する</font></p>
             <% end %>  

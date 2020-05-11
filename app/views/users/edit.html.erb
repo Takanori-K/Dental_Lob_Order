@@ -1,13 +1,4 @@
-<% provide(:title, "Edit") %>
-<section class="hero is-small is-success">
-  <div class="hero-body">
-    <div class="container">
-      <h1 class="title has-text-centered">
-        ユーザー編集
-      </h1>
-    </div>
-  </div>
-</section>
+<% provide(:title, "User_Edit") %>
 
 <section class="section" id="image-layout">
   <div class="hero-body">
@@ -25,12 +16,15 @@
         
           <div class="field has-text-centered">
             <% if @user.image.present? %>
-              <%= image_tag @user.image.thumb.url, size: "120x120", onClick:"$('#upfile').click()" %>
+              <%= image_tag @user.image.thumb.url, id: :img_prev, size: "120x120", onClick:"$('#upfile').click()" %>
             <% else %>
               <%= image_tag "/user_images/no-image-2.png", size: "120x120", onClick:"$('#upfile').click()" %>
             <% end %>
             <%= f.label :image, class: "label" %>
             <%= f.file_field :image, style:"display:none;", id:"upfile", class: "input"%>
+            <% if @user.image.present? %>
+              <p><%= f.check_box :remove_image %>&nbsp;<font color="black">画像を削除する</font></p>
+            <% end %>  
           </div>
         
           <div class="field">

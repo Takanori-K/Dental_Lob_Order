@@ -12,6 +12,7 @@ class UsersController < ApplicationController
   
   def show
     @orders = Order.where(user_id: current_user.id).order(id: "DESC")
+    @notification_info = Order.where.not(reception_date: nil).where(finished: [nil, "false"])
     @notification = Order.where.not(reception_date: nil).where(finished: [nil, "false"]).count
     @order = @user.orders.find_by(id: params[:id])
     @users = User.where(admin: false)
@@ -48,6 +49,16 @@ class UsersController < ApplicationController
     @user.destroy
     flash[:notice] = "#{@user.name}のデータを削除しました。"
     redirect_to users_url
+  end
+  
+  def destroy_all
+    if Order.where(id: params[:order_ids]).destroy_all
+      flash[:notice] = "指示書を一括削除しました。"
+      redirect_to users_url(@user)
+    else
+      flash[:alert] = "指示書を削除できませんでした。"
+      redirect_to users_url(@user)
+    end
   end
   
   private

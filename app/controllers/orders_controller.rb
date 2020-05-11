@@ -38,8 +38,6 @@ class OrdersController < ApplicationController
     end
   end
   
-  def destroy_all
-  end
   
   def edit
     @order = @user.orders.find_by(id: params[:id])
@@ -64,7 +62,7 @@ class OrdersController < ApplicationController
     else
       @order.update_attributes(order_params)
       flash[:notice] = "技工物の製作が完了しました。"
-      redirect_to user_order_url @user, @order
+      redirect_to user_url @user
     end
   end
   

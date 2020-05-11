@@ -126,33 +126,33 @@
              <tr>
                <td colspan = "2">
                  <div class="field tooth-image has-text-centered">
-                    <% if @order.image_1.present? %>
-                      <%= image_tag @order.image_1.thumb.url, size: "250x250", onClick:"$('#upfile').click()" %>
-                    <% else %>
-                      <%= image_tag "/user_images/no-image-2.png", size: "250x250", onClick:"$('#upfile').click()" %>
-                    <% end %>
-                    <%= f.file_field :image_1, style:"display:none;", id:"upfile", class: "input"%>
-                  </div>
+                   <% if @order.image_1.present? %>
+                     <%= image_tag @order.image_1.thumb.url, size: "250x250", onClick:"$('#upfile').click()" %>
+                   <% else %>
+                     <%= image_tag "/user_images/no-image-2.png", id: "order-image", size: "250x250", onClick:"$('#upfile').click()" %>
+                   <% end %>
+                   <%= f.file_field :image_1, style:"display:none;", id:"upfile", class: "input"%>
+                 </div>
                </td>
                <td colspan = "2">
                  <div class="field tooth-image has-text-centered">
-                    <% if @order.image_2.present? %>
-                      <%= image_tag @order.image_2.thumb.url, size: "250x250", onClick:"$('#upfile2').click()" %>
-                    <% else %>
-                      <%= image_tag "/user_images/no-image-2.png", size: "250x250", onClick:"$('#upfile2').click()" %>
-                    <% end %>
-                    <%= f.file_field :image_2, style:"display:none;", id:"upfile2", class: "input"%>
-                  </div>
+                   <% if @order.image_2.present? %>
+                     <%= image_tag @order.image_2.thumb.url, size: "250x250", onClick:"$('#upfile2').click()" %>
+                   <% else %>
+                     <%= image_tag "/user_images/no-image-2.png", size: "250x250", onClick:"$('#upfile2').click()" %>
+                   <% end %>
+                   <%= f.file_field :image_2, style:"display:none;", id:"upfile2", class: "input"%>
+                 </div>
                </td>
                <td colspan = "2">
                  <div class="field tooth-image has-text-centered">
-                    <% if @order.image_3.present? %>
-                      <%= image_tag @order.image_3.thumb.url, size: "250x250", onClick:"$('#upfile3').click()" %>
-                    <% else %>
-                      <%= image_tag "/user_images/no-image-2.png", size: "250x250", onClick:"$('#upfile3').click()" %>
-                    <% end %>
-                    <%= f.file_field :image_3, style:"display:none;", id:"upfile3", class: "input"%>
-                  </div>
+                   <% if @order.image_3.present? %>
+                     <%= image_tag @order.image_3.thumb.url, size: "250x250", onClick:"$('#upfile3').click()" %>
+                   <% else %>
+                     <%= image_tag "/user_images/no-image-2.png", size: "250x250", onClick:"$('#upfile3').click()" %>
+                   <% end %>
+                   <%= f.file_field :image_3, style:"display:none;", id:"upfile3", class: "input"%>
+                 </div>
                </td>
              </tr>
              <tr>

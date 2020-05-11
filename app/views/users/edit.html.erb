@@ -14,11 +14,15 @@
         <%= form_with(model: @user, local: true, multipart: true) do |f| %>
         <%= render partial: 'shared/error_messages', locals: { obj: @user } %>
         
-          <div class="field has-text-centered">
+          <div class="field has-text-centered is-horizontal-center">
             <% if @user.image.present? %>
-              <%= image_tag @user.image.thumb.url, id: :img_prev, size: "120x120", onClick:"$('#user_img').click()" %>
+              <figure class="image is-128x128 is-inline-block">
+                <%= image_tag @user.image.thumb.url, id: :img_prev, size: "120x120", onClick:"$('#user_img').click()" %>
+              </figure>
             <% else %>
-              <%= image_tag "/user_images/no-image-2.png", id: :img_prev, size: "120x120", onClick:"$('#user_img').click()" %>
+              <figure class="image is-128x128 is-inline-block">
+                <%= image_tag "/user_images/no-image-2.png", id: :img_prev, size: "120x120", onClick:"$('#user_img').click()" %>
+              </figure>
             <% end %>
             
             <%= f.label :image, class: "label" %>
@@ -32,7 +36,7 @@
                    var reader = new FileReader();
                    reader.onload = function (e) {
                      $('#img_prev').attr({
-                      src: e.target.result
+                      src: e.target.result,
                      });
                    }
                    reader.readAsDataURL(input.files[0]);

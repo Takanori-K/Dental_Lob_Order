@@ -36,19 +36,13 @@
   font-size: 14px;
 }
 
-.image {
-  padding-left: 20px;
+.is-horizontal-center {
+  justify-content: center;
 }
 
 .field img {
-  height: 105px;
-  object-fit: cover;
-}
-
-.image img{
   border-radius: 50%;
-  width: 180px;
-  height: 180px;
+  height: 120px;
   object-fit: cover;
 }
 
@@ -58,6 +52,7 @@
   height: 150px;
   object-fit: cover;
 }
+
 
 #image-layout {
   position: absolute;
@@ -257,6 +252,8 @@
 
 #order-table .tooth-image img {
   border-radius: 0%;
+  height: 350px;
+  width: 400px;
 }
 
 #order-table .checkbox-content {

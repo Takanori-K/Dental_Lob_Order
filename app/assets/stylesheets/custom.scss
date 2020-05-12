@@ -460,6 +460,10 @@
   background-size: cover;
 }
 
+.button.is-rounded {
+  margin-top: 3px;
+}
+
 .user-show::before {
   /* 透過した黒を重ねる */
 	background-color: rgba(0,0,0,0.3);
@@ -516,6 +520,10 @@
 
 .simple-calendar .wday-0 {
   color: red;
+}
+
+.calendar-title {
+  vertical-align: bottom;
 }
 
 /* 検索フォーム */

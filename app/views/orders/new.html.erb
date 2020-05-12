@@ -127,9 +127,9 @@
                <td colspan = "2">
                  <div class="field tooth-image has-text-centered">
                    <% if @order.image_1.present? %>
-                     <%= image_tag @order.image_1.thumb.url, size: "250x250", onClick:"$('#upfile').click()" %>
+                     <%= image_tag @order.image_1.thumb.url, id: :order_img_prev, size: "250x250", onClick:"$('#upfile').click()" %>
                    <% else %>
-                     <%= image_tag "/user_images/no-image-2.png", id: "order-image", size: "250x250", onClick:"$('#upfile').click()" %>
+                     <%= image_tag "/user_images/no-image-2.png", id: :order_img_prev, size: "250x250", onClick:"$('#upfile').click()" %>
                    <% end %>
                    <%= f.file_field :image_1, style:"display:none;", id:"upfile", class: "input"%>
                  </div>
@@ -137,9 +137,9 @@
                <td colspan = "2">
                  <div class="field tooth-image has-text-centered">
                    <% if @order.image_2.present? %>
-                     <%= image_tag @order.image_2.thumb.url, size: "250x250", onClick:"$('#upfile2').click()" %>
+                     <%= image_tag @order.image_2.thumb.url, id: :order_img_prev_2, size: "250x250", onClick:"$('#upfile2').click()" %>
                    <% else %>
-                     <%= image_tag "/user_images/no-image-2.png", size: "250x250", onClick:"$('#upfile2').click()" %>
+                     <%= image_tag "/user_images/no-image-2.png", id: :order_img_prev_2, size: "250x250", onClick:"$('#upfile2').click()" %>
                    <% end %>
                    <%= f.file_field :image_2, style:"display:none;", id:"upfile2", class: "input"%>
                  </div>
@@ -147,9 +147,9 @@
                <td colspan = "2">
                  <div class="field tooth-image has-text-centered">
                    <% if @order.image_3.present? %>
-                     <%= image_tag @order.image_3.thumb.url, size: "250x250", onClick:"$('#upfile3').click()" %>
+                     <%= image_tag @order.image_3.thumb.url, id: :order_img_prev_3, size: "250x250", onClick:"$('#upfile3').click()" %>
                    <% else %>
-                     <%= image_tag "/user_images/no-image-2.png", size: "250x250", onClick:"$('#upfile3').click()" %>
+                     <%= image_tag "/user_images/no-image-2.png", id: :order_img_prev_3, size: "250x250", onClick:"$('#upfile3').click()" %>
                    <% end %>
                    <%= f.file_field :image_3, style:"display:none;", id:"upfile3", class: "input"%>
                  </div>
@@ -179,3 +179,60 @@
   </div>
 </section>
 <% end %>
+
+<script type="text/javascript">
+  $(function() {
+    function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $('#order_img_prev').attr({
+          src: e.target.result,
+        });
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+   }
+    $("#upfile").change(function(){
+      readURL(this);
+    });
+  });
+</script>
+
+<script type="text/javascript">
+  $(function() {
+    function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $('#order_img_prev_2').attr({
+          src: e.target.result,
+        });
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+   }
+    $("#upfile2").change(function(){
+      readURL(this);
+    });
+  });
+</script>
+
+<script type="text/javascript">
+  $(function() {
+    function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $('#order_img_prev_3').attr({
+          src: e.target.result,
+        });
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+   }
+    $("#upfile3").change(function(){
+      readURL(this);
+    });
+  });
+</script>

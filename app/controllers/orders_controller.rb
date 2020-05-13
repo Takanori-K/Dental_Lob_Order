@@ -7,6 +7,7 @@ class OrdersController < ApplicationController
   end
   
   def create
+    @admin = User.find_by(admin: true)
     @order = @user.orders.build(order_params)
     if params[:order][:first_try].present? && params[:order][:complete_day].present?
       flash.now[:alert] = "試適１ または 完成日 一つに日付を入れてください。"
@@ -14,7 +15,7 @@ class OrdersController < ApplicationController
     else  
       if @order.save
         flash[:notice] = "技工指示書を新規作成しました。"
-        NotificationMailer.complete_mail(@user, @order).deliver
+        NotificationMailer.complete_mail(@user, @order, @admin).deliver
         redirect_to @user
       else
         render :new

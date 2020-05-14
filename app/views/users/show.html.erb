@@ -108,6 +108,11 @@
         </button>
       <% end %>  
       </h2>
+      <h2 class="title-order has-text-centered is-3">
+        <% if current_user.admin? %>
+          <%= link_to "歯科医院一覧", users_path, :style=>"color:white;" %>
+        <% end %>  
+      </h2>  
     </div>
   </div>
 </div><br><br>

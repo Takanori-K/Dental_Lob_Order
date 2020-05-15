@@ -83,7 +83,7 @@ class Order < ApplicationRecord
   end
   
   def content_slim
-    self.content.gsub!(/[\[\]\"]/, "").gsub!(" ","") if attribute_present?("content")
+    self.content.gsub!(/[\[\]\"]/, "").gsub!(",","") if attribute_present?("content")
   end
   
   def self.search(search)

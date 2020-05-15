@@ -99,8 +99,7 @@
              </tr>
              <tr>
                <td colspan = "6">
-                  <div class="has-text-weight-normal is-size-6"><%= @order.content %></div>     
-                  <div class="has-text-weight-normal is-size-6"><%= @order.other_text %></div>
+                  <div class="has-text-weight-normal is-size-6"><%= @order.content %>&emsp;<%= @order.other_text %></div>     
                </td>
              </tr>
              <tr>
@@ -110,7 +109,10 @@
                </td>
                <% if current_user.admin? && @order.metal.present? %>
                  <th class="select-metal">
-                   <font color="#FF6666"><i class="fas fa-exclamation-triangle"></i></font>&nbsp;金属量
+                   <% unless @order.finished == "true" %>
+                     <font color="#FF6666"><i class="fas fa-exclamation-triangle"></i></font> &nbsp;
+                    <% end %>
+                    金属量
                  </th>
                  <td>
                    <%= f.number_field :weight, step: '0.1', min: "0.0", :placeholder => "g", class: "input is-info is-small" %>

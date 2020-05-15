@@ -33,6 +33,14 @@ class ApplicationController < ActionController::Base
       redirect_to(root_url)
     end
   end
+  
+  def correct_user_orders
+    @user = User.find(params[:user_id]) if @user.blank?
+    unless current_user?(@user)
+      flash[:alert] = "アクセス権限がありません。"
+      redirect_to(root_url)
+    end
+  end
 
     # アクセスしたユーザーが現在ログインしているユーザーか確認します。
   def correct_user

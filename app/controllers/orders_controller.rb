@@ -1,7 +1,8 @@
 class OrdersController < ApplicationController
   
   before_action :set_user
-  before_action :admin_user_order_edit, only: [:new, :create, :update, :edit]
+  before_action :correct_user_orders,   only: [:new, :create, :edit, :update]
+  before_action :admin_user_order_edit, only: [:new, :create, :edit, :update]
   before_action :admin_or_correct_user, only: [:show, :index]
   before_action :admin_user,            only: :admin_update
   
@@ -67,7 +68,7 @@ class OrdersController < ApplicationController
     else
       @order.update_attributes(order_params)
       flash[:notice] = "技工物の製作が完了しました。"
-      redirect_to user_url @user
+      redirect_to user_url current_user
     end
   end
   

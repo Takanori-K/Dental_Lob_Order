@@ -3,7 +3,7 @@
 <ul class="order-image"></ul>
 
 <%= form_with(model: @order, url: admin_update_path(@user, @order), local: true, method: :patch) do |f| %>
-  <%= f.hidden_field :content, :multiple => true, value: @content %>
+  <%= f.hidden_field :content, :multiple => true,  value: @content %>
 <section class="section">
   <div class="container">
       <h1 class="title has-text-centered">
@@ -186,7 +186,7 @@
            </table>
           </div>
           <div class="has-text-centered">
-          <% if current_user.admin? && (@order.finished == "false" || @order.finished.blank?) %>  
+          <% if current_user.admin? && @order.complete_day.present? && (@order.finished == "false" || @order.finished.blank?) %>  
             <%= f.submit "技工物完了", data: { confirm: "完了してよろしいですか？" }, class: "button is-primary is-medium" %>&emsp;&nbsp;
           <% end %>
             <%= link_to "キャンセル", user_path(@user), class: "button is-outlined is-medium" %>

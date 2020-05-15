@@ -133,7 +133,7 @@
               <% else %>
                 <div class="is-size-7">
                   <button class="button is-info is-small has-text-weight-semibold" style="font-size:1px;width:25px;height:15px">完</button>&thinsp;
-                  <%= link_to order.patient_name, user_order_path(@user, order), :style=>"color:black;" %>
+                  <%= link_to order.patient_name, user_order_path(order.user, order), :style=>"color:black;" %>
                 </div>
               <% end %>  
             <% end %>
@@ -144,11 +144,12 @@
             <% orders.each do |order| %>
               <% if order.finished.blank? || order.finished == "false" %>
                 <div class="is-size-7">
-                  <button class="button is-danger is-small is-rounded" style="font-size:1px;width:10px;height:10px"></button>&thinsp;
+                  <button class="button is-success is-small has-text-weight-semibold" style="font-size:1px;width:25px;height:15px">申請</button>&thinsp;
                   <%= link_to order.patient_name, user_order_path(@user, order), :style=>"color:green;" %>
                 </div>
               <% else %>
                 <div class="is-size-7">
+                  <button class="button is-info is-small has-text-weight-semibold" style="font-size:1px;width:25px;height:15px">完</button>&thinsp;
                   <%= link_to order.patient_name, user_order_path(@user, order), :style=>"color:black;" %>
                 </div>  
               <% end %> 

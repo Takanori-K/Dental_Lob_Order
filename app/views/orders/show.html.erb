@@ -189,7 +189,7 @@
           <% if current_user.admin? && @order.complete_day.present? && (@order.finished == "false" || @order.finished.blank?) %>  
             <%= f.submit "技工物完了", data: { confirm: "完了してよろしいですか？" }, class: "button is-primary is-medium" %>&emsp;&nbsp;
           <% end %>
-            <%= link_to "キャンセル", user_path(@user), class: "button is-outlined is-medium" %>
+            <%= link_to "キャンセル", user_path(current_user), class: "button is-outlined is-medium" %>
           </div>
         </div>
       </div>
@@ -210,7 +210,7 @@
           <%= image_tag "/user_images/no-image-2.png" %>
         <% end %>
         <a class="js-modal-close" href="">閉じる</a>
-      </p>
+      </p>    
     </div>
 </div>
 
@@ -223,7 +223,7 @@
         <% if @order.image_2.present? %>
           <%= image_tag @order.image_2.thumb.url %>
         <% else %>
-          <%= image_tag "/user_images/no-image-2.png" %>
+          <%= image_tag "/user_images/no-image-2.png", size: "250x250" %>
         <% end %>
         <a class="js-modal-close" href="">閉じる</a>
       </p>

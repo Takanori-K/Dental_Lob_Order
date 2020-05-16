@@ -61,6 +61,7 @@ class OrdersController < ApplicationController
   end
   
   def admin_update
+    @admin = User.find_by(admin: true)
     @order = @user.orders.find_by(id: params[:id])
     if @order.metal.present? && params[:order][:weight].blank? || @order.complete_day.present? && params[:order][:finished] == "false"
       flash.now[:alert] = "必須項目が空欄です。"
@@ -68,6 +69,7 @@ class OrdersController < ApplicationController
     else
       @order.update_attributes(order_params)
       flash[:notice] = "技工物の製作が完了しました。"
+      NotificationMailer.complete_order_mail(@user, @order, @admin).deliver
       redirect_to user_url current_user
     end
   end

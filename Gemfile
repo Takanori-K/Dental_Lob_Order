@@ -7,6 +7,7 @@ gem 'bootstrap-sass'
 gem 'bcrypt'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'omniauth-line'
 gem "bulma-rails"
 gem 'will_paginate'
 gem 'will_paginate-bulma'

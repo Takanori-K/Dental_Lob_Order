@@ -56,6 +56,16 @@
             </span>
           <% end %>
         </p></br>
+        <P>
+          <%= link_to '/auth/line', class: "button is-success has-text-weight-semibold" do %>
+            <span class="icon">
+              <i class="fab fa-line"></i>
+            </span>
+            <span>
+              LINEアカウントでログイン
+            </span>
+          <% end %>  
+        </P><br>
         <p class="is-size-4 has-text-grey-dark has-text-weight-semibold">
           ユーザー登録がまだの場合は<%= link_to new_user_path, :style=>"background: #32CD32;  color: white;", class: "button" do %>
             <span class="icon">

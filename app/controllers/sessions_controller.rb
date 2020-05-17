@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     if auth.present?
       user = User.find_or_create_from_auth(request.env['omniauth.auth'])
       session[:user_id] = user.id
-      flash[:notice] = "facebookから承認されました。"
+      flash[:notice] = "ログインしました。"
       redirect_back_or user
     else #既存パタン
       user = User.find_by(email: params[:session][:email].downcase)

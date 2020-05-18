@@ -32,6 +32,20 @@ class OrdersController < ApplicationController
     @content = @order.content
   end
   
+  def pdf
+    @order = @user.orders.find_by(id: params[:id])
+    respond_to do |format|
+      format.html { redirect_to action: :pdf, format: :pdf, debug: true }
+      format.pdf do
+        render pdf: '歯科技工指示書',
+               layout: 'pdf.html.erb',
+               template: '/orders/pdf.html.erb',
+               encording: 'UTF-8',
+               show_as_html: params.key?('debug')
+      end
+    end
+  end
+  
   def index
     @order = @user.orders.find_by(id: params[:id])
     @orders_finished = Order.where(user_id: @user.id, finished: "true").paginate(page: params[:page], per_page: 60).order(id: "DESC")

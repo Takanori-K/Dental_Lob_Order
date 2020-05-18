@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       end
   end
   
+  get    '/users/:user_id/orders/:id/pdf',          to: 'orders#pdf',           as: :pdf
   patch  '/users/:user_id/orders/:id/admin_update', to: 'orders#admin_update',  as: :admin_update
   get    'auth/:provider/callback', to: 'sessions#create'
 

@@ -62,7 +62,7 @@ class User < ApplicationRecord
       user.name = name
       user.email = email
       user.remote_image_url = image.gsub("picture","picture?type=large") if provider == "facebook"
-      user.remote_image_url = auth[:info][:image] if provider == "line"
+      user.remote_image_url = image if provider == "line"
     end
   end
   

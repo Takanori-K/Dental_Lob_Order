@@ -33,6 +33,7 @@ class OrdersController < ApplicationController
   end
   
   def pdf
+    @admin = User.find_by(admin: true)
     @order = @user.orders.find_by(id: params[:id])
     respond_to do |format|
       format.html { redirect_to action: :pdf, format: :pdf, debug: true }
@@ -41,6 +42,8 @@ class OrdersController < ApplicationController
                layout: 'pdf.html.erb',
                template: '/orders/pdf.html.erb',
                encording: 'UTF-8',
+               page_size:   'A5',
+               orientation: 'Landscape',
                show_as_html: params.key?('debug')
       end
     end

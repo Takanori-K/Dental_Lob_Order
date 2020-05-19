@@ -13,7 +13,14 @@
       <div class="column is-10">
         <% if @order.finished == "true" %>
           <div class="pdf has-text-right has-text-weight-semibold">
-            <%= link_to "PDF", pdf_path(format: :pdf, user_id: @user.id, id: @order.id), class: "button is-link" %>
+            <%= link_to pdf_path(format: :pdf, user_id: @user.id, id: @order.id), class: "button is-link" do %>
+              <span class="icon">
+                <i class="far fa-file-pdf"></i>
+              </span>
+              <span>
+                PDF出力
+              </span>
+            <% end %>
           </div><br>
         <% end %>
          <div class="table-container">

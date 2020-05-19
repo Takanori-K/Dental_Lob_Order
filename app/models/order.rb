@@ -17,7 +17,6 @@ class Order < ApplicationRecord
   validate :content_other_is_invalid_without_other_text
   validate :other_text_is_invalid_without_content_other
   validate :first_try_and_complete_day_is_blank
-  #validate :first_try_and_complete_day_presence
   validate :first_try_is_late_second_try_and_complete_day
   validate :second_try_is_late_complete_day
   validate :first_try_is_late_date_current
@@ -43,12 +42,6 @@ class Order < ApplicationRecord
   def first_try_and_complete_day_is_blank
     if first_try.blank? && second_try.blank? && complete_day.blank?
       errors.add( :first_try, " または 完成日 に日付を入れてください。")
-    end
-  end
-  
-  def first_try_and_complete_day_presence
-    if first_try.present? && complete_day.present?
-      errors.add( :first_try, " または 完成日 一つに日付を入れてください。")
     end
   end
   

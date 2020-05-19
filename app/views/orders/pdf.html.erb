@@ -1,9 +1,9 @@
 <% provide(:title, 'Order_PDF') %>
 
 <section class="section">
-  <h1 class="title has-text-centered">
+  <div class="has-text-centered has-text-weight-semibold is-size-4">
     歯科技工指示書
-  </h1>
+  </div><br>
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-8">
@@ -13,8 +13,9 @@
           </div>
           <table class="table is-bordered is-hoverable is-fullwidth" id="pdf-table">
             <tr>
-              <th colspan = "4">T-セラミックス</th>
-              <td colspan = "3" rowspan = "10"><ul class="order-pdf"></ul></td>
+              <th>技工所名</th>
+              <td colspan = "3"><%= @admin.name %></td>
+              <td colspan = "3" rowspan = "10"><br><%= wicked_pdf_image_tag "/user_images/dental-teeth.png", size: "250x250" %></td>
             </tr>
             <tr>
               <th>医院名</th>

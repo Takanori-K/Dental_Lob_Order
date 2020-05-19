@@ -104,6 +104,10 @@
   background: #ADD8E6;
 }
 
+.navbar-brand {
+  background: #ADD8E6;
+}
+
 .navbar-item p {
   padding-right: 35px;
 }
@@ -575,4 +579,43 @@
 	bottom: 0;
 	left: 0;
 	content: ' ';
+}
+
+/* PDF */
+
+#pdf-table {
+  border:2px solid #333;
+}
+
+#pdf-table th {
+  text-align: center;
+  border:2px solid #333;
+  background: #DCDCDC;
+}
+
+#pdf-table td {
+  text-align: center;
+  border:2px solid #333;
+}
+
+/* User-paginate */
+
+.pagination-link {
+  color: white;
+}
+
+.pagination-next a {
+  color: white;
+}
+
+.pagination-previous a {
+  color: white;
+}
+
+.pagination-previous[disabled] span {
+  color: black;
+}
+
+.pagination-next[disabled] span {
+  color: black;
 }

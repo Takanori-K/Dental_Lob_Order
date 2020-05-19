@@ -194,7 +194,11 @@
           <% if current_user.admin? && @order.complete_day.present? && (@order.finished == "false" || @order.finished.blank?) %>  
             <%= f.submit "技工物完了", data: { confirm: "完了してよろしいですか？" }, class: "button is-primary is-medium" %>&emsp;&nbsp;
           <% end %>
+          <% if @order.finished == "true" %>
+            <%= link_to "キャンセル", user_orders_path(@user), class: "button is-outlined is-medium" %>
+          <% else %>    
             <%= link_to "キャンセル", user_path(current_user), class: "button is-outlined is-medium" %>
+          <% end %>    
           </div>
         </div>
       </div>

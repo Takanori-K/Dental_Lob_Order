@@ -66,6 +66,10 @@
     <% if current_user.admin? %>
       <div class="has-text-centered">
         <%= f.submit "まとめて削除", class: "button is-danger is-medium" %>&emsp;&nbsp;
+        <%= link_to "キャンセル", users_path, class: "button is-outlined is-medium" %>
+      </div>
+    <% else %>
+      <div class="has-text-centered">
         <%= link_to "キャンセル", user_path(current_user), class: "button is-outlined is-medium" %>
       </div>
     <% end %>  
@@ -77,17 +81,16 @@
 </div>
 
 <script language="javascript" type="text/javascript">
-
-function call(){
-var checks = document.getElementsByName("check_delete[]");
-var str = '';
-for (i=0; i<checks.length; i++){
-if(checks[i].checked === true){
-if(str!==""){
-str +=",";
-}
-str += checks[i].value;
-}
-}
-}
+  function call(){
+    var checks = document.getElementsByName("check_delete[]");
+    var str = '';
+    for (i=0; i<checks.length; i++){
+    if(checks[i].checked === true){
+    if(str!==""){
+    str +=",";
+    }
+    str += checks[i].value;
+    }
+    }
+  }
 </script>

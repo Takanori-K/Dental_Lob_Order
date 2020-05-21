@@ -7,9 +7,14 @@ class User < ApplicationRecord
   validates :name, presence: true, unless: :uid?
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: true, unless: :uid?
-  has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true, if: :blank_uid?
+  has_secure_password validations: false
   
+  validate(if: :blank_uid?) do |record|
+    record.errors.add(:password, :blank) unless record.password_digest.present?
+  end
+
+  validates_length_of :password, minimum: 6, if: :blank_uid?
+  validates_confirmation_of :password, allow_blank: true, if: :blank_uid?
   
   def downcase_email
     self.email = email.downcase
@@ -67,9 +72,7 @@ class User < ApplicationRecord
   end
   
   def blank_uid?
-    uid.blank?
+    uid.blank? || provider.blank?
   end
-  
-  
   
 end

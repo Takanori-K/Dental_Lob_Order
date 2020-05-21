@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       user = User.find_or_create_from_auth(request.env['omniauth.auth'])
       session[:user_id] = user.id
       flash[:notice] = "ログインしました。"
-      redirect_back_or user
+      redirect_to user
     else #既存パタン
       user = User.find_by(email: params[:session][:email].downcase)
       if user && user.authenticate(params[:session][:password])

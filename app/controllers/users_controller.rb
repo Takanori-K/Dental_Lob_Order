@@ -2,10 +2,10 @@ class UsersController < ApplicationController
   
   before_action :set_user,               only: [:show, :edit, :update, :destroy]
   before_action :logged_in_user,         only: [:index, :show, :edit, :update, :destroy]
-  before_action :correct_user,           only: [:show, :update]
+  before_action :correct_user,           only: :show
   before_action :admin_user,             only: [:index, :destroy]
   before_action :logged_in_new_or_login, only: :new
-  before_action :admin_or_correct_user,  only: :edit
+  before_action :admin_or_correct_user,  only: [:edit, :update]
   
   def index
     @admin_other = User.where.not(admin: true)
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
   
   def update
     if @user.update_attributes(user_params)
-      redirect_to @user, notice: "ユーザー情報を更新しました。"
+      redirect_to user_url(current_user), notice: "ユーザー情報を更新しました。"
     else
       render :edit      
     end

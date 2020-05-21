@@ -13,52 +13,32 @@
     <div class="columns is-centered">
       <div class="column is-5">
         <%= form_with(model: @user, local: true) do |f| %>
-        <%= render partial: 'shared/error_messages', locals: { obj: @user } %><br>
-
+        <%= render partial: 'shared/error_messages', locals: { obj: @user } %>
 
         <div class="field">
           <%= f.label :name, class: "label" %>
-          <p class="control has-icons-left">
-            <%= f.text_field :name, autofocus: true, autocomplete: "name", :placeholder => "name", class: "input is-success" %>
-            <span class="icon is-small is-left">
-              <i class="fas fa-user"></i>
-            </span>
-          </p>
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", :placeholder => " \uf007 name", class: "fa input is-success" %>
         </div><br>
-
+         
         <div class="field">
           <%= f.label :email, class: "label" %>
-          <p class="control has-icons-left">
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "email", class: "input is-success" %>
-            <span class="icon is-small is-left">
-              <i class="fas fa-envelope"></i>
-            </span>
-          </p>
+          <%= f.email_field :email, autocomplete: "email", :placeholder => " \uf0e0 email", class: "fa input is-success" %>
         </div><br>
 
         <div class="field">
           <%= f.label :password, class: "label" %>
-          <p class="control has-icons-left">
-          <%= f.password_field :password, :placeholder => "password", class: "input is-success" %>
-            <span class="icon is-small is-left">
-              <i class="fas fa-lock"></i>
-            </span>
-          </p>
+          <%= f.password_field :password, :placeholder => " \uf023 password", class: "fa input is-success" %>
         </div><br>
-
+        
         <div class="field">
           <%= f.label :password_confirmation, class: "label" %>
-          <p class="control has-icons-left">
-            <%= f.password_field :password_confirmation, :placeholder => "password confirmation", class: "input is-success" %>
-            <span class="icon is-small is-left">
-              <i class="fas fa-lock"></i>
-            </span>
-          </p>
+          <%= f.password_field :password_confirmation, :placeholder => " \uf023 password confirmation", class: "fa input is-success" %>
         </div><br>
-
+        
         <div class="actions">
           <%= f.submit "新規登録", class: "button is-success has-text-weight-semibold" %>
         </div>
+        
         <% end %>
       </div>
     </div>

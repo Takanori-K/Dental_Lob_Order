@@ -16,22 +16,12 @@
 
           <div class="field">
             <%= f.label :email, "メールアドレス",  class: "label" %>
-            <p class="control has-icons-left">
-              <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "email", class: "input is-info" %>
-              <span class="icon is-small is-left">
-                <i class="fas fa-envelope"></i>
-              </span>
-            </p>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => " \uf0e0 email", class: "fa input is-info" %>
           </div><br>
     
           <div class="field">
             <%= f.label :password, "パスワード", class: "label" %>
-            <p class="control has-icons-left">
-              <%= f.password_field :password, :placeholder => "password", class: "input is-info" %>
-              <span class="icon is-small is-left">
-                <i class="fas fa-lock"></i>
-              </span>
-            </p>
+            <%= f.password_field :password, :placeholder => " \uf023 password", class: "fa input is-info" %>
           </div><br>
     
           <div class="field">

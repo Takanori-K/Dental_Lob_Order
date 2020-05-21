@@ -55,44 +55,25 @@
         
           <div class="field">
             <%= f.label :name, class: "label" %>
-            <p class="control has-icons-left">
-              <%= f.text_field :name, class: "input" %>
-              <span class="icon is-small is-left">
-                <i class="fas fa-user"></i>
-              </span>
-            </p>
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", :placeholder => " \uf007 name", class: "fa input is-primary" %>
           </div>
 
           <div class="field">
             <%= f.label :email, class: "label" %>
-            <p class="control has-icons-left">
-              <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "email", class: "input" %>
-              <span class="icon is-small is-left">
-                <i class="fas fa-envelope"></i>
-              </span>
-            </p>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => " \uf0e0 email", class: "fa input is-primary" %>
           </div>
           
           <div class="field">
             <%= f.label :password, class: "label" %>
-            <p class="control has-icons-left">
-            <%= f.password_field :password, :placeholder => "password", class: "input" %>
-              <span class="icon is-small is-left">
-                <i class="fas fa-lock"></i>
-              </span>
-            </p>
+            <%= f.password_field :password, :placeholder => " \uf023 password", class: "fa input is-primary" %>
           </div>
           
           <div class="field">
             <%= f.label :password_confirmation, class: "label" %>
-            <p class="control has-icons-left">
-              <%= f.password_field :password_confirmation, :placeholder => "password confirmation", class: "input" %>
-              <span class="icon is-small is-left">
-                <i class="fas fa-lock"></i>
-              </span>
-            </p>
+            <%= f.password_field :password_confirmation, :placeholder => " \uf023 password confirmation", class: "fa input is-primary" %>
           </div><br>
-            <%= f.submit "更新", class: "button is-success has-text-weight-semibold" %>
+          
+            <%= f.submit "更新", class: "button is-primary has-text-weight-semibold" %>
         <% end %>
       </div>
     </div>

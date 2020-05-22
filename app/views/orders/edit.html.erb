@@ -42,31 +42,20 @@
                <th class="select-table">
                  <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;患者名
                </th>
-               <td colspan = "3">
+               <td colspan = "5">
                  <div class="field">
-                   <p class="control has-icons-left">
-                     <%= f.text_field :patient_name, class: "input is-info" %>
-                     <span class="icon is-small is-left">
-                       <i class="fas fa-user"></i>
-                     </span>
-                   </p> 
+                   <%= f.text_field :patient_name, :placeholder => " \uf007 患者名", class: "fa input is-info" %>
                  </div>   
-               </td>
-               <th class="select-table">
-                 <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;性別
-               </th>
-               <td class="select-table">
-                 <div class="select is-info is-small">
-                   <%= f.select :sex, [['男', '男'], ['女', '女']], { include_blank: '選択してください' } %>
-                 </div>
                </td>
              </tr>
              <tr>
                <th class="select-tag">
-                 <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;受付日
+                 <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;性別
                </th>
                <td class="select-date">
-                 <%= f.date_field :reception_date, class: "input is-small is-info" %>
+                 <div class="select is-info is-small">
+                   <%= f.select :sex, [['男', '男'], ['女', '女']], { include_blank: '選択してください' } %>
+                 </div>
                </td>
                <th class="select-tag">シェード</th>
                <td class="select-order">

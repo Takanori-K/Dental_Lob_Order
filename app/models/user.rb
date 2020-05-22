@@ -13,8 +13,10 @@ class User < ApplicationRecord
     record.errors.add(:password, :blank) unless record.password_digest.present?
   end
 
-  validates_length_of :password, minimum: 6, if: :blank_uid?
+  validates_length_of :password, minimum: 6, allow_blank: true, if: :blank_uid?
   validates_confirmation_of :password, allow_blank: true, if: :blank_uid?
+  
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true, if: :blank_uid?
   
   def downcase_email
     self.email = email.downcase

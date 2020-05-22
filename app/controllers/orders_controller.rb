@@ -19,7 +19,7 @@ class OrdersController < ApplicationController
     else  
       if @order.save
         flash[:notice] = "技工指示書を新規作成しました。"
-        NotificationMailer.complete_mail(@user, @order, @admin).deliver
+        NotificationMailer.complete_mail(@user, @order, @admin).deliver if current_user.email.present?
         redirect_to @user
       else
         render :new

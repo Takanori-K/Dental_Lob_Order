@@ -13,17 +13,12 @@ class OrdersController < ApplicationController
   def create
     @admin = User.find_by(admin: true)
     @order = @user.orders.build(order_params)
-    if params[:order][:first_try].present? && params[:order][:complete_day].present?
-      flash.now[:alert] = "試適１ または 完成日 どちらか一つに日付を入れてください。"
+    if @order.save
+      flash[:notice] = "技工指示書を新規作成しました。"
+      NotificationMailer.complete_mail(@user, @order, @admin).deliver if current_user.email.present?
+      redirect_to @user
+    else
       render :new
-    else  
-      if @order.save
-        flash[:notice] = "技工指示書を新規作成しました。"
-        NotificationMailer.complete_mail(@user, @order, @admin).deliver if current_user.email.present?
-        redirect_to @user
-      else
-        render :new
-      end
     end
   end
   
@@ -70,8 +65,9 @@ class OrdersController < ApplicationController
   def update
     @order = @user.orders.find_by(id: params[:id])
     if @order.update_attributes(order_params)
+      @order.content.gsub!(/[\[\]\"]/, "").gsub!(",","") unless @order.content.nil?
       flash[:notice] = "指示書を更新しました。"
-      redirect_to user_order_url @user, @order
+      redirect_to user_order_url(@user, @order)
     else
       render :edit
     end

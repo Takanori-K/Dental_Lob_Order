@@ -27,7 +27,7 @@
 
     <% if flash[:alert] %>
       <div class="notification" id="flash-alert">
-        <p class="alert"><%= alert %></p>
+        <p class="alert"><%= alert.html_safe %></p>
       </div>
     <% end %>
     

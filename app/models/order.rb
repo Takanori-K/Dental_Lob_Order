@@ -5,7 +5,7 @@ class Order < ApplicationRecord
   mount_uploader :image_2, ImagesUploader
   mount_uploader :image_3, ImagesUploader
   
-  before_save :content_slim
+  #before_save :content_slim
   
   validates :patient_name,   presence: true
   validates :sex,            presence: true
@@ -76,7 +76,7 @@ class Order < ApplicationRecord
   end
   
   def content_slim
-    self.content.gsub!(/[\[\]\"]/, "").gsub!(",","") if attribute_present?("content")
+    self.content.gsub!(/[\[\]\"]/, "").gsub!(",","") if attribute_present?('content')
   end
   
   def self.search(search)

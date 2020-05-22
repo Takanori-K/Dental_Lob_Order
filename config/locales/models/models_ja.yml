@@ -17,7 +17,7 @@ ja:
           patient_name: 患者名
           sex: 性別
           color: シェード
-          note: 詳細
+          note: 部位・注意事項
           content: 注文内容
           content_other: その他
           other_text: その他記入欄

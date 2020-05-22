@@ -92,7 +92,7 @@
                  <div class="checkbox is-flex-desktop">
                    <% if @order.content.present? %>
                    <% ["AC　","MB　","e-max　","CAD冠　", "前装冠　", "FCK　", "In　", "総義歯　", "部分床義歯　"].each do |order| %>
-                   <div class="checkbox-content"><%= f.check_box :content, {multiple: true, :checked => @content.present? ? @content.include?(order) : false}, order, nil %></div>&nbsp;
+                   <div class="checkbox-content"><%= f.check_box :content, {multiple: true, :checked => @content.present? ? @content.include?(order) : false, include_hidden: false}, order, nil %></div>&nbsp;
                      <%= order %>&emsp;
                    <% end %>
                    <% end %>
@@ -100,7 +100,7 @@
                  <div class="field is-grouped">
                    <div class="control-order">
                       <div class="checkbox">
-                        <%= f.check_box :content_other, {}, "その他", nil %>
+                        <%= f.check_box :content_other, {}, "その他", "false" %>
                         <%= f.label :content_other, "その他" %>
                       </div>     
                    </div>
@@ -175,7 +175,7 @@
            </table>
           </div>
           <div class="has-text-centered">
-            <%= f.submit "指示書編集", class: "button is-primary is-medium" %>&emsp;&nbsp;
+            <%= f.submit "指示書更新", class: "button is-primary is-medium" %>&emsp;&nbsp;
             <%= link_to "キャンセル", user_path(@user), class: "button is-outlined is-medium" %>
           </div>
         </div>

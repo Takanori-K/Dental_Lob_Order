@@ -36,7 +36,7 @@ class Order < ApplicationRecord
   end
   
   def other_text_is_invalid_without_content_other
-    errors.add(:content_other, "にレ点チェックを入れてください。") if content_other.blank? && other_text.present?
+    errors.add(:content_other, "にレ点チェックを入れてください。") if (content_other.blank? || content_other == "false") && other_text.present?
   end
   
   def first_try_and_complete_day_is_blank

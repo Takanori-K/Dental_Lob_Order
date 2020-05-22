@@ -111,7 +111,7 @@
              </tr>
              <tr>
                <td colspan = "6">
-                  <div class="has-text-weight-normal is-size-6"><%= @order.content %>&nbsp;<%= @order.other_text %></div>     
+                  <div class="has-text-weight-normal is-size-6"><%= @order.content.gsub!(/[\[\]\"]/, "") %>,&nbsp;<%= @order.other_text %></div>     
                </td>
              </tr>
              <tr>
@@ -201,8 +201,15 @@
           <% if current_user.admin? && @order.complete_day.present? && (@order.finished == "false" || @order.finished.blank?) %>  
             <%= f.submit "技工物完了", data: { confirm: "完了してよろしいですか？" }, class: "button is-primary is-medium" %>&emsp;&nbsp;
           <% end %>  
-          <% unless current_user.admin? %>
-            <%= link_to "指示書編集", edit_user_order_path(@user, @order), class: "button is-medium is-primary" if (@order.finished == "false" || @order.finished.blank?) %>&emsp;&nbsp;  
+          <% if !current_user.admin? && (@order.finished == "false" || @order.finished.blank?) %>
+            <%= link_to edit_user_order_path(@user, @order), class: "button is-medium is-primary" do %>
+              <span class="icon">
+                <i class="far fa-edit"></i>
+              </span>
+              <span>
+                指示書編集
+              </span>
+            <% end %>&emsp;&nbsp; 
           <% end %>
           <% if @order.finished == "true" %>
             <%= link_to "キャンセル", user_orders_path(@user), class: "button is-outlined is-medium" %>

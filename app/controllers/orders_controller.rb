@@ -87,7 +87,7 @@ class OrdersController < ApplicationController
       @order.update_attributes(order_params)
       flash[:notice] = "技工物の製作が完了しました。"
       NotificationMailer.complete_order_mail(@user, @order, @admin).deliver
-      redirect_to user_url current_user
+      redirect_to user_url(current_user)
     end
   end
   
@@ -95,7 +95,7 @@ class OrdersController < ApplicationController
     @order = @user.orders.find_by(id: params[:id])
     @order.destroy
     flash[:notice] = "指示書を削除しました。"
-    redirect_to @user
+    redirect_to user_url(current_user)
   end
   
   private

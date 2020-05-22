@@ -2,11 +2,12 @@ class User < ApplicationRecord
   has_many :orders, dependent: :destroy
   mount_uploader :image, ImageUploader
   attr_accessor :remember_token
-  before_save :downcase_email, unless: :uid?
+  before_save :downcase_email
   
   validates :name, presence: true, unless: :uid?
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: true, unless: :uid?
+  validates :email, format: { with: VALID_EMAIL_REGEX }, uniqueness: true, if: :uid_present_email_valid?, on: :update
   has_secure_password validations: false
   
   validate(if: :blank_uid?) do |record|
@@ -18,8 +19,11 @@ class User < ApplicationRecord
   
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true, if: :blank_uid?
   
+  
   def downcase_email
-    self.email = email.downcase
+    if uid.blank? || (uid.present? && email.present?)
+      self.email = email.downcase
+    end
   end
   
   # 渡された文字列のハッシュ値を返します。
@@ -75,6 +79,10 @@ class User < ApplicationRecord
   
   def blank_uid?
     uid.blank? || provider.blank?
+  end
+  
+  def uid_present_email_valid?
+    uid.present? && email.present?
   end
   
 end

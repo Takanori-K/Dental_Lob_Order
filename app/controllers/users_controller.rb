@@ -40,10 +40,18 @@ class UsersController < ApplicationController
   end
   
   def update
-    if @user.update_attributes(user_params)
-      redirect_to user_url(current_user), notice: "ユーザー情報を更新しました。"
-    else
-      render :edit      
+    if @user.uid.present? && params[:user][:email].blank?
+      if @user.update_attributes(uid_params)
+        redirect_to user_url(current_user), notice: "ユーザー情報を更新しました。"
+      else
+        render :edit      
+      end
+    else  
+      if @user.update_attributes(user_params)
+        redirect_to user_url(current_user), notice: "ユーザー情報を更新しました。"
+      else
+        render :edit      
+      end
     end
   end
   
@@ -67,6 +75,10 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation, :image, :image_cache, :remove_image)
+    end
+    
+    def uid_params
+      params.require(:user).permit(:name, :image, :image_cache, :remove_image)
     end
     
     def set_user

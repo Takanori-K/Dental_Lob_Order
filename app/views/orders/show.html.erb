@@ -111,7 +111,7 @@
              </tr>
              <tr>
                <td colspan = "6">
-                  <div class="has-text-weight-normal is-size-6"><%= @order.content.gsub!(/[\[\]\"]/, "") %>,&nbsp;<%= @order.other_text %></div>     
+                  <div class="has-text-weight-normal is-size-6"><%= @order.content.gsub!(/[\[\]\"]/, "").gsub!(",","") %>&nbsp;<%= @order.other_text %></div>     
                </td>
              </tr>
              <tr>

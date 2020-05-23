@@ -24,7 +24,7 @@
              <div class="control">
                <font color="red"><p class="warning-text is-size-7">マーク 【試適１】または 【試適２】または 【完成日】 に日付を入力してください。</p></font>
              </div>
-           </div> 
+           </div>
            <table class="table is-bordered is-hoverable is-fullwidth" id="order-table">
              <tr>
                <th class="select-tag">技工所名</th>
@@ -44,7 +44,7 @@
                </th>
                <td colspan = "5">
                  <div class="field">
-                   <%= f.text_field :patient_name, :placeholder => " \uf007 患者名", class: "fa input is-info" %>
+                   <%= f.text_field :patient_name, :placeholder => "患者名", class: "input is-info" %>
                  </div>   
                </td>
              </tr>
@@ -52,7 +52,7 @@
                <th class="select-tag">
                  <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;性別
                </th>
-               <td class="select-date">
+               <td class="select-order">
                  <div class="select is-info is-small">
                    <%= f.select :sex, [['男', '男'], ['女', '女']], { include_blank: '選択してください' } %>
                  </div>
@@ -90,11 +90,9 @@
              <tr>
                <td colspan = "6">
                  <div class="checkbox is-flex-desktop">
-                   <% if @order.content.present? %>
                    <% ["AC　","MB　","e-max　","CAD冠　", "前装冠　", "FCK　", "In　", "総義歯　", "部分床義歯　"].each do |order| %>
-                   <div class="checkbox-content"><%= f.check_box :content, {multiple: true, :checked => @content.present? ? @content.include?(order) : false, include_hidden: false}, order, nil %></div>&nbsp;
+                   <div class="checkbox-content"><%= f.check_box :content, {multiple: true, :checked => @content.present? ? @content.include?(order) : false}, order, "" %></div>&nbsp;
                      <%= order %>&emsp;
-                   <% end %>
                    <% end %>
                  </div><br>
                  <div class="field is-grouped">

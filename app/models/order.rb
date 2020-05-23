@@ -14,7 +14,8 @@ class Order < ApplicationRecord
   validates :reception_date, presence: true
   
   validate :content_is_invalid_without_content_other
-  validate :content_other_is_invalid_without_other_text
+  validate :content_other_is_invalid_without_other_text,      on: :create
+  validate :content_other_is_invalid_without_other_text_edit, on: :update
   validate :other_text_is_invalid_without_content_other
   validate :first_try_and_complete_day_is_blank
   validate :first_try_is_late_second_try_and_complete_day
@@ -31,8 +32,18 @@ class Order < ApplicationRecord
     end
   end
   
+  def content_is_invalid_without_content_other
+    if (content.blank? && content_other.blank? && other_text.blank?)
+      errors.add(:content, "にレ点チェックを入れてください。")
+    end
+  end
+  
   def content_other_is_invalid_without_other_text
-    errors.add(:other_text, "に記入してください。") if content_other.present? && other_text.blank?
+    errors.add(:other_text, "に記入してください。") if content_other.present?  && other_text.blank?
+  end
+  
+  def content_other_is_invalid_without_other_text_edit
+    errors.add(:other_text, "に記入してください。") if content_other == "その他"  && other_text.blank?
   end
   
   def other_text_is_invalid_without_content_other

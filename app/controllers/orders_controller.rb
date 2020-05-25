@@ -64,7 +64,7 @@ class OrdersController < ApplicationController
   
   def update
     @order = @user.orders.find_by(id: params[:id])
-    if @order.update_attributes(order_params)
+    if @order.update_attributes(edit_params)
       flash[:notice] = "指示書を更新しました。"
       redirect_to user_order_url(@user, @order)
     else
@@ -99,6 +99,11 @@ class OrdersController < ApplicationController
       params.require(:order).permit(:patient_name, :sex, :color, :note, {content: []}, :content_other, :other_text, :crown, :metal, :weight, :first_try, :second_try,
                                     :complete_day, :reception_date, :finished,:image_1, :image_2, :image_3)
     end
+    
+    def edit_params
+      params.require(:order).permit(:patient_name, :sex, :color, :note, {content: []}, :content_other, :other_text, :crown, :metal, :weight, :first_try, :second_try,
+                                    :complete_day, :reception_date, :finished,:image_1, :image_1_cache, :remove_image_1, :image_2, :image_2_cache, :remove_image_2, :image_3, :image_3_cache, :remove_image_3)
+    end                              
     
     def reservation_search_params
       params.fetch(:search, {}).permit(:patient_name, :complete_day)

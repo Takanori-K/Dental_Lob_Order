@@ -5,6 +5,7 @@ class OrdersController < ApplicationController
   before_action :admin_user_order_edit, only: [:new, :create, :edit, :update]
   before_action :admin_or_correct_user, only: [:show, :index]
   before_action :admin_user,            only: :admin_update
+  before_action :finished_edit,         only: [:edit, :updete]
   
   def new
     @order = Order.new

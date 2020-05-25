@@ -57,4 +57,13 @@ class ApplicationController < ActionController::Base
       redirect_to(root_url)
     end
   end
+  
+  def finished_edit
+    @user = User.find(params[:user_id])
+    @order = @user.orders.find_by(id: params[:id])
+    if current_user?(@user) && @order.finished == "true"
+      flash[:alert] = "完了した指示書を編集することはできません。"
+      redirect_to(current_user)
+    end
+  end
 end

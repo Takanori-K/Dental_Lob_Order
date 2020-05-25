@@ -28,7 +28,7 @@
             </tr>
             <tr>
               <th>シェード</th>
-              <td><%= @order.color %></td>
+              <td><%= @order.color_i18n %></td>
               <td colspan = "2"></td>
             </tr>
             <tr>
@@ -44,7 +44,7 @@
               <th colspan = "4">注文内容</th>
             </tr>
             <tr>
-              <td colspan = "4"><%= @order.content %>&emsp;<%= @order.other_text %></td>
+              <td colspan = "4"><%= @order.content.gsub!(/[\[\]\"]/, "").gsub!(",","") %>&emsp;<%= @order.other_text %></td>
               <th>試適１</th>
               <th>試適２</th>
               <th>完成日</th>

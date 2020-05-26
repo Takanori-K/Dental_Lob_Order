@@ -10,7 +10,7 @@
 
 <ul class="user-index"></ul>
 
-<div class="pagination is-rounded is-centered" id="pagenate-style">
+<div class="paginate is-rounded columns is-multiline">
   <%= will_paginate @users, renderer: BulmaPagination::Rails %>
 </div>
 <section class="section">
@@ -69,6 +69,6 @@
     </div>
   </div>
 </section>
-<div class="pagination is-rounded is-centered" id="pagenate-style">
+<div class="paginate is-rounded columns is-multiline">
   <%= will_paginate @users, renderer: BulmaPagination::Rails %>
 </div><br>

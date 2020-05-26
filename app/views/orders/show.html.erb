@@ -113,12 +113,12 @@
                <% if current_user.admin? && @order.metal.present? %>
                  <th class="select-metal">
                    <% unless @order.finished == "true" %>
-                     <font color="#FF6666"><i class="fas fa-exclamation-triangle"></i></font> &nbsp;
+                     <font color="#FF6666"><i class="fas fa-exclamation-triangle"></i></font>&nbsp;
                     <% end %>
                     金属量
                  </th>
                  <td>
-                   <%= f.number_field :weight, step: '0.1', min: "0.0", :placeholder => "g", class: "input is-info is-small" %>
+                   <%= f.number_field :weight, step: '0.1', min: "0.1", :placeholder => "g", class: "input is-info is-small" %>
                  </td>
                  <td colspan = "2"></td>
                <% else %>

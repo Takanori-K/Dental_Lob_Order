@@ -95,9 +95,16 @@
       <% end %>
       <h2 class="title-order has-text-centered is-3" id="open">
       <% if current_user.admin? %>
-        <font color="white">新着技工物</font>
+        <font color="white">
+          <span class="icon">
+            <i class="far fa-list-alt"></i>
+          </span>&nbsp;
+          <span>
+            新着技工物
+          </span>
+        </font>
         <% if @notification_info.present? %>
-          <a class="button is-rounded is-danger is-small "><span class="icon"><i class="fas fa-bell"></i></span><span><%= @notification %></span></a>
+          <a class="button is-rounded is-danger is-small "><span class="icon"><i class="fas fa-bell"></i></span><span><%= @notification %></span></a>&emsp;
         <% end %>
       <% else %>
         <button class="button is-medium is-success">
@@ -110,7 +117,12 @@
       </h2>
       <h2 class="title-order has-text-centered is-3">
         <% if current_user.admin? %>
-          <%= link_to "歯科医院一覧", users_path, :style=>"color:white;" %>
+          <%= link_to  users_path, :style=>"color:white;" do %>
+            <span class="icon">
+              <i class="fas fa-users"></i>
+            </span>&nbsp;
+            <span>歯科医院一覧</span>
+          <% end %>  
         <% end %>  
       </h2>  
     </div>

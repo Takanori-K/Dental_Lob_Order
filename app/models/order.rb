@@ -26,7 +26,7 @@ class Order < ApplicationRecord
   enum color: { a1: 0, a2: 1, a3: 2, a35: 3, a4: 4, photo: 5 }
   
   def content_is_invalid_without_content_other
-    if (content.blank? && content_other.blank? && other_text.blank?)
+    if (content.blank? && content_other == "false" && other_text.blank?)
       errors.add(:content, "にレ点チェックを入れてください。")
     end
   end

@@ -61,6 +61,9 @@
           <div class="field">
             <%= f.label :email, class: "label" %>
             <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => " \uf0e0 email", class: "fa input is-primary" %>
+            <% if @user.uid.present? && @user.email.blank? %>
+              <span><font color="blue">※メールアドレスを登録するとメールで通知を送受信することができます。</font></span>
+            <% end %>  
           </div><br>
           
           <% if @user.uid.blank? %>

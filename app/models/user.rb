@@ -4,7 +4,7 @@ class User < ApplicationRecord
   attr_accessor :remember_token
   before_save :downcase_email
   
-  validates :name, presence: true, unless: :uid?
+  validates :name, presence: true
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: true, unless: :uid?
   validates :email, format: { with: VALID_EMAIL_REGEX }, uniqueness: true, if: :uid_present_email_valid?, on: :update

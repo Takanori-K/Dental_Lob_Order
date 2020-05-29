@@ -40,28 +40,15 @@ class UsersController < ApplicationController
   end
   
   def update
-    if @user.uid.present? && params[:user][:email].blank?
-      if @user.update_attributes(uid_params)
-        flash[:notice] = "ユーザー情報を更新しました。"
-        if current_user.admin?
-          redirect_to users_url
-        else
-          redirect_to user_url(current_user)
-        end
-      else
-        render :edit      
+    if @user.update_attributes(user_params)
+      flash[:notice] = "ユーザー情報を更新しました。"
+      if current_user.admin?
+        redirect_to users_url
+      else  
+        redirect_to user_url(current_user)
       end
-    else  
-      if @user.update_attributes(user_params)
-        flash[:notice] = "ユーザー情報を更新しました。"
-        if current_user.admin?
-          redirect_to users_url
-        else  
-          redirect_to user_url(current_user)
-        end
-      else
-        render :edit      
-      end
+    else
+      render :edit      
     end
   end
   

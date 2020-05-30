@@ -219,14 +219,14 @@
 
 <div class="modal js-modal" id="modal01">
   <div class="modal__bg js-modal-close"></div>
-    <div class="modal__content">
+    <div class="modal__content has-background-black-ter">
       <p class="images-orders is-4by3">
         <% if @order.image_1.present? %>
           <%= image_tag @order.image_1.thumb.url %>
         <% else %>
           <%= image_tag "/user_images/no-image-2.png" %>
         <% end %>
-        <a class="js-modal-close" href="">閉じる</a>
+        <a class="js-modal-close has-text-light" href=""><div class="has-text-right">閉じる</div></a>
       </p>    
     </div>
 </div>
@@ -235,14 +235,14 @@
 
 <div class="modal js-modal" id="modal02">
   <div class="modal__bg js-modal-close"></div>
-    <div class="modal__content">
+    <div class="modal__content has-background-black-ter">
       <p class="images-orders is-4by3">
         <% if @order.image_2.present? %>
           <%= image_tag @order.image_2.thumb.url %>
         <% else %>
           <%= image_tag "/user_images/no-image-2.png", size: "250x250" %>
         <% end %>
-        <a class="js-modal-close" href="">閉じる</a>
+        <a class="js-modal-close has-text-light" href=""><div class="has-text-right">閉じる</div></a>
       </p>
     </div>
 </div>
@@ -251,14 +251,14 @@
 
 <div class="modal js-modal" id="modal03">
   <div class="modal__bg js-modal-close"></div>
-    <div class="modal__content">
+    <div class="modal__content has-background-black-ter">
       <p class="images-orders is-4by3">
         <% if @order.image_3.present? %>
           <%= image_tag @order.image_3.thumb.url %>
         <% else %>
           <%= image_tag "/user_images/no-image-2.png" %>
         <% end %>
-        <a class="js-modal-close" href="">閉じる</a>
+        <a class="js-modal-close has-text-light" href=""><div class="has-text-right">閉じる</div></a>
       </p>
     </div>
 </div>

@@ -44,7 +44,7 @@
              <tr>
                <th class="select-tag">技工所名</th>
                <td colspan = "5">
-                 <div class="has-text-weight-semibold is-size-5">デンタルラボラトリー</div>
+                 <div class="has-text-weight-semibold is-size-5"><%= @admin.name %></div>
                </td>
              </tr>
              <tr>
@@ -58,7 +58,7 @@
                  患者名
                </th>
                <td colspan = "3">
-                 <div class="has-text-weight-semibold is-size-5"><%= @order.patient_name %>&ensp;様</div>   
+                 <div class="is-size-5"><%= @order.patient_name %>&ensp;様</div>   
                </td>
                <th class="select-tag">
                  性別
@@ -102,7 +102,7 @@
              </tr>
              <tr>
                <td colspan = "6">
-                  <div class="has-text-weight-normal is-size-6"><%= @order.content.gsub!(/[\[\]\"]/, "").gsub!(",","") %>&nbsp;<%= @order.other_text %></div>     
+                  <div class="has-text-weight-normal is-size-6"><%= @order.content.gsub!(/[\[\]\"]/, "").gsub!(",","") %><%= @order.other_text %></div>     
                </td>
              </tr>
              <tr>

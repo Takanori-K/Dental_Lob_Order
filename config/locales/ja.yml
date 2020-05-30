@@ -6,6 +6,10 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+  will_paginate:
+    previous_label: 前
+    next_label: 次
+    page_gap: …        
   date:
     abbr_day_names:
     - 日

@@ -1,18 +1,19 @@
 class OrdersController < ApplicationController
   
   before_action :set_user
+  before_action :set_admin_user,        only: [:new, :show, :edit, :update, :pdf, :create, :admin_update]
   before_action :correct_user_orders,   only: [:new, :create, :edit, :update]
   before_action :admin_user_order_edit, only: [:new, :create, :edit, :update]
   before_action :admin_or_correct_user, only: [:show, :index]
   before_action :admin_user,            only: :admin_update
   before_action :finished_edit,         only: [:edit, :updete]
   
+  
   def new
     @order = Order.new
   end
   
   def create
-    @admin = User.find_by(admin: true)
     @order = @user.orders.build(order_params)
     if @order.save
       flash[:notice] = "技工指示書を新規作成しました。"
@@ -29,7 +30,6 @@ class OrdersController < ApplicationController
   end
   
   def pdf
-    @admin = User.find_by(admin: true)
     @order = @user.orders.find_by(id: params[:id])
     respond_to do |format|
       format.html { redirect_to action: :pdf, format: :pdf, debug: true }
@@ -74,7 +74,6 @@ class OrdersController < ApplicationController
   end
   
   def admin_update
-    @admin = User.find_by(admin: true)
     @order = @user.orders.find_by(id: params[:id])
     if @order.metal.present? && params[:order][:weight].blank? || @order.complete_day.present? && params[:order][:finished] == "false"
       flash.now[:alert] = "必須項目が空欄です。"
@@ -112,5 +111,9 @@ class OrdersController < ApplicationController
     
     def set_user
       @user = User.find(params[:user_id])
+    end
+    
+    def set_admin_user
+      @admin = User.find_by(admin: true)
     end
 end

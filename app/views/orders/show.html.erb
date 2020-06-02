@@ -92,7 +92,7 @@
              </tr>
              <tr>
                <td colspan = "6">
-                 <div class="has-text-weight-normal is-size-6"><%= @order.note %></div>
+                 <div class="has-text-weight-normal is-size-6"><%= safe_join(@order.note.split("\n"), tag(:br)) %></div>
                </td>
              </tr>
              <tr>

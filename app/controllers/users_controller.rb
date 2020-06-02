@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   
   def index
     @admin_other = User.where.not(admin: true)
-    @users = @admin_other.paginate(page: params[:page], per_page: 8)
+    @users = @admin_other.paginate(page: params[:page], per_page: 8).order(:id)
   end
   
   def show

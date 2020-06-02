@@ -60,7 +60,7 @@
               <th>使用金属</th>
               <td><%= @order.metal %></td>
               <th>金属量</th>
-              <td><%= @order.weight %></td>
+              <td><%= @order.weight %>g</td>
               <td><%= l(@order.first_try) if @order.first_try.present? %></td>
               <td><%= l(@order.second_try) if @order.second_try.present? %></td>
               <td><%= l(@order.complete_day) if @order.complete_day.present? %></td>

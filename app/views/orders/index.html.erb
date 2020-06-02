@@ -47,7 +47,7 @@
             <th>削除確認</th>
           <% end %>  
         </tr>
-        <% @orders_finished.each do |order| %>
+        <% @orders_finished_search.each do |order| %>
           <tr>
             <td><%= order.patient_name %></td>
             <td><%= l(order.complete_day, format: :long) if order.complete_day.present? %></td>

@@ -5,8 +5,6 @@ class Order < ApplicationRecord
   mount_uploader :image_2, ImagesUploader
   mount_uploader :image_3, ImagesUploader
   
-  #before_save :content_slim
-  
   validates :patient_name,   presence: true
   validates :sex,            presence: true
   validates :note,           presence: true, length: { maximum: 100 }
@@ -73,10 +71,6 @@ class Order < ApplicationRecord
     if complete_day.present?
       errors.add( :complete_day, " は今日より早い時間の入力は無効です") if complete_day < Date.current
     end
-  end
-  
-  def content_slim
-    self.content.gsub!(/[\[\]\"]/, "").gsub!(",","") if attribute_present?('content')
   end
   
   def self.search(search)

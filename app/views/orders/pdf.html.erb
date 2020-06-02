@@ -35,7 +35,7 @@
               <th colspan = "4">部位 ・注意事項</th>
             </tr>
             <tr>
-              <td colspan = "4" rowspan = "3"><%= @order.note %></td>
+              <td colspan = "4" rowspan = "3"><%= safe_join(@order.note.split("\n"), tag(:br)) %></td>
             </tr>
             <tr></tr>
             <tr></tr>
@@ -44,7 +44,14 @@
               <th colspan = "4">注文内容</th>
             </tr>
             <tr>
-              <td colspan = "4"><%= @order.content.gsub!(/[\[\]\"]/, "").gsub!(",","") %>&emsp;<%= @order.other_text %></td>
+              <td colspan = "4">
+                <%= @order.content.gsub!(/[\[\]\"]/, "") if @order.content.present? %>
+                <% if @order.other_text.present? && @order.content.blank? %>
+                  <%= @order.other_text %>
+                <% elsif  @order.other_text.present? && @order.content.present? %>
+                  ,<%= @order.other_text %>
+                <% end %>
+              </td>
               <th>試適１</th>
               <th>試適２</th>
               <th>完成日</th>

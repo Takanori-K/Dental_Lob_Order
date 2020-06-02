@@ -102,7 +102,14 @@
              </tr>
              <tr>
                <td colspan = "6">
-                  <div class="has-text-weight-normal is-size-6"><%= @order.content.gsub!(/[\[\]\"]/, "").gsub!(",","") %><%= @order.other_text %></div>     
+                  <div class="has-text-weight-normal is-size-6">
+                    <%= @order.content.gsub!(/[\[\]\"]/, "") if @order.content.present? %>
+                    <% if @order.other_text.present? && @order.content.blank? %>
+                      <%= @order.other_text %>
+                    <% elsif  @order.other_text.present? && @order.content.present? %>
+                      ,<%= @order.other_text %>
+                    <% end %>  
+                  </div>     
                </td>
              </tr>
              <tr>
@@ -190,7 +197,7 @@
           </div>
           <div class="has-text-centered">
           <% if current_user.admin? && @order.complete_day.present? && (@order.finished == "false" || @order.finished.blank?) %>  
-            <%= f.submit "技工物完了", data: { confirm: "完了してよろしいですか？" }, class: "button is-primary is-medium" %>&emsp;&nbsp;
+            <%= f.submit "技工物完了", data: { confirm: "完了すると編集することができなくなりますがよろしいですか？" }, class: "button is-primary is-medium" %>&emsp;&nbsp;
           <% end %>  
           <% if !current_user.admin? && (@order.finished == "false" || @order.finished.blank?) %>
             <%= link_to edit_user_order_path(@user, @order), class: "button is-medium is-primary" do %>

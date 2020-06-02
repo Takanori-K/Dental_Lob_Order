@@ -7,7 +7,14 @@
     <h3><%= @user.name %>から新しい指示書の通知が届きました。</h3>
     <ul>
       <li><strong>患者名：</strong><%= @order.patient_name %></li>
-      <li><strong>注文内容：</strong><%= @order.content.gsub!(/[\[\]\"]/, "").gsub!(",","") if @order.content.present? %><%= @order.other_text if @order.other_text.present? %></li>
+      <li><strong>注文内容：</strong>
+        <%= @order.content.gsub!(/[\[\]\"]/, "") if @order.content.present? %>
+        <% if @order.other_text.present? && @order.content.blank? %>
+          <%= @order.other_text %>
+        <% elsif  @order.other_text.present? && @order.content.present? %>
+          ,<%= @order.other_text %>
+        <% end %>
+      </li>
       <li><strong>試適日：</strong><%= l(@order.first_try) if @order.first_try.present? %></li>
       <li><strong>完成日：</strong><%= l(@order.complete_day) if @order.complete_day.present? %></li>
     </ul>

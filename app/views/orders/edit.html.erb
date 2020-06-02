@@ -91,7 +91,7 @@
                <td colspan = "6">
                  <div class="checkbox is-flex-desktop">
                    <% ["AC　","MB　","e-max　","CAD冠　", "前装冠　", "FCK　", "In　", "総義歯　", "部分床義歯　"].each do |order| %>
-                   <div class="checkbox-content"><%= f.check_box :content, {multiple: true, :checked => @content.present? ? @content.include?(order) : false}, order, "" %></div>&nbsp;
+                   <div class="checkbox-content"><%= f.check_box :content, {multiple: true, :checked => @content.present? ? @content.include?(order) : false}, order, nil %></div>&nbsp;
                      <%= order %>&emsp;
                    <% end %>
                  </div><br>

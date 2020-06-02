@@ -47,13 +47,13 @@ class OrdersController < ApplicationController
   
   def index
     @order = @user.orders.find_by(id: params[:id])
-    @orders_finished = Order.where(user_id: @user.id, finished: "true").paginate(page: params[:page], per_page: 5).order(id: "DESC")
+    @orders_finished = Order.where(user_id: @user.id, finished: "true").paginate(page: params[:page], per_page: 50).order(id: "DESC")
     if params[:search].present? && params[:search_day].blank?
       @orders_finished = @orders_finished.where('patient_name LIKE ?', "%#{params[:search]}%").order(:complete_day)
     elsif params[:search].present? && params[:search_day].present?
-      @orders_finished = @orders_finished.where('patient_name LIKE ?', "%#{params[:search]}%").where(complete_day: Date.parse("#{params[:search_day]}-01").all_month).order(:complete_day)
+      @orders_finished = @orders_finished.where('patient_name LIKE ?', "%#{params[:search]}%").where('complete_day LIKE ?', "%#{params[:search_day]}%").order(:complete_day)
     elsif params[:search].blank? && params[:search_day].present?
-      @orders_finished = @orders_finished.where(complete_day: Date.parse("#{params[:search_day]}-01").all_month).order(:complete_day)
+      @orders_finished = @orders_finished.where('complete_day LIKE ?', "%#{params[:search_day]}%").order(:complete_day)
     end
   end
   

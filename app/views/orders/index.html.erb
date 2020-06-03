@@ -21,7 +21,7 @@
 </div>
 <div class="month-search field is-grouped">
   <div class="control">
-    <%= f.label :complete_day, '完成日', :style=>"color:white;",  class: "label" %>
+    <%= f.label :reception_date, '日付', :style=>"color:white;",  class: "label" %>
     <%= f.month_field :search_day, class: "input is-small" %>
   </div>&emsp; 
   <div class="control-submit">
@@ -41,7 +41,7 @@
       <table class="table is-fullwidth" id="order-show-table">
         <tr>
           <th>患者名</th>
-          <th>完成日</th>
+          <th>申請日</th>
           <th>詳細</th>
           <% if current_user.admin? %>
             <th>削除確認</th>
@@ -50,7 +50,7 @@
         <% @orders_finished_search.each do |order| %>
           <tr>
             <td><%= order.patient_name %></td>
-            <td><%= l(order.complete_day, format: :long) if order.complete_day.present? %></td>
+            <td><%= l(order.reception_date, format: :long) if order.reception_date.present? %></td>
             <td>
               <%= link_to user_order_path(@user, order), class: "button is-info is-small" do %>
                 <i class="fas fa-teeth-open"></i>
@@ -65,7 +65,7 @@
     </div>
     <% if current_user.admin? %>
       <div class="has-text-centered">
-        <%= f.submit "まとめて削除", class: "button is-danger is-medium" %>&emsp;&nbsp;
+        <%= f.submit "まとめて削除", data: { confirm: "削除してよろしいですか？" }, class: "button is-danger is-medium" %>&emsp;&nbsp;
         <%= link_to "キャンセル", users_path, class: "button is-outlined is-medium" %>
       </div>
     <% else %>

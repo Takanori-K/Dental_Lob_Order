@@ -13,6 +13,15 @@
 
   #item-layout {
     margin-left: 19%;
+
+    .button-index {
+      margin-left: 9%;
+    }
+
+    #show-order-button {
+      margin-top: 20px;
+      margin-left: 52%;
+    }
   }
 }
 
@@ -34,5 +43,24 @@
 
   #item-layout {
     margin-left: 3%;
+
+    .button-new {
+      margin-left: 13%;
+      padding: 0px;
+    }
+
+    .show-new-order {
+      font-size: 13px;
+    }
+
+    .show-index-order {
+      font-size: 13px;
+    }
+
+    #show-order-button {
+      margin-top: 10px;
+      margin-left: 65%;
+      font-size: 13px;
+    }
   }
 }

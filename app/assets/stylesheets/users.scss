@@ -1,3 +1,38 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@media screen and ( max-width: 1000px ) {
+  #show-image {
+    text-align: center;
+  }
+
+  #calendar-layout {
+    margin: 0px;
+  }
+
+  #item-layout {
+    margin-left: 19%;
+  }
+}
+
+@media screen and ( max-width: 500px ) {
+  .image-tag img {
+    width: 100px;
+    height: 100px;
+  }
+
+  #user-show-table {
+    td {
+      font-size: 12px !important;
+    }
+  }
+
+  .title-order.is-3 {
+    font-size: 19px;
+  }
+
+  #item-layout {
+    margin-left: 3%;
+  }
+}

@@ -22,187 +22,199 @@
             <% end %>
           </div><br>
         <% end %>
-         <div class="table-container">
-           <%= render partial: 'shared/error_messages', locals: { obj: @order } %>
-           <div class="field is-grouped">
-             <% if current_user.admin? && (@order.finished == "false" || @order.finished.blank?) %>
-               <div class="control">
-                 <font color="#FF6666"><i class="fas fa-tooth"></i></font>
-               </div>
-               <div class="control">
-                 <font color="red"><p class="warning-text is-size-7">マークは【必須】になります。</p></font>
-               </div>
-               <div class="control">
-               <font color="#FF6666"><i class="fas fa-exclamation-triangle"></i></font>
-               </div>
-               <div class="control">
-                 <font color="red"><p class="warning-text is-size-7">マークは使用金属に記入済みの場合【必須】になります。</p></font>
-               </div>&ensp;
-             <% end %>
-           </div> 
-           <table class="table is-bordered is-hoverable is-fullwidth" id="order-table">
-             <tr>
-               <th class="select-tag">技工所名</th>
-               <td colspan = "5">
-                 <div class="has-text-weight-semibold is-size-5"><%= @admin.name %></div>
-               </td>
-             </tr>
-             <tr>
-               <th class="select-tag">医院名</th>
-               <td colspan = "5">
-                 <div class="has-text-weight-semibold is-size-5"><%= @user.name %>&ensp;様</div>
-               </td>
-             </tr>
-             <tr>
-               <th class="select-tag">
-                 患者名
-               </th>
-               <td colspan = "3">
-                 <div class="is-size-5"><%= @order.patient_name %>&ensp;様</div>   
-               </td>
-               <th class="select-tag">
-                 性別
-               </th>
-               <td class="select-table">
-                 <div class="has-text-weight-normal is-size-6"><%= @order.sex %></div>
-               </td>
-             </tr>
-             <tr>
-               <th class="select-tag">
-                 受付日
-               </th>
-               <td class="select-date">
-                 <div class="has-text-weight-normal is-size-6"><%= l(@order.reception_date, format: :long) %></div>
-               </td>
-               <th class="select-tag">シェード</th>
-               <td class="select-order">
-                 <div class="has-text-weight-normal is-size-6"><%= @order.color_i18n %></div>  
-               </td>
-               <th class="select-tag">
-                 単 or 連
-               </th>
-               <td class="select-order">
-                 <div class="has-text-weight-normal is-size-6"><%= @order.crown %></div> 
-               </td>
-             </tr>
-             <tr>
-               <th colspan = "6">
-                 部位 ・注意事項
-               </th>
-             </tr>
-             <tr>
-               <td colspan = "6">
-                 <div class="has-text-weight-normal is-size-6"><%= safe_join(@order.note.split("\n"), tag(:br)) %></div>
-               </td>
-             </tr>
-             <tr>
-               <th colspan = "6">
-                 注文内容
-               </th>
-             </tr>
-             <tr>
-               <td colspan = "6">
+          <div class="table-container">
+            <%= render partial: 'shared/error_messages', locals: { obj: @order } %>
+            <div class="field is-grouped">
+              <% if current_user.admin? && (@order.finished == "false" || @order.finished.blank?) %>
+                <div class="control">
+                  <font color="#FF6666"><i class="fas fa-tooth"></i></font>
+                </div>
+                <div class="control">
+                  <font color="red"><p class="warning-text is-size-7">マークは【必須】になります。</p></font>
+                </div>
+                <div class="control">
+                <font color="#FF6666"><i class="fas fa-exclamation-triangle"></i></font>
+                </div>
+                <div class="control">
+                  <font color="red"><p class="warning-text is-size-7">マークは使用金属に記入済みの場合【必須】になります。</p></font>
+                </div>&ensp;
+              <% end %>
+            </div>
+            <table class="table is-bordered is-hoverable is-fullwidth" id="order-table">
+              <tr>
+                <th>技工所名</th>
+                <td colspan = "5">
+                  <div class="has-text-weight-semibold is-size-5"><%= @admin.name %></div>
+                </td>
+              </tr>
+              <tr>
+                <th>医院名</th>
+                <td colspan = "5">
+                  <div class="has-text-weight-semibold is-size-5"><%= @user.name %>&ensp;様</div>
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  患者名
+                </th>
+                <td colspan = "3">
+                  <%= @order.patient_name %>&ensp;様
+                </td>
+                <th>
+                  性別
+                </th>
+                <td>
+                  <%= @order.sex %>
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  受付日
+                </th>
+                <td>
+                  <%= l(@order.reception_date, format: :long) %>
+                </td>
+                <th>シェード</th>
+                <td>
+                  <%= @order.color_i18n %>
+                </td>
+                <th>
+                  単 or 連
+                </th>
+                <td>
+                  <%= @order.crown %>
+                </td>
+              </tr>
+              <tr>
+                <th colspan = "6">
+                  部位 ・注意事項
+                </th>
+              </tr>
+              <tr>
+                <td colspan = "6">
+                  <%= safe_join(@order.note.split("\n"), tag(:br)) %>
+                </td>
+              </tr>
+              <tr>
+                <th colspan = "6">
+                  注文内容
+                </th>
+              </tr>
+              <tr>
+                <td colspan = "6">
                   <div class="has-text-weight-normal is-size-6">
                     <%= @order.content.gsub!(/[\[\]\"]/, "") if @order.content.present? %>
                     <% if @order.other_text.present? && @order.content.blank? %>
                       <%= @order.other_text %>
                     <% elsif  @order.other_text.present? && @order.content.present? %>
                       ,<%= @order.other_text %>
-                    <% end %>  
-                  </div>     
-               </td>
-             </tr>
-             <tr>
-               <th class="select-metal">使用金属</th>
-               <td>
-                 <div class="has-text-weight-normal is-size-6"><%= @order.metal %></div>
-               </td>
-               <% if current_user.admin? && @order.metal.present? %>
-                 <th class="select-metal">
-                   <% unless @order.finished == "true" %>
-                     <font color="#FF6666"><i class="fas fa-exclamation-triangle"></i></font>&nbsp;
-                   <% end %>
-                   金属量
-                 </th>
-                 <td>
-                   <% if @order.finished == "true" %>
-                     <%= @order.weight %>g
-                   <% else %> 
-                     <%= f.number_field :weight, step: '0.1', min: "0.1", :placeholder => "g", class: "input is-info is-small" %>
-                   <% end %>    
-                 </td>
-                 <td colspan = "2"></td>
-               <% else %>
-                 <td colspan = "4"></td>
-               <% end %>
-             </tr>
-             <tr>
-               <th colspan = "6">口腔内写真</th>
-             </tr>
-             <tr>
-               <td colspan = "2">
-                 <div class="field tooth-image has-text-centered js-modal-open" data-target="modal01">
+                    <% end %>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th>使用金属</th>
+                <td>
+                  <div class="has-text-weight-normal is-size-6"><%= @order.metal %></div>
+                </td>
+                <% if current_user.admin? && @order.metal.present? %>
+                  <th class="select-metal">
+                    <% unless @order.finished == "true" %>
+                      <font color="#FF6666"><i class="fas fa-exclamation-triangle"></i></font>&nbsp;
+                    <% end %>
+                    金属量
+                  </th>
+                  <td>
+                    <% if @order.finished == "true" %>
+                      <%= @order.weight %>g
+                    <% else %>
+                      <%= f.number_field :weight, step: '0.1', min: "0.1", :placeholder => "g", class: "input is-info is-small" %>
+                    <% end %>
+                  </td>
+                  <td colspan = "2"></td>
+                <% else %>
+                  <td colspan = "4"></td>
+                <% end %>
+              </tr>
+            </table>
+
+            <table class="table is-bordered is-hoverable is-fullwidth" id="image-table">
+              <tr>
+                <th colspan = "6">口腔内写真</th>
+              </tr>
+              <tr>
+                <td>
+                  <div class="field tooth-image has-text-centered js-modal-open" data-target="modal01">
                     <% if @order.image_1.present? %>
                       <%= image_tag @order.image_1.thumb.url, size: "250x250" %>
                     <% else %>
                       <%= image_tag "/user_images/no-image-2.png", size: "250x250" %>
                     <% end %>
                   </div>
-               </td>
-               <td colspan = "2">
-                 <div class="field tooth-image has-text-centered js-modal-open" data-target="modal02">
+                </td>
+                <td>
+                  <div class="field tooth-image has-text-centered js-modal-open" data-target="modal02">
                     <% if @order.image_2.present? %>
                       <%= image_tag @order.image_2.thumb.url, size: "250x250" %>
                     <% else %>
                       <%= image_tag "/user_images/no-image-2.png", size: "250x250" %>
                     <% end %>
                   </div>
-               </td>
-               <td colspan = "2">
-                 <div class="field tooth-image has-text-centered js-modal-open" data-target="modal03">
+                </td>
+                <td>
+                  <div class="field tooth-image has-text-centered js-modal-open" data-target="modal03">
                     <% if @order.image_3.present? %>
                       <%= image_tag @order.image_3.thumb.url, size: "250x250" %>
                     <% else %>
                       <%= image_tag "/user_images/no-image-2.png", size: "250x250" %>
                     <% end %>
                   </div>
-               </td>
-             </tr>
-             <tr>
-               <th class="select-tag">試適１</th>
-               <td class="select-date">
-                 <div class="has-text-weight-normal is-size-6">
-                     <%= l(@order.first_try) if @order.first_try.present? %>
-                 </div>
-               </td>
-               <th class="select-tag">試適２</th>
-               <td class="select-date">
-                 <div class="has-text-weight-normal is-size-6">
-                   <%= l(@order.second_try) if @order.second_try.present? %>
-                 </div>  
-               </td>
-               <th class="select-tag">完成日</th>
-               <td class="select-date">
-                <div class="has-text-weight-normal is-size-6">
-                  <%= l(@order.complete_day) if @order.complete_day.present? %>
-                </div>  
-               </td>
-             </tr>
-               <% if current_user.admin? && @order.complete_day.present? && (@order.finished == "false" || @order.finished.blank?) %>
-                 <tr>
-                   <td colspan = "4"></td>
-                   <th><font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;完了</th>
-                   <td>
-                     <%= f.check_box :finished, {:checked => false}, "true", "false" %>      
-                   </td>
-                 </tr>
-               <% end %>
-           </table>
+                </td>
+              </tr>
+            </table>
+
+            <table class="table is-bordered is-hoverable is-fullwidth" id="plans-table">
+              <tr>
+                <th colspan = 6>アポイント</th>
+              </tr>
+              <tr>
+                <th>試適１</th>
+                <td>
+                  <div class="has-text-weight-normal" id="plans-date">
+                      <%= l(@order.first_try) if @order.first_try.present? %>
+                  </div>
+                </td>
+                <th>試適２</th>
+                <td>
+                  <div class="has-text-weight-normal" id="plans-date">
+                    <%= l(@order.second_try) if @order.second_try.present? %>
+                  </div>
+                </td>
+                <th>完成日</th>
+                <td>
+                  <div class="has-text-weight-normal" id="plans-date">
+                    <%= l(@order.complete_day) if @order.complete_day.present? %>
+                  </div>
+                </td>
+              </tr>
+              <% if current_user.admin? && @order.complete_day.present? && (@order.finished == "false" || @order.finished.blank?) %>
+                <tr>
+                  <td colspan = "4"></td>
+                  <th><font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;完了</th>
+                  <td>
+                    <div class="check-layout">
+                      <%= f.check_box :finished, {:checked => false}, "true", "false" %>
+                    </div>
+                  </td>
+                </tr>
+              <% end %>
+            </table>
+
           </div>
           <div class="has-text-centered">
-          <% if current_user.admin? && @order.complete_day.present? && (@order.finished == "false" || @order.finished.blank?) %>  
+          <% if current_user.admin? && @order.complete_day.present? && (@order.finished == "false" || @order.finished.blank?) %>
             <%= f.submit "技工物完了", data: { confirm: "完了すると編集することができなくなりますがよろしいですか？" }, class: "button is-primary is-medium" %>&emsp;&nbsp;
-          <% end %>  
+          <% end %>
           <% if !current_user.admin? && (@order.finished == "false" || @order.finished.blank?) %>
             <%= link_to edit_user_order_path(@user, @order), class: "button is-medium is-primary" do %>
               <span class="icon">
@@ -211,13 +223,13 @@
               <span>
                 指示書編集
               </span>
-            <% end %>&emsp;&nbsp; 
+            <% end %>&emsp;&nbsp;
           <% end %>
           <% if @order.finished == "true" %>
             <%= link_to "キャンセル", user_orders_path(@user), class: "button is-outlined is-medium" %>
-          <% else %>    
+          <% else %>
             <%= link_to "キャンセル", user_path(current_user), class: "button is-outlined is-medium" %>
-          <% end %>    
+          <% end %>
           </div>
         </div>
       </div>
@@ -238,7 +250,7 @@
           <%= image_tag "/user_images/no-image-2.png" %>
         <% end %>
         <a class="js-modal-close has-text-light" href=""><div class="has-text-right">閉じる</div></a>
-      </p>    
+      </p>
     </div>
 </div>
 
@@ -287,7 +299,6 @@
     $('.js-modal-close').on('click',function(){
         $('.js-modal').fadeOut();
         return false;
-    }); 
+    });
   });
-</script>    
-    
+</script>

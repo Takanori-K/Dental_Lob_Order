@@ -9,180 +9,191 @@
       </h1>
     <div class="columns is-centered">
       <div class="column is-11">
-         <div class="table-container">
-           <%= render partial: 'shared/error_messages', locals: { obj: @order } %>
-           <div class="field is-grouped">
-             <div class="control">
-               <font color="#FF6666"><i class="fas fa-tooth"></i></font>
-             </div>
-             <div class="control">
-               <font color="red"><p class="warning-text is-size-7">マークは【必須】になります。</p></font>
-             </div>&ensp;
-             <div class="control">
-               <font color="#FF6666"><i class="fas fa-calendar-check"></i></font>
-             </div>
-             <div class="control">
-               <font color="red"><p class="warning-text is-size-7">マーク 【試適１】または 【試適２】または 【完成日】 に日付を入力してください。</p></font>
-             </div>
-           </div>
-           <table class="table is-bordered is-hoverable is-fullwidth" id="order-table">
-             <tr>
-               <th class="select-tag">技工所名</th>
-               <td colspan = "5">
-                 <div class="has-text-weight-semibold is-size-5"><%= @admin.name %></div>
-               </td>
-             </tr>
-             <tr>
-               <th class="select-tag">医院名</th>
-               <td colspan = "5">
-                 <div class="has-text-weight-semibold is-size-5"><%= current_user.name %>&ensp;様</div>
-               </td>
-             </tr>
-             <tr>
-               <th class="select-table">
-                 <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;患者名
-               </th>
-               <td colspan = "5">
-                 <div class="field">
-                   <%= f.text_field :patient_name, :placeholder => "患者名", class: "input is-info" %>
-                 </div>   
-               </td>
-             </tr>
-             <tr>
-               <th class="select-tag">
-                 <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;性別
-               </th>
-               <td class="select-order">
-                 <div class="select is-info is-small">
-                   <%= f.select :sex, [['男', '男'], ['女', '女']], { include_blank: '選択してください' } %>
-                 </div>
-               </td>
-               <th class="select-tag">シェード</th>
-               <td class="select-order">
-                <div class="select is-info is-small">
+          <div class="table-container">
+            <%= render partial: 'shared/error_messages', locals: { obj: @order } %>
+            <div class="field is-grouped">
+              <div class="control">
+                <font color="#FF6666"><i class="fas fa-tooth"></i></font>
+              </div>
+              <div class="control">
+                <font color="red"><p class="warning-text is-size-7">マークは【必須】になります。</p></font>
+              </div>&ensp;
+              <div class="control">
+                <font color="#FF6666"><i class="fas fa-calendar-check"></i></font>
+              </div>
+              <div class="control">
+                <font color="red"><p class="warning-text is-size-7">マーク 【試適１】または 【試適２】または 【完成日】 に日付を入力してください。</p></font>
+              </div>
+            </div>
+            <table class="table is-bordered is-hoverable is-fullwidth" id="order-table">
+              <tr>
+                <th class="select-tag">技工所名</th>
+                <td colspan = "5">
+                  <div class="has-text-weight-semibold is-size-5"><%= @admin.name %></div>
+                </td>
+              </tr>
+              <tr>
+                <th class="select-tag">医院名</th>
+                <td colspan = "5">
+                  <div class="has-text-weight-semibold is-size-5"><%= current_user.name %>&ensp;様</div>
+                </td>
+              </tr>
+              <tr>
+                <th class="select-table">
+                  <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;患者名
+                </th>
+                <td colspan = "5">
+                  <div class="field">
+                    <%= f.text_field :patient_name, :placeholder => "患者名", class: "input is-info" %>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th class="select-tag">
+                  <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;性別
+                </th>
+                <td class="select-order">
+                  <div class="select is-info is-small">
+                    <%= f.select :sex, [['男', '男'], ['女', '女']], { include_blank: '選択してください' } %>
+                  </div>
+                </td>
+                <th class="select-tag">シェード</th>
+                <td class="select-order">
+                  <div class="select is-info is-small">
                   <%= f.select :color, Order.colors_i18n.invert, {include_blank: '選択してください'} %>
-                </div>  
-               </td>
-               <th class="select-tag">
-                 <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;単 or 連
-               </th>
-               <td class="select-order">
-                 <div class="select is-info is-small">
-                   <%= f.select :crown, [['単冠', '単冠'], ['連結', '連結']], { include_blank: '選択してください' }%>
-                 </div> 
-               </td>
-             </tr>
-             <tr>
-               <th colspan = "6">
-                 <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;部位 ・注意事項
-               </th>
-             </tr>
-             <tr>
-               <td colspan = "6">
-                 <%= f.text_area :note, :placeholder => "部位・注意事項", class: "textarea is-info is-medium" %>
-               </td>
-             </tr>
-             <tr>
-               <th colspan = "6">
-                 <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;注文内容
-               </th>
-             </tr>
-             <tr>
-               <td colspan = "6">
-                 <div class="checkbox is-flex-desktop">
-                   <% ["AC　","MB　","e-max　","CAD冠　", "前装冠　", "FCK　", "In　", "総義歯　", "部分床義歯　"].each do |order| %>
-                   <div class="checkbox-content"><%= f.check_box :content, {multiple: true, :checked => @content.present? ? @content.include?(order) : false}, order, nil %></div>&nbsp;
-                     <%= order %>&emsp;
-                   <% end %>
-                 </div><br>
-                 <div class="field is-grouped">
-                   <div class="control-order">
+                </div>
+                </td>
+                <th class="select-tag">
+                  <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;単 or 連
+                </th>
+                <td class="select-order">
+                  <div class="select is-info is-small">
+                    <%= f.select :crown, [['単冠', '単冠'], ['連結', '連結']], { include_blank: '選択してください' }%>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th colspan = "6">
+                  <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;部位 ・注意事項
+                </th>
+              </tr>
+              <tr>
+                <td colspan = "6">
+                  <%= f.text_area :note, :placeholder => "部位・注意事項", class: "textarea is-info is-medium" %>
+                </td>
+              </tr>
+              <tr>
+                <th colspan = "6">
+                  <font color="#FF6666"><i class="fas fa-tooth"></i></font>&nbsp;注文内容
+                </th>
+              </tr>
+              <tr>
+                <td colspan = "6">
+                  <div class="checkbox is-flex-desktop">
+                    <% ["AC　","MB　","e-max　","CAD冠　", "前装冠　", "FCK　", "In　", "総義歯　", "部分床義歯　"].each do |order| %>
+                    <div class="checkbox-content">
+                      <%= f.check_box :content, {multiple: true, :checked => @content.present? ? @content.include?(order) : false}, order, nil %>
+                    </div>&nbsp;
+                      <%= order %>&emsp;
+                    <% end %>
+                  </div><br>
+                  <div class="field is-grouped">
+                    <div class="control-order">
                       <div class="checkbox">
                         <%= f.check_box :content_other, {}, "その他", "false" %>
                         <%= f.label :content_other, "その他" %>
-                      </div>     
-                   </div>
-                   <div class="control-field">
-                     <%= f.text_field :other_text,  class: "input is-info" %>
-                   </div>
-                   <div class="control-field">
-                     <font color="red"><p class="warning-text is-size-7">※その他記入の場合、その他にチェックを入れて空欄に記入してください。</p></font>
-                   </div>
-                 </div>
-               </td>
-             </tr>
-             <tr>
-               <th class="select-metal">使用金属</th>
-               <td>
-                 <%= f.text_field :metal, :placeholder => "金属名", class: "input is-info is-small" %>
-               </td>
-             </tr>
-             <tr>
-               <th colspan = "6">口腔内写真</th>
-             </tr>
-             <tr>
-               <td colspan = "2">
-                 <div class="field tooth-image has-text-centered">
-                    <% if @order.image_1.present? %>
-                      <%= image_tag @order.image_1.thumb.url, id: :edit_img_prev, size: "250x250", onClick:"$('#upfile').click()" %>
-                    <% else %>
-                      <%= image_tag "/user_images/no-image-2.png", id: :edit_img_prev, size: "250x250", onClick:"$('#upfile').click()" %>
-                    <% end %>
-                    <%= f.file_field :image_1, style:"display:none;", id:"upfile", class: "input"%>
-                    <%= f.hidden_field :image_1_cache %>
-                    <% if @order.image_1.present? %>
-                      <p><%= f.check_box :remove_image_1 %>&nbsp;<font color="black">画像を削除する</font></p>
-                    <% end %>
+                      </div>
+                    </div>
+                    <div class="control-field">
+                      <%= f.text_field :other_text,  class: "input is-info" %>
+                    </div>
+                    <div class="control-field">
+                      <font color="red"><p class="warning-text is-size-7">※その他記入の場合、その他にチェックを入れて空欄に記入してください。</p></font>
+                    </div>
                   </div>
-               </td>
-               <td colspan = "2">
-                 <div class="field tooth-image has-text-centered">
-                    <% if @order.image_2.present? %>
-                      <%= image_tag @order.image_2.thumb.url, id: :edit_img_prev_2, size: "250x250", onClick:"$('#upfile2').click()" %>
-                    <% else %>
-                      <%= image_tag "/user_images/no-image-2.png", id: :edit_img_prev_2, size: "250x250", onClick:"$('#upfile2').click()" %>
-                    <% end %>
-                    <%= f.file_field :image_2, style:"display:none;", id:"upfile2", class: "input"%>
-                    <%= f.hidden_field :image_2_cache %>
-                    <% if @order.image_2.present? %>
-                      <p><%= f.check_box :remove_image_2 %>&nbsp;<font color="black">画像を削除する</font></p>
-                    <% end %>
-                  </div>
-               </td>
-               <td colspan = "2">
-                 <div class="field tooth-image has-text-centered">
-                    <% if @order.image_3.present? %>
-                      <%= image_tag @order.image_3.thumb.url, id: :edit_img_prev_3, size: "250x250", onClick:"$('#upfile3').click()" %>
-                    <% else %>
-                      <%= image_tag "/user_images/no-image-2.png", id: :edit_img_prev_3,size: "250x250", onClick:"$('#upfile3').click()" %>
-                    <% end %>
-                    <%= f.file_field :image_3, style:"display:none;", id:"upfile3", class: "input"%>
-                    <%= f.hidden_field :image_3_cache %>
-                    <% if @order.image_3.present? %>
-                      <p><%= f.check_box :remove_image_3 %>&nbsp;<font color="black">画像を削除する</font></p>
-                    <% end %>
-                  </div>
-               </td>
-             </tr>
-             <tr>
-               <th class="select-tag"><font color="#FF6666"><i class="fas fa-calendar-check"></i></font>&nbsp;試適１</th>
-               <td class="select-date">
-                 <%= f.datetime_field :first_try, class: "input is-small is-info" if @order.first_try.present? %> 
-               </td>
-               <th class="select-tag"><font color="#FF6666"><i class="fas fa-calendar-check"></i></font>&nbsp;試適２</th>
-               <td class="select-date">
-                 <% if @order.second_try.present? || @order.first_try.present? %>
-                   <%= f.datetime_field :second_try, class: "input is-small is-info" %>
-                 <% end %> 
-               </td>
-               <th class="select-tag"><font color="#FF6666"><i class="fas fa-calendar-check"></i></font>&nbsp;完成日</th>
-               <td class="select-date">
-                 <% if @order.complete_day.present? || @order.first_try.present? %>
-                   <%= f.datetime_field :complete_day, class: "input is-small is-info" %>
-                 <% end %>  
-               </td>
-             </tr>
-           </table>
+                </td>
+              </tr>
+              <tr>
+                <th class="select-metal">使用金属</th>
+                <td>
+                  <%= f.text_field :metal, :placeholder => "金属名", class: "input is-info is-small" %>
+                </td>
+              </tr>
+            </table>
+
+            <table class="table is-bordered is-hoverable is-fullwidth" id="image-table">
+            <tr>
+              <th colspan = "6">口腔内写真</th>
+            </tr>
+            <tr>
+              <td>
+                <div class="field tooth-image has-text-centered">
+                  <% if @order.image_1.present? %>
+                    <%= image_tag @order.image_1.thumb.url, id: :edit_img_prev, size: "250x250", onClick:"$('#upfile').click()" %>
+                  <% else %>
+                    <%= image_tag "/user_images/no-image-2.png", id: :edit_img_prev, size: "250x250", onClick:"$('#upfile').click()" %>
+                  <% end %>
+                  <%= f.file_field :image_1, style:"display:none;", id:"upfile", class: "input"%>
+                  <%= f.hidden_field :image_1_cache %>
+                  <% if @order.image_1.present? %>
+                    <p><%= f.check_box :remove_image_1 %>&nbsp;<font color="black">画像を削除する</font></p>
+                  <% end %>
+                </div>
+              </td>
+              <td>
+                <div class="field tooth-image has-text-centered">
+                  <% if @order.image_2.present? %>
+                    <%= image_tag @order.image_2.thumb.url, id: :edit_img_prev_2, size: "250x250", onClick:"$('#upfile2').click()" %>
+                  <% else %>
+                    <%= image_tag "/user_images/no-image-2.png", id: :edit_img_prev_2, size: "250x250", onClick:"$('#upfile2').click()" %>
+                  <% end %>
+                  <%= f.file_field :image_2, style:"display:none;", id:"upfile2", class: "input"%>
+                  <%= f.hidden_field :image_2_cache %>
+                  <% if @order.image_2.present? %>
+                    <p><%= f.check_box :remove_image_2 %>&nbsp;<font color="black">画像を削除する</font></p>
+                  <% end %>
+                </div>
+              </td>
+              <td>
+                <div class="field tooth-image has-text-centered">
+                  <% if @order.image_3.present? %>
+                    <%= image_tag @order.image_3.thumb.url, id: :edit_img_prev_3, size: "250x250", onClick:"$('#upfile3').click()" %>
+                  <% else %>
+                    <%= image_tag "/user_images/no-image-2.png", id: :edit_img_prev_3, size: "250x250", onClick:"$('#upfile3').click()" %>
+                  <% end %>
+                  <%= f.file_field :image_3, style:"display:none;", id:"upfile3", class: "input"%>
+                  <%= f.hidden_field :image_3_cache %>
+                  <% if @order.image_3.present? %>
+                    <p><%= f.check_box :remove_image_3 %>&nbsp;<font color="black">画像を削除する</font></p>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+          </table>
+
+          <table class="table is-bordered is-hoverable is-fullwidth" id="plans-table">
+            <tr>
+              <th colspan = 6>アポイント</th>
+            </tr>
+            <tr>
+              <th><font color="#FF6666"><i class="fas fa-calendar-check"></i></font>&nbsp;試適１</th>
+              <td>
+                <%= f.datetime_field :first_try, class: "input is-small is-info" if @order.first_try.present? %>
+              </td>
+              <th><font color="#FF6666"><i class="fas fa-calendar-check"></i></font>&nbsp;試適２</th>
+              <td>
+                <% if @order.second_try.present? || @order.first_try.present? %>
+                  <%= f.datetime_field :second_try, class: "input is-small is-info" %>
+                <% end %>
+              </td>
+              <th><font color="#FF6666"><i class="fas fa-calendar-check"></i></font>&nbsp;完成日</th>
+              <td>
+                <% if @order.complete_day.present? || @order.first_try.present? %>
+                  <%= f.datetime_field :complete_day, class: "input is-small is-info" %>
+                <% end %>
+              </td>
+            </tr>
+          </table>
           </div>
           <div class="has-text-centered">
             <%= f.submit "指示書更新", class: "button is-primary is-medium" %>&emsp;&nbsp;
@@ -198,16 +209,16 @@
 <script type="text/javascript">
   $(function() {
     function readURL(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        $('#edit_img_prev').attr({
-          src: e.target.result,
-        });
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $('#edit_img_prev').attr({
+            src: e.target.result,
+          });
+        }
+        reader.readAsDataURL(input.files[0]);
       }
-      reader.readAsDataURL(input.files[0]);
     }
-   }
     $("#upfile").change(function(){
       readURL(this);
     });
@@ -217,16 +228,16 @@
 <script type="text/javascript">
   $(function() {
     function readURL(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        $('#edit_img_prev_2').attr({
-          src: e.target.result,
-        });
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $('#edit_img_prev_2').attr({
+            src: e.target.result,
+          });
+        }
+        reader.readAsDataURL(input.files[0]);
       }
-      reader.readAsDataURL(input.files[0]);
     }
-   }
     $("#upfile2").change(function(){
       readURL(this);
     });
@@ -236,16 +247,16 @@
 <script type="text/javascript">
   $(function() {
     function readURL(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        $('#edit_img_prev_3').attr({
-          src: e.target.result,
-        });
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $('#edit_img_prev_3').attr({
+            src: e.target.result,
+          });
+        }
+        reader.readAsDataURL(input.files[0]);
       }
-      reader.readAsDataURL(input.files[0]);
     }
-   }
     $("#upfile3").change(function(){
       readURL(this);
     });

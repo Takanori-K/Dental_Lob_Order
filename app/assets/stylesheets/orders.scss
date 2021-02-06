@@ -2,6 +2,100 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#image-table {
+
+  th {
+    text-align: center;
+    background: #FFEFD5;
+    vertical-align: middle;
+  }
+
+  td {
+    padding: 0px;
+    padding-top: 5px;
+    width: 30%;
+    vertical-align: middle;
+
+    .tooth-image img {
+      border-radius: 0%;
+      height: 300px;
+      width: 95%;
+    }
+  }
+}
+
+#plans-table {
+
+  th {
+    text-align: center;
+    background: #FFEFD5;
+    vertical-align: middle;
+  }
+
+  td {
+    vertical-align: middle;
+  }
+}
+
+@media screen and ( max-width: 1050px ) {
+  #order-table  {
+
+    .checkbox {
+      padding-left: 0px;
+    }
+  }
+}
+
 @media screen and ( max-width: 1000px ) {
-  
+  #order-table {
+
+    th {
+      vertical-align: middle;
+      width: 38%;
+      font-size: 10px;
+    }
+
+    td {
+      vertical-align: middle;
+      padding: 0px;
+    }
+
+    .checkbox {
+      display: inline-flex;
+      font-size: 12px;
+      padding: 10px;
+    }
+
+    .control-order {
+      padding-left: 13px;
+    }
+
+    .select-tag {
+      padding: 0px;
+    }
+
+    .select-order {
+      padding: 0px;
+    }
+
+    .select-table {
+      padding: 0px;
+    }
+
+    .select-metal {
+      padding: 0px;
+    }
+  }
+
+  #image-table {
+    th {
+      font-size: 10px;
+    }
+  }
+
+  #plans-table {
+    th {
+      font-size: 10px;
+    }
+  }
 }

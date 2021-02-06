@@ -30,13 +30,13 @@
             <tr>
               <th class="select-tag">技工所名</th>
               <td colspan = "5">
-                <div class="has-text-weight-semibold is-size-5"><%= @admin.name %></div>
+                <div class="has-text-weight-semibold"><%= @admin.name %></div>
               </td>
             </tr>
             <tr>
               <th class="select-tag">医院名</th>
               <td colspan = "5">
-                <div class="has-text-weight-semibold is-size-5"><%= current_user.name %>&ensp;様</div>
+                <div class="has-text-weight-semibold"><%= current_user.name %>&ensp;様</div>
               </td>
             </tr>
             <tr>
@@ -120,11 +120,15 @@
               <td colspan = "2"></td>
               <td colspan = "2"></td>
             </tr>
+          </table>
+
+          <table class="table is-bordered is-hoverable is-fullwidth" id="image-table">
             <tr>
               <th colspan = "6">口腔内写真</th>
             </tr>
+
             <tr>
-              <td colspan = "2">
+              <td>
                 <div class="field tooth-image has-text-centered">
                   <% if @order.image_1.present? %>
                     <%= image_tag @order.image_1.thumb.url, id: :order_img_prev, size: "250x250", onClick:"$('#upfile').click()" %>
@@ -134,7 +138,7 @@
                   <%= f.file_field :image_1, style:"display:none;", id:"upfile", class: "input"%>
                 </div>
               </td>
-              <td colspan = "2">
+              <td>
                 <div class="field tooth-image has-text-centered">
                   <% if @order.image_2.present? %>
                     <%= image_tag @order.image_2.thumb.url, id: :order_img_prev_2, size: "250x250", onClick:"$('#upfile2').click()" %>
@@ -144,7 +148,7 @@
                   <%= f.file_field :image_2, style:"display:none;", id:"upfile2", class: "input"%>
                 </div>
               </td>
-              <td colspan = "2">
+              <td>
                 <div class="field tooth-image has-text-centered">
                   <% if @order.image_3.present? %>
                     <%= image_tag @order.image_3.thumb.url, id: :order_img_prev_3, size: "250x250", onClick:"$('#upfile3').click()" %>
@@ -155,15 +159,19 @@
                 </div>
               </td>
             </tr>
+          </table>
+
+          <table class="table is-bordered is-hoverable is-fullwidth" id="plans-table">
             <tr>
-              <th class="select-tag"><font color="#FF6666"><i class="fas fa-calendar-check"></i></font>&nbsp;試適１</th>
-              <td class="select-date">
+              <th colspan = 6>アポイント</th>
+            </tr>
+            <tr>
+              <th><font color="#FF6666"><i class="fas fa-calendar-check"></i></font>&nbsp;試適１</th>
+              <td>
                 <%= f.datetime_field :first_try, class: "input is-small is-info" %>
               </td>
-              <td class="select-date" colspan = "2">
-              </td>
-              <th class="select-tag"><font color="#FF6666"><i class="fas fa-calendar-check"></i></font>&nbsp;完成日</th>
-              <td class="select-date">
+              <th><font color="#FF6666"><i class="fas fa-calendar-check"></i></font>&nbsp;完成日</th>
+              <td>
                 <%= f.datetime_field :complete_day, class: "input is-small is-info" %>
               </td>
             </tr>

@@ -5,7 +5,7 @@ ActionMailer::Base.smtp_settings = {
   address:              'smtp.gmail.com',
   domain:               'gmail.com',
   user_name:            'kaku.takanori.1026@gmail.com',
-  password:             'ioakzdiwnmyilvyn',
+  password:             'lfvgsddzocaprexe',
   authentication:       'plain',
   enable_starttls_auto: true
 }

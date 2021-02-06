@@ -28,7 +28,8 @@ gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
 
 group :development, :test do
-  gem 'sqlite3'
+  #gem 'sqlite3'
+  gem 'mysql2'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 

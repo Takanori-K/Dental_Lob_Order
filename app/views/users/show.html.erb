@@ -16,7 +16,7 @@
     <div class="columns is-centered">
       <div class="column is-8">
         <div class="columns is-centered">
-          <div class="column is-4">
+          <div class="column is-4" id="show-image">
             <% if @user.image.present? %>
               <figure class="image-tag">
                 <%= image_tag @user.image.thumb.url, size: "200x200" %>
@@ -28,7 +28,7 @@
             <% end %>
           </div>
           <div class="column is-10">
-            <table class="table is-fullwidth">
+            <table class="table is-fullwidth" id="user-show-table">
               <tr>
                 <td class="is-size-5">
                   <strong>医院名</strong>
@@ -37,7 +37,7 @@
                   <strong>メールアドレス</strong>
                 </td>
                 <td class="is-size-5">
-                  
+
                 </td>
               </tr>
               <tr></tr>
@@ -69,21 +69,21 @@
 
 <div class="container">
   <div class="columns is-centered">
-    <div class="buttons are-medium">
+    <div class="buttons are-medium" id="item-layout">
       <% if current_user?(@user) && !current_user.admin? %>
         <div class="button-new">
-         <%= link_to new_user_order_path(@user), class: "button is-warning", :style=>"width:120%;" do %>
+         <%= link_to new_user_order_path(@user), class: "button is-warning show-new-order", :style=>"width:120%;" do %>
            <span class="icon">
              <i class="far fa-edit"></i>
            </span>
            <span>
              指示書作成
            </span>
-         <% end %> 
+         <% end %>
         </div>
-          
+
         <div class="button-index">
-          <%= link_to user_orders_path(@user), class: "button is-info" do %>
+          <%= link_to user_orders_path(@user), class: "button is-info show-index-order" do %>
             <span class="icon">
               <i class="far fa-list-alt"></i>
             </span>
@@ -104,16 +104,17 @@
           </span>
         </font>
         <% if @notification_info.present? %>
-          <a class="button is-rounded is-danger is-small "><span class="icon"><i class="fas fa-bell"></i></span><span><%= @notification %></span></a>&emsp;
+          <a class="button is-rounded is-danger is-small" id="notification-icon"><span class="icon"><i class="fas fa-bell"></i></span><span><%= @notification %></span></a>&emsp;
+          <div id="notification-icon-mobile"><%= @notification %></div>
         <% end %>
       <% elsif current_user?(@user) %>
-        <button class="button is-medium is-success">
+        <button class="button is-medium is-success" id="show-order-button">
           <span class="icon">
             <i class="far fa-list-alt"></i>
           </span>
           <span>申請中の技工物</span>
         </button>
-      <% end %>  
+      <% end %>
       </h2>
       <h2 class="title-order has-text-centered is-3">
         <% if current_user.admin? && current_user?(@user) %>
@@ -122,7 +123,7 @@
               <i class="fas fa-users"></i>
             </span>&nbsp;
               <span>歯科医院一覧</span>
-          <% end %>  
+          <% end %>
         <% elsif current_user.admin? && !current_user?(@user) %>
           <%= link_to  users_path, class: "button" do %>
             <span class="icon">
@@ -130,16 +131,16 @@
             </span>&nbsp;
               <span>歯科医院一覧</span>
           <% end %>
-        <% end %>  
-          
-      </h2>  
+        <% end %>
+
+      </h2>
     </div>
   </div>
 </div><br><br>
 
 <section>
   <div class="container">
-    <div class="columns is-centered">
+    <div class="columns is-centered" id="calendar-layout">
       <div class="column is-12">
         <% if current_user.admin? && current_user?(@user) %>
           <%= month_calendar(attribute: :reception_date, events: @calendar_orders) do |date, orders| %>
@@ -147,32 +148,36 @@
             <% orders.each do |order| %>
               <% if order.finished.blank? || order.finished == "false" %>
                 <div class="is-size-7">
-                  <button class="button is-danger is-small" style="font-size:1px;width:25px;height:15px">NEW</button>
-                  <%= link_to order.patient_name, user_order_path(order.user, order), :style=>"color:green;" %>
+                  <button class="button is-danger is-small has-text-weight-semibold new-request-btn">新着</button>
+                  <%= link_to order.patient_name, user_order_path(order.user, order), class: "request-name" %>
+                  <%= link_to order.patient_name.slice(0..1), user_order_path(order.user, order), class: "request-name-mobile" %>
                 </div>
               <% else %>
                 <div class="is-size-7">
-                  <button class="button is-info is-small has-text-weight-semibold" style="font-size:1px;width:25px;height:15px">完</button>&thinsp;
-                  <%= link_to order.patient_name, user_order_path(order.user, order), :style=>"color:black;" %>
+                  <button class="button is-info is-small has-text-weight-semibold finished-btn">完</button>
+                  <%= link_to order.patient_name, user_order_path(order.user, order), class: "finished-name" %>
+                  <%= link_to order.patient_name.slice(0..1), user_order_path(order.user, order), class: "finished-name-mobile" %>
                 </div>
-              <% end %>  
+              <% end %>
             <% end %>
           <% end %>
-        <% elsif current_user?(@user) %>  
+        <% elsif current_user?(@user) %>
           <%= month_calendar(attribute: :reception_date, events: @orders) do |date, orders| %>
             <%= l(date, format: :short) %>
             <% orders.each do |order| %>
               <% if order.finished.blank? || order.finished == "false" %>
                 <div class="is-size-7">
-                  <button class="button is-success is-small has-text-weight-semibold" style="font-size:1px;width:25px;height:15px">申請</button>&thinsp;
-                  <%= link_to order.patient_name, user_order_path(@user, order), :style=>"color:green;" %>
+                  <button class="button is-success is-small has-text-weight-semibold new-request-btn">申請</button>
+                  <%= link_to order.patient_name, user_order_path(@user, order), class: "request-name" %>
+                  <%= link_to order.patient_name.slice(0..1), user_order_path(@user, order), class: "request-name-mobile" %>
                 </div>
               <% else %>
                 <div class="is-size-7">
-                  <button class="button is-info is-small has-text-weight-semibold" style="font-size:1px;width:25px;height:15px">完</button>&thinsp;
-                  <%= link_to order.patient_name, user_order_path(@user, order), :style=>"color:black;" %>
-                </div>  
-              <% end %> 
+                  <button class="button is-info is-small has-text-weight-semibold finished-btn">完</button>
+                  <%= link_to order.patient_name, user_order_path(@user, order), class: "finished-name" %>
+                  <%= link_to order.patient_name.slice(0..1), user_order_path(@user, order), class: "finished-name-mobile" %>
+                </div>
+              <% end %>
               </div>
             <% end %>
           <% end %>
@@ -191,9 +196,9 @@
       <header class="modal-card-head">
         <% if current_user.admin? %>
           <p class="modal-card-title has-text-centered has-text-weight-semibold">新着技工物</p>
-        <% else %>  
+        <% else %>
           <p class="modal-card-title has-text-centered has-text-weight-semibold">申請中の技工物</p>
-        <% end %>  
+        <% end %>
         <button class="delete is-large" aria-label="close" id="close"></button>
       </header>
       <section class="modal-card-body">
@@ -247,7 +252,7 @@
                                   data: { confirm: "削除してよろしいですか？" }, class: "button is-danger" %>
                             </td>
                           </tr>
-                        <% end %>  
+                        <% end %>
                       <% end %>
                     </tbody>
                   </table>
@@ -295,19 +300,19 @@
                                 data: { confirm: "削除してよろしいですか？" }, class: "button is-danger" %>
                           </td>
                         </tr>
-                      <% end %>  
+                      <% end %>
                     <% end %>
                   </tbody>
                 </table>
-            <% end %>  
+            <% end %>
           </div>
-        </div>  
+        </div>
       </section>
     </div>
   </div>
 </div>
-    
-    
+
+
 
 <script>
   $(document).ready(function() {

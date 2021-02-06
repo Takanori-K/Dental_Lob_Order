@@ -97,7 +97,7 @@
 }
 
 .button-position {
-	padding-top: 150px;
+	padding-top: 66px;
 }
 
 .navbar {
@@ -354,7 +354,7 @@
   -webkit-animation: anime 30s linear 0s ;
   animation: anime 30s linear 0s ;
 }
-.background-view li:nth-child(1) { 
+.background-view li:nth-child(1) {
   background-image: url(/user_images/dental-4.jpg);  /* 背景画像を入力して下さい */
 }
 .background-view li:nth-child(2) {
@@ -363,7 +363,7 @@
   animation-delay: 8s;
 }
 
-@-webkit-keyframes anime { 
+@-webkit-keyframes anime {
     0% {
         -webkit-animation-timing-function: ease-in;
         opacity: 1;
@@ -383,7 +383,7 @@
     }
     100% { opacity: 0 }
 }
-@keyframes anime { 
+@keyframes anime {
     0% {
         animation-timing-function: ease-in;
         opacity: 0;

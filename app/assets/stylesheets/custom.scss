@@ -1,8 +1,14 @@
 @import "bulma";
 /* universal */
 
-.title.is-4 {
+.header-main-title {
 	padding-left: 10px;
+  font-family: Georgia;
+  font-size: 1.5rem;
+  background: -webkit-linear-gradient(top, #FFE4C4, #B8860B);
+  background: linear-gradient(to bottom, #FFE4C4, #B8860B);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
 }
 
 .title-order.is-3 {
@@ -54,8 +60,8 @@
 }
 
 
-#image-layout {
-  position: absolute;
+.image-layout {
+  position: fixed;
   top: 0;
   width: 100%;
   height: auto;
@@ -68,9 +74,9 @@
 	background-image: url("/user_images/dental-2.jpg");
 }
 
-#image-layout::before{
+.image-layout::before{
 	/* 透過した黒を重ねる */
-	background-color: rgba(0,0,0,0.1);
+	background-color: rgba(0,0,0,0.4);
 	/* どの範囲に重ねるかを指定 */
 	position: absolute;
 	top: 0;
@@ -101,19 +107,42 @@
 }
 
 .navbar {
-  background: #ADD8E6;
+  background: #222;
 }
 
 .navbar-brand {
-  background: #ADD8E6;
+  background: #222;
 }
 
 .navbar-item p {
   padding-right: 35px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.navbar-burger {
+  color: #fff;
+}
+
+.nav-menu {
+  color: #fff;
+  font-family: Georgia;
+}
+
+.nav-menu:hover {
+  background: -webkit-linear-gradient(top, #FFE4C4, #B8860B);
+  background: linear-gradient(to bottom, #FFE4C4, #B8860B);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
 }
 
 .navbar-menu {
-  background: #ADD8E6;
+  background: #222;
+}
+
+.navbar-menu.is-active {
+  display: block;
+  text-align: right;
 }
 
 .navbar-item.has-dropdown {
@@ -121,7 +150,38 @@
 }
 
 .dropdown-content {
-  background: #ADD8E6;
+  background: #222;
+  text-align: center;
+}
+
+.dropdown-trigger {
+
+  span {
+    color: #fff;
+  }
+
+  span:hover {
+    background: -webkit-linear-gradient(top, #FFE4C4, #B8860B);
+    background: linear-gradient(to bottom, #FFE4C4, #B8860B);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+  }
+}
+
+#dropdown-menu {
+
+  .dropdown-item {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  .dropdown-item:hover {
+    background: -webkit-linear-gradient(top, #FFE4C4, #B8860B);
+    background: linear-gradient(to bottom, #FFE4C4, #B8860B);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+  }
 }
 
 .section {
@@ -148,8 +208,8 @@
   display: inline-block;
   padding: 0.3em 1em;
   text-decoration: none;
-  color: #67c5ff;
-  border: solid 2px #67c5ff;
+  color: #fff;
+  background: #4682B4;
   border-radius: 3px;
   transition: .4s;
   margin-bottom: 50px;
@@ -157,7 +217,7 @@
 
 .btn-flat-border:hover {
   background: #67c5ff;
-  color: white;
+  color: #fff;
 }
 
 .btn-flat-border-new {
@@ -168,8 +228,8 @@
   display: inline-block;
   padding: 0.3em 1em;
   text-decoration: none;
-  color: #32CD32;
-  border: solid 2px #32CD32;
+  color: #fff;
+  background: #3CB371;
   border-radius: 3px;
   transition: .4s;
   margin-bottom: 50px;
@@ -422,7 +482,7 @@
 
 .image-login-new::before {
   /* 透過した黒を重ねる */
-	background-color: rgba(0,0,0,0.1);
+	background-color: rgba(0,0,0,0.4);
 	/* どの範囲に重ねるかを指定 */
 	position: absolute;
 	top: 0;

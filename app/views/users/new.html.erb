@@ -4,9 +4,9 @@
 <section class="section is-small">
   <div class="hero-body">
     <div class="container">
-      <h1 class="title has-text-centered">
+      <div class="title has-text-centered title-layout">
         新規登録画面
-      </h1>
+      </div>
     </div>
   </div>
   <div class="container">
@@ -16,29 +16,29 @@
         <%= render partial: 'shared/error_messages', locals: { obj: @user } %>
 
         <div class="field">
-          <%= f.label :name, class: "label" %>
+          <%= f.label :name, class: "label label-color" %>
           <%= f.text_field :name, autofocus: true, autocomplete: "name", :placeholder => " \uf007 name", class: "fa input is-success" %>
         </div><br>
-         
+
         <div class="field">
-          <%= f.label :email, class: "label" %>
+          <%= f.label :email, class: "label label-color" %>
           <%= f.email_field :email, autocomplete: "email", :placeholder => " \uf0e0 email", class: "fa input is-success" %>
         </div><br>
 
         <div class="field">
-          <%= f.label :password, class: "label" %>
+          <%= f.label :password, class: "label label-color" %>
           <%= f.password_field :password, :placeholder => " \uf023 password", class: "fa input is-success" %>
         </div><br>
-        
+
         <div class="field">
-          <%= f.label :password_confirmation, class: "label" %>
+          <%= f.label :password_confirmation, class: "label label-color" %>
           <%= f.password_field :password_confirmation, :placeholder => " \uf023 password confirmation", class: "fa input is-success" %>
         </div><br>
-        
+
         <div class="actions">
           <%= f.submit "新規登録", class: "button is-success has-text-weight-semibold" %>
         </div>
-        
+
         <% end %>
       </div>
     </div>

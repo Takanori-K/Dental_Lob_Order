@@ -9,3 +9,14 @@
 .button-position {
   text-align: center;
 }
+
+.main-title {
+  font-size: 4rem;
+  font-family: Georgia;
+  color: #DAA520;
+  background: -moz-linear-gradient(top, #FFE4C4, #B8860B);
+  background: -webkit-linear-gradient(top, #FFE4C4, #B8860B);
+  background: linear-gradient(to bottom, #FFE4C4, #B8860B);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}

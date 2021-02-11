@@ -1,11 +1,13 @@
 <% provide(:title, "User_Edit") %>
 
-<section class="section" id="image-layout">
+<ul class="image-layout"></ul>
+
+<section class="section">
   <div class="hero-body">
     <div class="container">
-      <h1 class="title has-text-centered">
+      <div class="title has-text-centered title-layout">
         ユーザー編集
-      </h1>
+      </div>
     </div>
   </div>
   <div class="container">
@@ -13,7 +15,7 @@
       <div class="column is-6">
         <%= form_with(model: @user, local: true, multipart: true) do |f| %>
         <%= render partial: 'shared/error_messages', locals: { obj: @user } %>
-        
+
           <div class="field has-text-centered is-horizontal-center">
             <% if @user.image.present? %>
               <figure class="image is-128x128 is-inline-block">
@@ -24,56 +26,37 @@
                 <%= image_tag "/user_images/no-image-2.png", id: :img_prev, size: "120x120", onClick:"$('#user_img').click()" %>
               </figure>
             <% end %>
-            
-            <%= f.label :image, class: "label" %>
+
+            <%= f.label :image, class: "label label-color" %>
             <%= f.file_field :image, style:"display:none;", id: :user_img , class: "input"%>
             <%= f.hidden_field :image_cache %>
-            
-            <script type="text/javascript">
-              $(function() {
-               function readURL(input) {
-                 if (input.files && input.files[0]) {
-                   var reader = new FileReader();
-                   reader.onload = function (e) {
-                     $('#img_prev').attr({
-                      src: e.target.result,
-                     });
-                   }
-                   reader.readAsDataURL(input.files[0]);
-                 }
-               }
-               $("#user_img").change(function(){
-                 readURL(this);
-               });
-              });
-            </script>
-            
+
             <% if @user.image.present? %>
               <p><%= f.check_box :remove_image %>&nbsp;<font color="black">画像を削除する</font></p>
-            <% end %>  
+            <% end %>
           </div>
-        
+
           <div class="field">
-            <%= f.label :name, class: "label" %>
+            <%= f.label :name, class: "label label-color" %>
             <%= f.text_field :name, autofocus: true, autocomplete: "name", :placeholder => " \uf007 name", class: "fa input is-primary" %>
           </div><br>
 
           <div class="field">
-            <%= f.label :email, class: "label" %>
+            <%= f.label :email, class: "label label-color" %>
             <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => " \uf0e0 email", class: "fa input is-primary" %>
             <% if @user.uid.present? && @user.email.blank? %>
               <span><font color="blue">※メールアドレスを登録するとメールで通知を送受信することができます。</font></span>
-            <% end %>  
+            <% end %>
           </div><br>
-          
+
           <% if @user.uid.blank? %>
             <div class="field">
-              <%= f.label :password, class: "label" %>
+              <%= f.label :password, class: "label label-color" %>
               <%= f.password_field :password, :placeholder => " \uf023 password", class: "fa input is-primary" %>
             </div><br>
-            
+
             <div class="field">
-              <%= f.label :password_confirmation, class: "label" %>
+              <%= f.label :password_confirmation, class: "label label-color" %>
               <%= f.password_field :password_confirmation, :placeholder => " \uf023 password confirmation", class: "fa input is-primary" %>
             </div><br>
           <% end %>
@@ -83,3 +66,22 @@
     </div>
   </div>
 </section>
+
+<script type="text/javascript">
+  $(function() {
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $('#img_prev').attr({
+            src: e.target.result,
+          });
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+    $("#user_img").change(function(){
+      readURL(this);
+    });
+  });
+</script>

@@ -15,3 +15,35 @@
 span.sub-info {
   font-weight: bold;
 }
+
+#form-layout {
+
+  p {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and ( max-width: 1050px ) {
+  #form-layout {
+    width: 70%;
+    margin: 0 auto;
+  }
+}
+
+@media screen and ( max-width: 1000px ) {
+  #form-layout {
+    width: 70%;
+    margin: 0 auto;
+  }
+}
+
+@media screen and ( max-width: 500px ) {
+  #form-layout {
+    width: 90%;
+    margin: 0 auto;
+
+    p {
+      font-size: 20px;
+    }
+  }
+}

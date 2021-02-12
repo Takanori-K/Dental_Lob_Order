@@ -2,6 +2,7 @@
 /* universal */
 
 .header-main-title {
+  color: #B8860B;
 	padding-left: 10px;
   font-family: Georgia;
   font-size: 1.5rem;
@@ -130,6 +131,7 @@
 }
 
 .nav-menu:hover {
+  color: #B8860B;
   background: -webkit-linear-gradient(top, #FFE4C4, #B8860B);
   background: linear-gradient(to bottom, #FFE4C4, #B8860B);
   -webkit-text-fill-color: transparent;
@@ -161,6 +163,7 @@
   }
 
   span:hover {
+    color: #B8860B;
     background: -webkit-linear-gradient(top, #FFE4C4, #B8860B);
     background: linear-gradient(to bottom, #FFE4C4, #B8860B);
     -webkit-text-fill-color: transparent;
@@ -177,6 +180,7 @@
   }
 
   .dropdown-item:hover {
+    color: #B8860B;
     background: -webkit-linear-gradient(top, #FFE4C4, #B8860B);
     background: linear-gradient(to bottom, #FFE4C4, #B8860B);
     -webkit-text-fill-color: transparent;

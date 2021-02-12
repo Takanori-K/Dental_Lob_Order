@@ -45,6 +45,320 @@
   cursor:pointer
 }
 
+.button-video {
+
+  .room-btn {
+    width: 120%;
+  }
+
+  span {
+    font-size: 1.25rem;
+  }
+}
+
+//歯科医院一覧
+#card-menu {
+
+  .list-name {
+    font-size: 1.25rem;
+    border-bottom: solid 1px gray;
+    padding-bottom: 10px;
+  }
+
+  .menu-list {
+    text-align: center;
+  }
+}
+
+//ビデオルーム
+/* 面会ルームのタイトル */
+.hero-6 {
+
+  h1 {
+    font-size: 40px;
+  }
+}
+
+//ビデオチャットレイアウト
+.chat-section {
+  padding: 3rem 1.5rem;
+}
+
+.video_background {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: -1;
+  background-position: center 50%;
+  background-repeat: no-repeat;
+  background-image: url("/user_images/dental-8.jpg");
+  background-size: cover;
+}
+
+video::-webkit-media-controls-start-playback-button {
+  pointer-events: none;
+}
+
+video::-webkit-media-controls-timeline {
+  display: none;
+}
+
+video::-webkit-media-controls-current-time-display {
+  display: none;
+}
+
+video::-webkit-media-controls-play-button {
+  display: none;
+  pointer-events: none;
+}
+
+video::-webkit-media-controls-pause-button {
+  pointer-events: none;
+}
+
+#js-remote-streams {
+  width: 100%;
+}
+
+//ローカルモニター
+#local-video {
+  span#js-room-mode {
+    display: none;
+  }
+}
+
+//Room Name記入欄
+#input-key {
+  p#room-key {
+    display: none;
+  }
+
+  h3 {
+    display: none;
+  }
+}
+
+//入室ボタン
+#js-join-trigger {
+  font-size: 22px;
+}
+
+//退室ボタン
+#js-leave-trigger {
+  font-size: 22px;
+}
+
+//チャット
+.messages-layout {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+
+  #chat-icon {
+    display: none;
+  }
+}
+
+#js-messages {
+  height: 400px;
+  word-break: break-all;
+  overflow-x: hidden;
+  background: -webkit-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.4),
+      rgba(135, 206, 250, 1)
+    ),
+    url("/user_images/chat.jpg");
+  background-size: cover;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+  padding: 0px 20px 10px 20px;
+
+  .chat-day {
+    color: #fff;
+    width: 22%;
+    border-radius: 50px;
+    background: rgba(0, 0, 0, 0.2);
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: -37px;
+    padding-top: 2px;
+  }
+
+  .local-start {
+    margin-top: 30px;
+  }
+
+  .local-start span {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 25px;
+    font-size: 13px;
+    padding: 5px 13px;
+  }
+
+  .remote-start {
+    margin-top: 25px;
+  }
+
+  .remote-start span {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.2);
+    font-size: 13px;
+    padding: 5px 13px;
+    border-radius: 25px;
+  }
+
+  .room-end {
+    margin-top: 25px;
+  }
+
+  .room-end span {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 5px 13px;
+    font-size: 13px;
+    border-radius: 25px;
+  }
+
+  .chat-end {
+    margin-top: 25px;
+  }
+
+  .chat-end span {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 5px 13px;
+    font-size: 13px;
+    border-radius: 25px;
+  }
+
+  .remote-text {
+    position: relative;
+    width: 60%;
+    margin-right: auto;
+    margin-top: 30px;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  //チャットアイコン
+  .remote-text img.message-chat-icon {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: -8px;
+    display: inline-block;
+  }
+
+  .remote-text span {
+    top: 53px;
+    position: absolute;
+    margin-right: auto;
+    color: gray;
+    border-radius: 25px;
+    padding: 6px;
+    font-size: 8px;
+    display: block;
+  }
+
+  .remote-text p {
+    position: relative;
+    background-color: #fff;
+    padding: 10px;
+    margin-left: 30px;
+    border-radius: 25px;
+    white-space: pre-wrap;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 10px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+  }
+
+  .remote-text p:after {
+    border: solid transparent;
+    content: "";
+    height: 0;
+    width: 0;
+    pointer-events: none;
+    position: absolute;
+    border-color: rgba(255, 255, 255, 0);
+    border-top-width: 3px;
+    border-bottom-width: 8px;
+    border-left-width: 20px;
+    border-right-width: 20px;
+    margin-top: -10px;
+    border-right-color: #fff;
+    right: 100%;
+    top: 26px;
+  }
+
+  .local-text {
+    width: 60%;
+    margin-right: 3%;
+    margin-left: auto;
+    margin-top: 30px;
+    text-align: right;
+  }
+
+  .local-text span {
+    position: relative;
+    text-align: left;
+    margin-left: auto;
+    background-color: #90ee90;
+    border-radius: 25px;
+    padding: 10px;
+    white-space: pre-wrap;
+    display: inline-block;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+  }
+
+  .local-text span:after {
+    border: solid transparent;
+    content: "";
+    height: 0;
+    width: 0;
+    pointer-events: none;
+    position: absolute;
+    border-color: rgba(255, 255, 255, 0);
+    border-top-width: 3px;
+    border-bottom-width: 8px;
+    border-left-width: 20px;
+    border-right-width: 20px;
+    margin-top: -10px;
+    border-left-color: #90ee90;
+    left: 100%;
+    top: 23px;
+  }
+}
+
+//送信ボタン
+#js-send-trigger {
+  font-size: 22px;
+}
+
+//戻るボタン
+#return-btn {
+  margin-top: 20px;
+  font-size: 22px;
+  margin-bottom: 9%;
+}
+
+//テレビ電話のシステム表示
+p#js-meta {
+  display: none;
+}
+
+p.meta {
+  display: none;
+}
+
 @media screen and ( max-width: 1000px ) {
   #show-image {
     text-align: center;

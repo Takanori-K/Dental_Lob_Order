@@ -72,18 +72,18 @@
     <div class="buttons are-medium" id="item-layout">
       <% if current_user?(@user) && !current_user.admin? %>
         <div class="button-new">
-         <%= link_to new_user_order_path(@user), class: "button is-warning show-new-order", :style=>"width:120%;" do %>
-           <span class="icon">
-             <i class="far fa-edit"></i>
-           </span>
-           <span>
-             指示書作成
-           </span>
-         <% end %>
+          <%= link_to new_user_order_path(@user), class: "button is-warning has-text-weight-bold show-new-order", :style=>"width:120%;" do %>
+            <span class="icon">
+              <i class="far fa-edit"></i>
+            </span>
+            <span>
+              指示書作成
+            </span>
+          <% end %>
         </div>
 
         <div class="button-index">
-          <%= link_to user_orders_path(@user), class: "button is-info show-index-order" do %>
+          <%= link_to user_orders_path(@user), class: "button is-info has-text-weight-bold show-index-order" do %>
             <span class="icon">
               <i class="far fa-list-alt"></i>
             </span>
@@ -94,47 +94,58 @@
         </div>
       <% end %>
       <h2 class="title-order has-text-centered is-3" id="open">
-      <% if current_user.admin? && current_user?(@user) %>
-        <font color="white">
-          <span class="icon">
-            <i class="far fa-list-alt"></i>
-          </span>&nbsp;
-          <span>
-            新着技工物
-          </span>
-        </font>
-        <% if @notification_info.present? %>
-          <a class="button is-rounded is-danger is-small" id="notification-icon"><span class="icon"><i class="fas fa-bell"></i></span><span><%= @notification %></span></a>&emsp;
-          <div id="notification-icon-mobile"><%= @notification %></div>
+        <% if current_user.admin? && current_user?(@user) %>
+          <font color="white">
+            <span class="icon">
+              <i class="far fa-list-alt"></i>
+            </span>&nbsp;
+            <span>
+              新着技工物
+            </span>
+          </font>
+          <% if @notification_info.present? %>
+            <a class="button is-rounded is-danger is-small" id="notification-icon"><span class="icon"><i class="fas fa-bell"></i></span><span><%= @notification %></span></a>&emsp;
+            <div id="notification-icon-mobile"><%= @notification %></div>
+          <% end %>
+        <% elsif current_user?(@user) %>
+          <button class="button is-medium is-success has-text-weight-bold" id="show-order-button">
+            <span class="icon">
+              <i class="far fa-list-alt"></i>
+            </span>
+            <span>申請中の技工物</span>
+          </button>
         <% end %>
-      <% elsif current_user?(@user) %>
-        <button class="button is-medium is-success" id="show-order-button">
-          <span class="icon">
-            <i class="far fa-list-alt"></i>
-          </span>
-          <span>申請中の技工物</span>
-        </button>
-      <% end %>
       </h2>
       <h2 class="title-order has-text-centered is-3">
         <% if current_user.admin? && current_user?(@user) %>
-          <%= link_to  users_path, :style=>"color:white;" do %>
+          <%= link_to users_path, :style=>"color:white;" do %>
             <span class="icon">
               <i class="fas fa-users"></i>
             </span>&nbsp;
               <span>歯科医院一覧</span>
           <% end %>
         <% elsif current_user.admin? && !current_user?(@user) %>
-          <%= link_to  users_path, class: "button" do %>
+          <%= link_to users_path, class: "button" do %>
             <span class="icon">
               <i class="fas fa-users"></i>
             </span>&nbsp;
               <span>歯科医院一覧</span>
           <% end %>
         <% end %>
-
       </h2>
     </div>
+    <% unless current_user.admin? %>
+      <div class="button-video">
+        <%= link_to video_room_user_path(@user), data: {"turbolinks" => false}, class: "button is-medium is-link has-text-weight-bold room-btn" do %>
+          <span class="icon">
+            <i class="fas fa-video"></i>
+          </span>
+          <span>
+            ビデオ通話
+          </span>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div><br><br>
 

@@ -1,0 +1,260 @@
+<ul class="video_background">
+</ul>
+
+<section class="hero-6">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title has-text-centered has-text-white">
+        ミーティングルーム
+      </h1>
+    </div>
+  </div>
+</section>
+
+<section class="chat-section" data-turbolinks="false">
+  <div class="container">
+    <div class="room">
+      <div class="has-text-centered columns is-gapless">
+        <div class="column is-half" id="local-video">
+          <video id="js-local-stream"></video>
+          <span id="js-room-mode"></span>
+        </div>
+        <div class="column is-half" id="remote-video">
+          <div class="remote-streams" id="js-remote-streams"></div>
+        </div>
+      </div>
+      <div class="has-text-centered" id="input-key">
+        <p class="column is-three-fifths is-offset-one-fifth control" id="room-key">
+          <input class="input is-large is-warning has-text-weight-semibold is-rounded is-focused" type="text" placeholder="メールアドレスを入力してください" value="<%= @user.email %>" id="js-room-id">
+        </p>
+        <h3 class="is-size-3"><strong>Room Name:&emsp;<font color="#FF7F50"><%= @user.email if @user.present? %></font></strong></h3><br>
+        <button id="js-join-trigger" class="button is-focused is-success is-rounded has-text-weight-semibold">入室する</button>&emsp;
+        <button id="js-leave-trigger" class="button is-focused is-danger is-rounded has-text-weight-semibold">退室する</button>
+      </div><br>
+      <div class="has-text-centered messages-layout">
+        <pre class="messages" id="js-messages">
+          <div class="chat-day"><%= l(Date.current) %></div>
+        </pre>
+        <% if @user.image.present? %>
+          <%= image_tag @user.image.thumb.url, id: "chat-icon" %>
+        <% else %>
+          <%= image_tag "/user_images/no-image-2.png", id: "chat-icon" %>
+        <% end %>
+        <input class="input" type="hidden" name="name" value="<%= current_user.name %>" id="js-local-name">
+        <textarea class="input is-medium is-info has-text-weight-semibold" type="text" placeholder="メッセージを入力して下さい" id="js-local-text"></textarea>
+        <p class="has-text-right has-text-weight-semibold info-message">
+          *メッセージを送信することができます。
+        </p>
+        <button id="js-send-trigger" class="button is-focused is-info is-rounded has-text-weight-semibold">送信する</button>
+      </div>
+    </div><br>
+    <div class="has-text-centered">
+      <%= link_to "歯科医院一覧", users_path, class: "button is-outlined" %>
+    </div>
+    <p class="meta" id="js-meta"></p>
+  </div>
+</section>
+
+<script src="//cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
+
+<script>
+  const Peer = window.Peer;
+
+  (async function main() {
+    const localLayout = document.getElementById('local-video');
+    const localVideo = document.getElementById('js-local-stream');
+    const joinTrigger = document.getElementById('js-join-trigger');
+    const leaveTrigger = document.getElementById('js-leave-trigger');
+    const remoteVideos = document.getElementById('js-remote-streams');
+    const roomId = document.getElementById('js-room-id');
+    const roomMode = document.getElementById('js-room-mode');
+    const localName = document.getElementById('js-local-name')
+    const localText = document.getElementById('js-local-text');
+    const sendTrigger = document.getElementById('js-send-trigger');
+    const messages = document.getElementById('js-messages');
+    const meta = document.getElementById('js-meta');
+    const sdkSrc = document.querySelector('script[src*=skyway]');
+    const remoteIcon = document.getElementById('chat-icon');
+    const tablet = window.matchMedia("(max-width: 1000px)");
+    const mobile = window.matchMedia("(max-width: 500px)");
+    const buttonLayout = document.getElementById('input-key');
+
+    function scrollToEnd() {
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    const observer = new MutationObserver((render) => {
+      scrollToEnd();
+    });
+
+    observer.observe(messages, {
+      childList: true,
+    });
+
+    leaveTrigger.disabled = true;
+
+    meta.innerText = `
+      UA: ${navigator.userAgent}
+      SDK: ${sdkSrc ? sdkSrc.src : 'unknown'}
+    `.trim();
+
+    const getRoomModeByHash = () => (location.hash === '#sfu' ? 'sfu' : 'mesh');
+
+    roomMode.textContent = getRoomModeByHash();
+    window.addEventListener(
+      'hashchange',
+      () => (roomMode.textContent = getRoomModeByHash())
+    );
+
+    const localStream = await navigator.mediaDevices
+      .getUserMedia({
+        audio: true,
+        video: { facingMode: 'user' },
+      })
+      .catch(console.error);
+    // Render local stream
+    localVideo.muted = true;
+    localVideo.srcObject = localStream;
+    localVideo.playsInline = true;
+    localVideo.setAttribute('controls', true);
+    await localVideo.play().catch(console.error);
+
+    // eslint-disable-next-line require-atomic-updates
+    const peer = (window.peer = new Peer({
+      key: "56ce0219-dc92-4ccb-98e3-4fe9bc9be693",
+      debug: 3,
+    }));
+
+    // Register join handler
+    joinTrigger.addEventListener('click', () => {
+      // Note that you need to ensure the peer has connected to signaling server
+      // before using methods of peer instance.
+      if (!peer.open) {
+        return;
+      }
+
+      const room = peer.joinRoom(roomId.value, {
+        mode: getRoomModeByHash(),
+        stream: localStream,
+      });
+
+      joinTrigger.disabled = true;
+      leaveTrigger.disabled = false;
+
+      room.once('open', () => {
+        messages.innerHTML += '<div class="local-start"><span>入室しました</span></div>';
+      });
+      room.on('peerJoin', peerId => {
+        messages.innerHTML += `<div class="remote-start"><span>相手が入室しました</span></div>`;
+      });
+
+      // Render remote stream for new peer join in the room
+      room.on('stream', async stream => {
+        const newVideo = document.createElement('video');
+
+        if (mobile.matches) {
+          localLayout.style.height = '0px';
+          buttonLayout.style.marginTop = '-35px';
+          localVideo.style.top = '0px';
+          localVideo.style.left = '75%';
+          localVideo.style.height = '45px'
+        } else if (tablet.matches) {
+          localLayout.style.height = '0px';
+          localVideo.style.top = '0px';
+          localVideo.style.left = '78%';
+          localVideo.style.height = '89px'
+        };
+
+        newVideo.srcObject = stream;
+        newVideo.playsInline = true;
+        // mark peerId to find it later at peerLeave event
+        newVideo.setAttribute('data-peer-id', stream.peerId);
+        newVideo.setAttribute('controls', true);
+        newVideo.setAttribute('id', "remote-monitor");
+        remoteVideos.append(newVideo);
+        await newVideo.play().catch(console.error);
+      });
+
+      room.on('data', ({
+        data,
+        src
+      }) => {
+        // Show a message sent to the room and who sent
+        messages.innerHTML += `<div class="remote-text"><img src="${data[2]}" class="message-chat-icon"><p>${data[1]}</p><span>${data[0]}</span></div>`;
+      });
+
+      // for closing room members
+      room.on('peerLeave', peerId => {
+        const remoteVideo = remoteVideos.querySelector(
+          `[data-peer-id="${peerId}"]`
+        );
+        remoteVideo.srcObject.getTracks().forEach(track => track.stop());
+        remoteVideo.srcObject = null;
+        remoteVideo.remove();
+        messages.innerHTML += `<div class="chat-end"><span>面会が終了しました</span></div>\n`;
+
+        var firstRemote = document.getElementById('remote-monitor');
+
+        if (mobile.matches && firstRemote === null) {
+          localLayout.style.height = '185px';
+          buttonLayout.style.marginTop = '38px';
+          localVideo.style.right = '0px';
+          localVideo.style.left = '0px';
+          localVideo.style.height = '100%';
+        } else if (tablet.matches && firstRemote === null) {
+          localLayout.style.height = '330px';
+          localVideo.style.top = '0px';
+          localVideo.style.right = '9%';
+          localVideo.style.left = '9%';
+          localVideo.style.height = '100%';
+        };
+      });
+
+      // for closing myself
+      room.once('close', () => {
+        sendTrigger.removeEventListener('click', onClickSend);
+        messages.innerHTML += `<div class="room-end"><span>退室しました</span></div>`;
+        Array.from(remoteVideos.children).forEach(remoteVideo => {
+          remoteVideo.srcObject.getTracks().forEach(track => track.stop());
+          remoteVideo.srcObject = null;
+          remoteVideo.remove();
+
+          var firstRemote = document.getElementById('remote-monitor');
+
+          if (mobile.matches && firstRemote === null) {
+            localLayout.style.height = '185px';
+            buttonLayout.style.marginTop = '-30px';
+            localVideo.style.right = '0px';
+            localVideo.style.left = '0px';
+            localVideo.style.height = '100%';
+          } else if (tablet.matches && firstRemote === null) {
+            localLayout.style.height = '330px';
+            localVideo.style.top = '0px';
+            localVideo.style.right = '9%';
+            localVideo.style.left = '9%';
+            localVideo.style.height = '100%';
+          };
+        });
+      });
+
+      sendTrigger.addEventListener('click', onClickSend);
+      leaveTrigger.addEventListener('click', () => room.close(), {
+        once: true
+      });
+      leaveTrigger.addEventListener('click', () => {
+        joinTrigger.disabled = false;
+        leaveTrigger.disabled = true;
+      });
+
+      function onClickSend() {
+        let obj = new String(remoteIcon.src)
+        // Send message to all of the peers in the room via websocket
+        room.send([localName.value, localText.value, obj]);
+        messages.innerHTML += `<div class="local-text"><span>${localText.value}\n</span></div>`;
+        localText.value = '';
+      }
+    });
+
+    peer.on('error', console.error);
+  })();
+</script>

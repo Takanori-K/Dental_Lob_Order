@@ -42,14 +42,18 @@
         <% end %>
         <input class="input" type="hidden" name="name" value="<%= current_user.name %>" id="js-local-name">
         <textarea class="input is-medium is-info has-text-weight-semibold" type="text" placeholder="メッセージを入力して下さい" id="js-local-text"></textarea>
-        <p class="has-text-right has-text-weight-semibold info-message">
+        <p class="has-text-right has-text-white has-text-weight-semibold info-message">
           *メッセージを送信することができます。
         </p>
         <button id="js-send-trigger" class="button is-focused is-info is-rounded has-text-weight-semibold">送信する</button>
       </div>
     </div><br>
     <div class="has-text-centered">
-      <%= link_to "歯科医院一覧", users_path, class: "button is-outlined" %>
+      <% if current_user.admin? %>
+        <%= link_to "歯科医院一覧", users_path, class: "button is-outlined btn-back" %>
+      <% else %>
+        <%= link_to "マイページ", user_path(current_user), class: "button is-outlined btn-back"%>
+      <% end %>
     </div>
     <p class="meta" id="js-meta"></p>
   </div>

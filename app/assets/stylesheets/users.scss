@@ -73,6 +73,7 @@
 //ビデオルーム
 /* 面会ルームのタイトル */
 .hero-6 {
+  background: rgba(184, 134, 11, 0.2);
 
   h1 {
     font-size: 40px;
@@ -344,10 +345,20 @@ video::-webkit-media-controls-pause-button {
 }
 
 //戻るボタン
-#return-btn {
-  margin-top: 20px;
-  font-size: 22px;
-  margin-bottom: 9%;
+.btn-back {
+  height: 65px;
+  width: 200px;
+  border: solid 2px #B8860B;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 50px;
+  color: #B8860B;
+  margin-bottom: 10%;
+}
+
+.btn-back:hover {
+  background: #B8860B;
+  color: #fff;
 }
 
 //テレビ電話のシステム表示
@@ -477,6 +488,24 @@ p.meta {
 
     .finished-btn {
       margin-bottom: 0px;
+    }
+  }
+
+  //ビデオルーム
+  .hero-6 {
+
+    h1 {
+      font-size: 22px;
+    }
+  }
+  .messages-layout {
+    width: 100%;
+  }
+
+  #js-messages {
+
+    .chat-day {
+      width: 34%;
     }
   }
 }

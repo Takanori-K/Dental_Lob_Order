@@ -136,7 +136,7 @@
     </div>
     <% unless current_user.admin? %>
       <div class="button-video">
-        <%= link_to video_room_user_path(@user), data: {"turbolinks" => false}, class: "button is-medium is-link has-text-weight-bold room-btn" do %>
+        <%= link_to video_room_user_path(@user), data: {"turbolinks" => false}, class: "button is-medium has-text-weight-bold room-btn" do %>
           <span class="icon">
             <i class="fas fa-video"></i>
           </span>

@@ -16,6 +16,8 @@
   font-size: 30px;
   font-weight: bold;
   padding-left: 35px;
+  cursor: pointer;
+  cursor: hand;
 }
 
 .notification:not(:last-child){
@@ -25,6 +27,10 @@
 #flash-alert {
   background: #FFB6C1;
   color: #FF0000;
+}
+
+.hero {
+  margin-top: 4%;
 }
 
 .hero-body {

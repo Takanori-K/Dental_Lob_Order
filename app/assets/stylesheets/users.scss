@@ -48,7 +48,10 @@
 .button-video {
 
   .room-btn {
-    width: 120%;
+    width: 125%;
+    background: #FF7F50;
+    color: #fff;
+    border: solid 0px;
   }
 
   span {
@@ -410,6 +413,16 @@ p.meta {
     width: 35px;
     height: 35px;
   }
+
+  .button-video {
+    text-align: center;
+
+    .room-btn {
+      width: 30%;
+      width: 26%;
+      margin-right: 2%;
+    }
+  }
 }
 
 @media screen and ( max-width: 500px ) {
@@ -488,6 +501,18 @@ p.meta {
 
     .finished-btn {
       margin-bottom: 0px;
+    }
+  }
+
+  .button-video {
+
+    .room-btn {
+      height: 30px;
+      width: 34%;
+    }
+
+    span {
+      font-size: 13px;
     }
   }
 

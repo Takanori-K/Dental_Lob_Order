@@ -53,6 +53,36 @@
   }
 }
 
+//指示書一覧（完）
+.search-index-layout {
+  display: block;
+  width: 80%;
+  margin: 0 auto;
+
+  .text-search {
+    width: 192px;
+    padding-bottom: 5px;
+  }
+}
+
+.search-layout {
+  text-align: left;
+
+  .input-layout {
+    border-radius: 25px;
+    border: solid 1px black;
+  }
+
+  .search-btn {
+    border-radius: 25px;
+  }
+}
+
+#table-layout {
+  width: 80%;
+  margin: 0 auto;
+}
+
 @media screen and ( max-width: 1050px ) {
   #order-table  {
 
@@ -127,5 +157,12 @@
     td {
       padding: 5px;
     }
+  }
+}
+
+@media screen and ( max-width: 500px ) {
+  //指示書一覧（完）
+  #table-layout {
+    width: 94%;
   }
 }

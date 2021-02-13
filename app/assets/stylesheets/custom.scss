@@ -353,7 +353,7 @@
 
 #order-show-table th {
   text-align: center;
-  background: #FFEFD5;
+  background: #FFDEAD;
 }
 
 #order-show-table td {
@@ -601,19 +601,8 @@
 }
 
 /* 検索フォーム */
-
-.field.has-addons {
-  margin-left: 847px;
-}
-
-.text-search .control {
-  width: 192px;
-  padding-bottom: 5px;
-}
-
 .month-search .control{
-  width: 192px;
-  margin-left: 847px;
+  width: 192px
 }
 
 .month-search .control-submit {

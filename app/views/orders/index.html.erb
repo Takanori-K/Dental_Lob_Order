@@ -12,69 +12,75 @@
   </div>
 </section>
 
-<%= form_with(url: user_orders_path(@user), method: :get, local: true) do |f| %>
-<div class="text-search field has-addons">
-  <div class="control">
-    <%= f.label :patient_name, '患者名', :style=>"color:white;", class: "label" %>
-    <%= f.text_field :search, :placeholder => "キーワード検索", class: "input is-small" %>
-  </div>  
+<div class="search-index-layout">
+  <%= form_with(url: user_orders_path(@user), method: :get, local: true) do |f| %>
+    <div class="search-layout">
+      <div class="container">
+        <div class="text-search field">
+          <div class="control">
+            <%= f.label :patient_name, '患者名', :style=>"color:white;", class: "label" %>
+            <%= f.text_field :search, :placeholder => "キーワード検索", class: "input is-small input-layout" %>
+          </div>
+        </div>
+        <div class="month-search field is-grouped">
+          <div class="control">
+            <%= f.label :reception_date, '日付', :style=>"color:white;",  class: "label" %>
+            <%= f.month_field :search_day, class: "input is-small input-layout" %>
+          </div>&emsp;
+          <div class="control-submit">
+            <%= f.submit '検索', class: "button is-link is-small has-text-weight-semibold search-btn" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
-<div class="month-search field is-grouped">
-  <div class="control">
-    <%= f.label :reception_date, '日付', :style=>"color:white;",  class: "label" %>
-    <%= f.month_field :search_day, class: "input is-small" %>
-  </div>&emsp; 
-  <div class="control-submit">
-    <%= f.submit '検索', class: "button is-info is-small has-text-weight-semibold" %>
-  </div>
-</div>  
-<% end %>
 
 <div class="paginate is-rounded columns is-multiline">
   <%= will_paginate @orders_finished, renderer: BulmaPagination::Rails %>
 </div>
 
 <%= form_with url: destroy_all_users_path, method: :delete do |f| %>
-<div class="columns is-centered">
-  <div class="column is-9">
-    <div class="table-container">
-      <table class="table is-fullwidth" id="order-show-table">
-        <tr>
-          <th>患者名</th>
-          <th>申請日</th>
-          <th>詳細</th>
-          <% if current_user.admin? %>
-            <th>削除確認</th>
-          <% end %>  
-        </tr>
-        <% @orders_finished_search.each do |order| %>
+  <div class="columns is-centered is-desktop">
+    <div class="column is-9" id="table-layout">
+      <div class="table-container">
+        <table class="table is-fullwidth" id="order-show-table">
           <tr>
-            <td><%= order.patient_name %></td>
-            <td><%= l(order.reception_date, format: :long) if order.reception_date.present? %></td>
-            <td>
-              <%= link_to user_order_path(@user, order), class: "button is-info is-small" do %>
-                <i class="fas fa-teeth-open"></i>
-              <% end %>
-            </td>
+            <th>患者名</th>
+            <th>申請日</th>
+            <th>詳細</th>
             <% if current_user.admin? %>
-              <td><%= check_box_tag "order_ids[]", order.id %></td>
-            <% end %>  
+              <th>削除確認</th>
+            <% end %>
           </tr>
-        <% end %>
-      </table>
+          <% @orders_finished_search.each do |order| %>
+            <tr>
+              <td><%= order.patient_name %></td>
+              <td><%= l(order.reception_date, format: :long) if order.reception_date.present? %></td>
+              <td>
+                <%= link_to user_order_path(@user, order), class: "button is-info is-small" do %>
+                  <i class="fas fa-teeth-open"></i>
+                <% end %>
+              </td>
+              <% if current_user.admin? %>
+                <td><%= check_box_tag "order_ids[]", order.id %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+      <% if current_user.admin? %>
+        <div class="has-text-centered">
+          <%= f.submit "まとめて削除", data: { confirm: "削除してよろしいですか？" }, class: "button is-danger is-medium" %>&emsp;&nbsp;
+          <%= link_to "歯科医院一覧", users_path, class: "button is-outlined is-medium" %>
+        </div>
+      <% else %>
+        <div class="has-text-centered">
+          <%= link_to "マイページ", user_path(current_user), class: "button is-outlined is-medium" %>
+        </div>
+      <% end %>
     </div>
-    <% if current_user.admin? %>
-      <div class="has-text-centered">
-        <%= f.submit "まとめて削除", data: { confirm: "削除してよろしいですか？" }, class: "button is-danger is-medium" %>&emsp;&nbsp;
-        <%= link_to "キャンセル", users_path, class: "button is-outlined is-medium" %>
-      </div>
-    <% else %>
-      <div class="has-text-centered">
-        <%= link_to "キャンセル", user_path(current_user), class: "button is-outlined is-medium" %>
-      </div>
-    <% end %>  
   </div>
-</div>
 <% end %>
 <div class="paginate is-rounded columns is-multiline">
   <%= will_paginate @orders_finished, renderer: BulmaPagination::Rails %>

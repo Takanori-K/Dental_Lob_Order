@@ -35,6 +35,7 @@ class OrdersController < ApplicationController
       format.html { redirect_to action: :pdf, format: :pdf, debug: true }
       format.pdf do
         render pdf: '歯科技工指示書',
+              title: '歯科技工指示書',
               layout: 'pdf.html.erb',
               template: '/orders/pdf.html.erb',
               encording: 'UTF-8',

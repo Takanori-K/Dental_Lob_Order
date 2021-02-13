@@ -3,7 +3,7 @@
 <section class="section">
   <div class="has-text-centered has-text-weight-semibold is-size-4">
     歯科技工指示書
-  </div><br>
+  </div>
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-8">
@@ -15,7 +15,7 @@
             <tr>
               <th>技工所名</th>
               <td colspan = "3"><%= @admin.name %></td>
-              <td colspan = "3" rowspan = "10"><br><%= wicked_pdf_image_tag "/user_images/dental-teeth.png", size: "250x250" %></td>
+              <td colspan = "3" rowspan = "10"><br><%= image_tag wicked_pdf_asset_base64("dental-teeth.png"), class:"pdf-image" %></td>
             </tr>
             <tr>
               <th>医院名</th>
@@ -65,10 +65,9 @@
               <td><%= l(@order.second_try) if @order.second_try.present? %></td>
               <td><%= l(@order.complete_day) if @order.complete_day.present? %></td>
             </tr>
-            
-          </table>  
-        </div>  
+          </table>
+        </div>
       </div>
-    </div>    
-  </div>  
-</section>  
+    </div>
+  </div>
+</section>

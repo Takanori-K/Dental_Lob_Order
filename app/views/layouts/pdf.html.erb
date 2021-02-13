@@ -1,12 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title><%= full_title(yield(:title)) %></title>
-    <%= wicked_pdf_stylesheet_link_tag "custom" -%>
+    <%= wicked_pdf_stylesheet_link_tag "custom" %>
     <%= wicked_pdf_javascript_include_tag "number_pages" %>
   </head>
-  <body onload='number_pages'>
+  <body>
     <div id="header">
     </div>
     <div id="content">

@@ -131,7 +131,7 @@
                   <% if @order.image_1.present? %>
                     <%= image_tag @order.image_1.thumb.url, id: :edit_img_prev, size: "250x250", onClick:"$('#upfile').click()" %>
                   <% else %>
-                    <%= image_tag "/user_images/no-image-2.png", id: :edit_img_prev, size: "250x250", onClick:"$('#upfile').click()" %>
+                    <%= image_tag "https://takanori-private-image.s3-ap-northeast-1.amazonaws.com/background-image/no-image.jpg", id: :edit_img_prev, size: "250x250", onClick:"$('#upfile').click()" %>
                   <% end %>
                   <%= f.file_field :image_1, style:"display:none;", id:"upfile", class: "input"%>
                   <%= f.hidden_field :image_1_cache %>
@@ -145,7 +145,7 @@
                   <% if @order.image_2.present? %>
                     <%= image_tag @order.image_2.thumb.url, id: :edit_img_prev_2, size: "250x250", onClick:"$('#upfile2').click()" %>
                   <% else %>
-                    <%= image_tag "/user_images/no-image-2.png", id: :edit_img_prev_2, size: "250x250", onClick:"$('#upfile2').click()" %>
+                    <%= image_tag "https://takanori-private-image.s3-ap-northeast-1.amazonaws.com/background-image/no-image.jpg", id: :edit_img_prev_2, size: "250x250", onClick:"$('#upfile2').click()" %>
                   <% end %>
                   <%= f.file_field :image_2, style:"display:none;", id:"upfile2", class: "input"%>
                   <%= f.hidden_field :image_2_cache %>
@@ -159,7 +159,7 @@
                   <% if @order.image_3.present? %>
                     <%= image_tag @order.image_3.thumb.url, id: :edit_img_prev_3, size: "250x250", onClick:"$('#upfile3').click()" %>
                   <% else %>
-                    <%= image_tag "/user_images/no-image-2.png", id: :edit_img_prev_3, size: "250x250", onClick:"$('#upfile3').click()" %>
+                    <%= image_tag "https://takanori-private-image.s3-ap-northeast-1.amazonaws.com/background-image/no-image.jpg", id: :edit_img_prev_3, size: "250x250", onClick:"$('#upfile3').click()" %>
                   <% end %>
                   <%= f.file_field :image_3, style:"display:none;", id:"upfile3", class: "input"%>
                   <%= f.hidden_field :image_3_cache %>

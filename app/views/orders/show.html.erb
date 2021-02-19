@@ -148,7 +148,7 @@
                     <% if @order.image_1.present? %>
                       <%= image_tag @order.image_1.thumb.url, size: "250x250" %>
                     <% else %>
-                      <%= image_tag "/user_images/no-image-2.png", size: "250x250" %>
+                      <%= image_tag "https://takanori-private-image.s3-ap-northeast-1.amazonaws.com/background-image/no-image.jpg", size: "250x250" %>
                     <% end %>
                   </div>
                 </td>
@@ -157,7 +157,7 @@
                     <% if @order.image_2.present? %>
                       <%= image_tag @order.image_2.thumb.url, size: "250x250" %>
                     <% else %>
-                      <%= image_tag "/user_images/no-image-2.png", size: "250x250" %>
+                      <%= image_tag "https://takanori-private-image.s3-ap-northeast-1.amazonaws.com/background-image/no-image.jpg", size: "250x250" %>
                     <% end %>
                   </div>
                 </td>
@@ -166,7 +166,7 @@
                     <% if @order.image_3.present? %>
                       <%= image_tag @order.image_3.thumb.url, size: "250x250" %>
                     <% else %>
-                      <%= image_tag "/user_images/no-image-2.png", size: "250x250" %>
+                      <%= image_tag "https://takanori-private-image.s3-ap-northeast-1.amazonaws.com/background-image/no-image.jpg", size: "250x250" %>
                     <% end %>
                   </div>
                 </td>
@@ -247,7 +247,7 @@
         <% if @order.image_1.present? %>
           <%= image_tag @order.image_1.thumb.url %>
         <% else %>
-          <%= image_tag "/user_images/no-image-2.png" %>
+          <%= image_tag "https://takanori-private-image.s3-ap-northeast-1.amazonaws.com/background-image/no-image.jpg" %>
         <% end %>
         <a class="js-modal-close has-text-light" href=""><div class="has-text-right">閉じる</div></a>
       </p>
@@ -263,7 +263,7 @@
         <% if @order.image_2.present? %>
           <%= image_tag @order.image_2.thumb.url %>
         <% else %>
-          <%= image_tag "/user_images/no-image-2.png", size: "250x250" %>
+          <%= image_tag "https://takanori-private-image.s3-ap-northeast-1.amazonaws.com/background-image/no-image.jpg" %>
         <% end %>
         <a class="js-modal-close has-text-light" href=""><div class="has-text-right">閉じる</div></a>
       </p>
@@ -279,7 +279,7 @@
         <% if @order.image_3.present? %>
           <%= image_tag @order.image_3.thumb.url %>
         <% else %>
-          <%= image_tag "/user_images/no-image-2.png" %>
+          <%= image_tag "https://takanori-private-image.s3-ap-northeast-1.amazonaws.com/background-image/no-image.jpg" %>
         <% end %>
         <a class="js-modal-close has-text-light" href=""><div class="has-text-right">閉じる</div></a>
       </p>

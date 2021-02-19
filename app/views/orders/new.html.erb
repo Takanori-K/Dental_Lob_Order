@@ -129,31 +129,19 @@
             <tr>
               <td>
                 <div class="field tooth-image has-text-centered">
-                  <% if @order.image_1.present? %>
-                    <%= image_tag @order.image_1.thumb.url, id: :order_img_prev, size: "250x250", onClick:"$('#upfile').click()" %>
-                  <% else %>
-                    <%= image_tag "https://takanori-private-image.s3-ap-northeast-1.amazonaws.com/background-image/no-image.jpg", id: :order_img_prev, size: "250x250", onClick:"$('#upfile').click()" %>
-                  <% end %>
+                  <%= @order.order_image_1_edit %>
                   <%= f.file_field :image_1, style:"display:none;", id:"upfile", class: "input"%>
                 </div>
               </td>
               <td>
                 <div class="field tooth-image has-text-centered">
-                  <% if @order.image_2.present? %>
-                    <%= image_tag @order.image_2.thumb.url, id: :order_img_prev_2, size: "250x250", onClick:"$('#upfile2').click()" %>
-                  <% else %>
-                    <%= image_tag "https://takanori-private-image.s3-ap-northeast-1.amazonaws.com/background-image/no-image.jpg", id: :order_img_prev_2, size: "250x250", onClick:"$('#upfile2').click()" %>
-                  <% end %>
+                  <%= @order.order_image_2_edit %>
                   <%= f.file_field :image_2, style:"display:none;", id:"upfile2", class: "input"%>
                 </div>
               </td>
               <td>
                 <div class="field tooth-image has-text-centered">
-                  <% if @order.image_3.present? %>
-                    <%= image_tag @order.image_3.thumb.url, id: :order_img_prev_3, size: "250x250", onClick:"$('#upfile3').click()" %>
-                  <% else %>
-                    <%= image_tag "https://takanori-private-image.s3-ap-northeast-1.amazonaws.com/background-image/no-image.jpg", id: :order_img_prev_3, size: "250x250", onClick:"$('#upfile3').click()" %>
-                  <% end %>
+                  <%= @order.order_image_3_edit %>
                   <%= f.file_field :image_3, style:"display:none;", id:"upfile3", class: "input"%>
                 </div>
               </td>
@@ -192,7 +180,7 @@
       if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-          $('#order_img_prev').attr({
+          $('#edit_img_prev').attr({
             src: e.target.result,
           });
         }
@@ -211,7 +199,7 @@
       if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-          $('#order_img_prev_2').attr({
+          $('#edit_img_prev_2').attr({
             src: e.target.result,
           });
         }
@@ -230,7 +218,7 @@
       if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-          $('#order_img_prev_3').attr({
+          $('#edit_img_prev_3').attr({
             src: e.target.result,
           });
         }

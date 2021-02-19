@@ -98,7 +98,7 @@
   z-index: -1;
   background-position: center 50%;
   background-repeat: no-repeat;
-  background-image: url("/user_images/dental-8.jpg");
+  background-image: url("https://takanori-private-image.s3-ap-northeast-1.amazonaws.com/background-image/room.jpg");
   background-size: cover;
 }
 
@@ -175,7 +175,7 @@ video::-webkit-media-controls-pause-button {
       rgba(255, 255, 255, 0.4),
       rgba(135, 206, 250, 1)
     ),
-    url("/user_images/chat.jpg");
+    url("https://takanori-private-image.s3-ap-northeast-1.amazonaws.com/background-image/cloud.jpg");
   background-size: cover;
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;

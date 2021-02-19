@@ -21,15 +21,9 @@
           <div class="card">
             <div class="card-content">
               <div class="card-image">
-                <% if user.image.present? %>
-                  <figure class="image">
-                    <%= image_tag user.image.thumb.url %>
-                  </figure>
-                <% else %>
-                  <figure class="image">
-                    <%= image_tag "/user_images/no-image-2.png" %>
-                  </figure>
-                <% end %>
+                <figure class="image">
+                  <%= user.user_image %>
+                </figure>
               </div>
             </div>
             <div class="card-content">

@@ -17,15 +17,9 @@
         <%= render partial: 'shared/error_messages', locals: { obj: @user } %>
 
           <div class="field has-text-centered is-horizontal-center">
-            <% if @user.image.present? %>
-              <figure class="image is-128x128 is-inline-block">
-                <%= image_tag @user.image.thumb.url, id: :img_prev, size: "120x120", onClick:"$('#user_img').click()" %>
-              </figure>
-            <% else %>
-              <figure class="image is-128x128 is-inline-block">
-                <%= image_tag "https://takanori-private-image.s3-ap-northeast-1.amazonaws.com/background-image/facility_default.png", id: :img_prev, size: "120x120", onClick:"$('#user_img').click()" %>
-              </figure>
-            <% end %>
+            <figure class="image is-128x128 is-inline-block">
+              <%= @user.user_image %>
+            </figure>
 
             <%= f.label :image, class: "label label-color" %>
             <%= f.file_field :image, style:"display:none;", id: :user_img , class: "input"%>

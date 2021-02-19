@@ -17,15 +17,9 @@
       <div class="column is-8">
         <div class="columns is-centered">
           <div class="column is-4" id="show-image">
-            <% if @user.image.present? %>
-              <figure class="image-tag">
-                <%= image_tag @user.image.thumb.url, size: "200x200" %>
-              </figure>
-            <% else %>
-              <figure class="image-tag">
-                <%= image_tag "https://takanori-private-image.s3-ap-northeast-1.amazonaws.com/background-image/facility_default.png", size: "120x120" %>
-              </figure>
-            <% end %>
+            <figure class="image-tag">
+              <%= @user.user_image %>
+            </figure>
           </div>
           <div class="column is-10">
             <table class="table is-fullwidth" id="user-show-table">

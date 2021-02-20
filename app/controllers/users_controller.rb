@@ -60,11 +60,10 @@ class UsersController < ApplicationController
   def destroy_all
     if Order.where(id: params[:order_ids]).destroy_all
       flash[:notice] = "指示書を一括削除しました。"
-      redirect_to users_url(@user)
     else
       flash[:alert] = "指示書を削除できませんでした。"
-      redirect_to users_url(@user)
     end
+    redirect_to users_url(@user)
   end
 
   private

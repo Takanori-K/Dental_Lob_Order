@@ -41,6 +41,16 @@ Style/Documentation:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
+Style/RedundantCondition:
+  Enabled: false
+
+Style/RedundantSelf:
+  Enabled: false
+
+# シングルクォーテーション
+Style/StringLiterals:
+  Enabled: false
+
 # ハッシュの記法はロケット記法ではなくruby1.9のハッシュ記法を使いますよ」ということを表します。
 HashSyntax:
   EnforcedStyle: ruby19

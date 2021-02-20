@@ -6,7 +6,7 @@ class User < ApplicationRecord
   before_save :downcase_email
 
   validates :name, presence: true
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: true, unless: :uid?
   validates :email, format: { with: VALID_EMAIL_REGEX }, uniqueness: true, if: :uid_present_email_valid?, on: :update
   has_secure_password validations: false

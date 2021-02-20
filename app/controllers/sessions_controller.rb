@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       redirect_to user
     else # 既存パタン
       user = User.find_by(email: params[:session][:email].downcase)
-      if user && user.authenticate(params[:session][:password])
+      if user&.authenticate(params[:session][:password])
         log_in user
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
         flash[:notice] = "ログインしました。"

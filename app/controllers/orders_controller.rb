@@ -1,5 +1,4 @@
 class OrdersController < ApplicationController
-
   before_action :set_user
   before_action :set_admin_user,        only: %i[new show edit update pdf create admin_update]
   before_action :correct_user_orders,   only: %i[new create edit update]
@@ -7,7 +6,6 @@ class OrdersController < ApplicationController
   before_action :admin_or_correct_user, only: %i[show index]
   before_action :admin_user,            only: :admin_update
   before_action :finished_edit,         only: %i[edit updete]
-
 
   def new
     @order = Order.new
@@ -35,13 +33,13 @@ class OrdersController < ApplicationController
       format.html { redirect_to action: :pdf, format: :pdf, debug: true }
       format.pdf do
         render pdf: '歯科技工指示書',
-              title: '歯科技工指示書',
-              layout: 'pdf.html.erb',
-              template: '/orders/pdf.html.erb',
-              encording: 'UTF-8',
-              page_size:   'A5',
-              orientation: 'Landscape',
-              show_as_html: params.key?('debug')
+               title: '歯科技工指示書',
+               layout: 'pdf.html.erb',
+               template: '/orders/pdf.html.erb',
+               encording: 'UTF-8',
+               page_size: 'A5',
+               orientation: 'Landscape',
+               show_as_html: params.key?('debug')
       end
     end
   end
@@ -49,17 +47,16 @@ class OrdersController < ApplicationController
   def index
     @order = @user.orders.find_by(id: params[:id])
     @orders_finished = Order.where(user_id: @user.id, finished: "true").paginate(page: params[:page], per_page: 50).order(:reception_date)
-    if params[:search].present? && params[:search_day].blank?
-      @orders_finished_search = @orders_finished.where('patient_name LIKE ?', "%#{params[:search]}%").order(:reception_date)
-    elsif params[:search].present? && params[:search_day].present?
-      @orders_finished_search = @orders_finished.where('patient_name LIKE ?', "%#{params[:search]}%").where(reception_date: Date.parse("#{params[:search_day]}-01").all_month).order(:reception_date)
-    elsif params[:search].blank? && params[:search_day].present?
-      @orders_finished_search = @orders_finished.where(reception_date: Date.parse("#{params[:search_day]}-01").all_month).order(:reception_date)
-    else
-      @orders_finished_search = @orders_finished
-    end
+    @orders_finished_search = if params[:search].present? && params[:search_day].blank?
+                                @orders_finished.where('patient_name LIKE ?', "%#{params[:search]}%").order(:reception_date)
+                              elsif params[:search].present? && params[:search_day].present?
+                                @orders_finished.where('patient_name LIKE ?', "%#{params[:search]}%").where(reception_date: Date.parse("#{params[:search_day]}-01").all_month).order(:reception_date)
+                              elsif params[:search].blank? && params[:search_day].present?
+                                @orders_finished.where(reception_date: Date.parse("#{params[:search_day]}-01").all_month).order(:reception_date)
+                              else
+                                @orders_finished
+                              end
   end
-
 
   def edit
     @order = @user.orders.find_by(id: params[:id])
@@ -99,13 +96,13 @@ class OrdersController < ApplicationController
   private
 
     def order_params
-      params.require(:order).permit(:patient_name, :sex, :color, :note, {content: []}, :content_other, :other_text, :crown, :metal, :weight, :first_try, :second_try,
-                                    :complete_day, :reception_date, :finished,:image_1, :image_2, :image_3)
+      params.require(:order).permit(:patient_name, :sex, :color, :note, { content: [] }, :content_other, :other_text, :crown, :metal, :weight, :first_try, :second_try,
+                                    :complete_day, :reception_date, :finished, :image_1, :image_2, :image_3)
     end
 
     def edit_params
-      params.require(:order).permit(:patient_name, :sex, :color, :note, {content: []}, :content_other, :other_text, :crown, :metal, :weight, :first_try, :second_try,
-                                    :complete_day, :reception_date, :finished,:image_1, :image_1_cache, :remove_image_1, :image_2, :image_2_cache, :remove_image_2, :image_3, :image_3_cache, :remove_image_3)
+      params.require(:order).permit(:patient_name, :sex, :color, :note, { content: [] }, :content_other, :other_text, :crown, :metal, :weight, :first_try, :second_try,
+                                    :complete_day, :reception_date, :finished, :image_1, :image_1_cache, :remove_image_1, :image_2, :image_2_cache, :remove_image_2, :image_3, :image_3_cache, :remove_image_3)
     end
 
     def reservation_search_params

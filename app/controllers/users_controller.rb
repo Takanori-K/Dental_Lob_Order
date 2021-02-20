@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
   before_action :set_user,               only: %i[show video_room edit update destroy]
   before_action :logged_in_user,         only: %i[index show video_room edit update destroy]
   before_action :admin_user,             only: %i[index destroy]
@@ -21,8 +20,7 @@ class UsersController < ApplicationController
     @new = Order.where(user_id: @user.id).where(finished: [nil, "false"])
   end
 
-  def video_room
-  end
+  def video_room; end
 
   def new
     @user = User.new
@@ -38,8 +36,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @user.update_attributes(user_params)
@@ -83,5 +80,4 @@ class UsersController < ApplicationController
     def set_user
       @user = User.find(params[:id])
     end
-
 end

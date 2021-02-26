@@ -41,37 +41,37 @@ class Order < ApplicationRecord
   def first_try_and_complete_day_is_blank
     return unless first_try.blank? && second_try.blank? && complete_day.blank?
 
-    errors.add(:first_try, " または 完成日 に日付を入れてください。")
+    errors.add(:first_try, "または 完成日 に日付を入れてください。")
   end
 
   def first_try_is_late_second_try_and_complete_day
     return unless first_try.present? && (second_try.present? || complete_day.present?)
 
-    errors.add(:first_try, " より早い時間の入力は無効です") if first_try > (second_try || complete_day)
+    errors.add(:first_try, "より早い時間の入力は無効です") if first_try > (second_try || complete_day)
   end
 
   def second_try_is_late_complete_day
     return unless second_try.present? && complete_day.present?
 
-    errors.add(:second_try, " より早い時間の入力は無効です") if second_try > complete_day
+    errors.add(:second_try, "より早い時間の入力は無効です") if second_try > complete_day
   end
 
   def first_try_is_late_date_current
     return unless first_try.present?
 
-    errors.add(:first_try, " は今日より早い時間の入力は無効です") if first_try < Date.current
+    errors.add(:first_try, "は今日より早い時間の入力は無効です") if first_try < Date.current
   end
 
   def second_try_is_late_date_current
     return unless second_try.present?
 
-    errors.add(:second_try, " は今日より早い時間の入力は無効です") if second_try < Date.current
+    errors.add(:second_try, "は今日より早い時間の入力は無効です") if second_try < Date.current
   end
 
   def complete_day_is_late_date_current
     return unless complete_day.present?
 
-    errors.add(:complete_day, " は今日より早い時間の入力は無効です") if complete_day < Date.current
+    errors.add(:complete_day, "は今日より早い時間の入力は無効です") if complete_day < Date.current
   end
 
   def self.search(search)

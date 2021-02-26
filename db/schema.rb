@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20200428021230) do
 
-  create_table "orders", force: :cascade do |t|
+  create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "patient_name"
     t.string "sex"
     t.integer "color"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20200428021230) do
     t.datetime "second_try"
     t.datetime "complete_day"
     t.date "reception_date"
-    t.float "weight"
+    t.float "weight", limit: 24
     t.string "finished"
     t.string "image_1"
     t.string "image_2"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20200428021230) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "email"
     t.string "uid"

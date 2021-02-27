@@ -108,5 +108,4 @@ RSpec.describe Order, type: :model do
     order.valid?
     expect(order.errors[:complete_day]).to include("は今日より早い時間の入力は無効です")
   end
-
 end

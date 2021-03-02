@@ -1,6 +1,6 @@
 <% provide(:title, 'Order_up') %>
 <%= form_with(model: @order, url: user_orders_path(@user), local: true) do |f| %>
-  <%= f.hidden_field :reception_date, value: Date.current %>
+  <%= f.hidden_field :reception_date, value: Date.current, id: "reception" %>
 <section class="section">
   <ul class="order-image">
   </ul>
@@ -92,7 +92,7 @@
               <td colspan = "6">
                 <div class="checkbox is-flex-desktop">
                   <% ["AC　","MB　","e-max　","CAD冠　", "前装冠　", "FCK　", "In　", "総義歯　", "部分床義歯　"].each do |order| %>
-                  <div class="checkbox-content"><%= f.check_box :content, {multiple: true}, order, nil %></div>&nbsp;
+                  <div class="checkbox-content"><%= f.check_box :content, { multiple: true, id: "order-content-#{order}" }, order, nil %></div>&nbsp;
                     <%= order %>&emsp;
                   <% end %>
                 </div><br>

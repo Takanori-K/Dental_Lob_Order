@@ -4,11 +4,11 @@ FactoryBot.define do
     sequence(:patient_name) { |n| "patient#{n}" }
     sex                     { "男" }
     sequence(:note)         { |n| "note#{n}" }
-    content                 { "オールセラミック" }
+    content                 { "AC" }
     crown                   { "連結" }
     metal                   { "クインテス" }
-    first_try               { "2021-03-01" }
+    first_try               { DateTime.current + 2.day }
     reception_date          { Date.current.to_s }
-    complete_day            { "2021-03-10" }
+    complete_day            { DateTime.current + 10.day }
   end
 end

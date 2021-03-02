@@ -57,7 +57,7 @@ RSpec.describe Order, type: :model do
   end
 
   it "試適１が記入済であれば試適２、完成日は未記入でも作成できる" do
-    order.first_try = "2021-03-09"
+    order.first_try = DateTime.current + 1.day
     order.second_try = nil
     order.complete_day = nil
     expect(order.valid?).to eq(true)
@@ -66,45 +66,45 @@ RSpec.describe Order, type: :model do
   it "完成日が記入済であれば試適１、試適２は未記入でも作成できる" do
     order.first_try = nil
     order.second_try = nil
-    order.complete_day = "2021-03-15"
+    order.complete_day = DateTime.current + 5.day
     expect(order.valid?).to eq(true)
   end
 
   it "試適１の時間より試適２が早い場合、作成できない" do
-    order.first_try = "2021-03-20"
-    order.second_try = "2021-03-13"
+    order.first_try = DateTime.current + 5.day
+    order.second_try = DateTime.current + 4.day
     order.valid?
     expect(order.errors[:first_try]).to include("より早い時間の入力は無効です")
   end
 
   it "試適１の時間より完成日が早い場合、作成できない" do
-    order.first_try = "2021-03-20"
-    order.complete_day = "2021-03-13"
+    order.first_try = DateTime.current + 5.day
+    order.complete_day = DateTime.current + 4.day
     order.valid?
     expect(order.errors[:first_try]).to include("より早い時間の入力は無効です")
   end
 
   it "試適２の時間より完成日が早い場合、作成できない" do
-    order.second_try = "2021-03-20"
-    order.complete_day = "2021-03-13"
+    order.second_try = DateTime.current + 5.day
+    order.complete_day = DateTime.current + 4.day
     order.valid?
     expect(order.errors[:second_try]).to include("より早い時間の入力は無効です")
   end
 
   it "試適１が今日よりも早い場合、作成できない" do
-    order.first_try = "2021-02-22"
+    order.first_try = DateTime.current - 1.day
     order.valid?
     expect(order.errors[:first_try]).to include("は今日より早い時間の入力は無効です")
   end
 
   it "試適２が今日よりも早い場合、作成できない" do
-    order.second_try = "2021-02-22"
+    order.second_try = DateTime.current - 1.day
     order.valid?
     expect(order.errors[:second_try]).to include("は今日より早い時間の入力は無効です")
   end
 
   it "完成日が今日よりも早い場合、作成できない" do
-    order.complete_day = "2021-02-22"
+    order.complete_day = DateTime.current - 1.day
     order.valid?
     expect(order.errors[:complete_day]).to include("は今日より早い時間の入力は無効です")
   end

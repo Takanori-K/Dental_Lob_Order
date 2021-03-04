@@ -5,7 +5,7 @@ RSpec.describe 'Users', type: :system do
 
   describe 'ユーザー新規登録' do
     before do
-      visit  new_user_path
+      visit new_user_path
     end
 
     context '新規登録画面に遷移' do

@@ -1,0 +1,98 @@
+# Ruby CircleCI 2.0 configuration file
+
+# CircleCIのバージョン。最新が2.1
+version: 2.0
+
+# 走らせるコンテナの指定。無料枠だと1つのみ
+jobs:
+  # jobsが一つの場合は、名前がbuildの必要あり
+  build:
+    # dockerコンテナを指定
+    docker:
+      #どのdockerイメージを使うか rubyのバージョン
+      - image: circleci/ruby:2.5.3-node-browsers
+        environment:
+          - BUNDLER_VERSION: 1.17.3
+          - RAILS_ENV: 'test'
+
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      - image: circleci/mysql:5.7
+
+    # 自身のアプリディレクトリ名を設定
+    working_directory: ~/Dental_Lab_Order
+
+    # CI環境上で動作させるコマンドや実行結果の保存、キャッシュ操作などを設定する
+    steps:
+      # CI環境上のworking_directoryの場所にgitリポジトリをコピーする
+      - checkout
+
+      # bundle install高速化のため、キャッシュを利用
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "Gemfile.lock" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      # gemのインストールを行う
+      - run:
+          name: install dependencies
+          command: |
+            gem install bundler -v 1.17.3
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+      # キャッシュを保存する
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
+      # mysqlの起動待機
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
+
+      # database.ymlとdatabase.yml.ciを入れ替える
+      - run: mv config/database.yml.ci config/database.yml
+
+      # DBセットアップ
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
+
+      # rspecテスト
+      - run:
+          name: run tests
+          command: |
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+            bundle exec rspec
+            # bundle exec rspec \
+            # --format progress \
+            # --format RspecJunitFormatter \
+            # --out /tmp/test-results/rspec.xml \
+            # --format progress \
+            # $TEST_FILES
+      # collect reports
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
+
+      # rubocopテスト
+      - run:
+          name: run rubocop
+          command: bundle exec rubocop
+
+      # capistranoのssh接続用秘密鍵の追加
+    # - add_ssh_keys:
+    #       fingerprints:
+    #         - "a6:7c:09:f6:78:76:0e:59:32:23:78:c5:9b:a0:de:c9"
+
+      # 本番環境へのデプロイ
+    # - deploy:
+    #       name: Capistrano deploy
+            # masterブランチの時のみデプロイ動作
+    #       command: |
+    #         if [ "${CIRCLE_BRANCH}" != "master" ]; then
+    #           exit 0
+    #         fi
+    #         bundle exec cap production deploy

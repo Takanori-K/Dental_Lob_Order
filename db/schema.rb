@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20200428021230) do
     t.string "sex"
     t.integer "color"
     t.text "note"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "content"
@@ -53,4 +53,5 @@ ActiveRecord::Schema.define(version: 20200428021230) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "orders", "users"
 end

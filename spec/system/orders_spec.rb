@@ -5,17 +5,17 @@ RSpec.describe 'Users', type: :system do
     @user = FactoryBot.create(:user)
     @admin = FactoryBot.create(:admin)
     @order = @user.orders.create!(
-                patient_name: "テスト",
-                sex: "男",
-                color: "a1",
-                note: "上顎１番",
-                metal: "クインテス",
-                content: "AC",
-                crown: "単冠",
-                first_try: '2030-03-15-00:00:00',
-                reception_date: '2030-03-03',
-                complete_day: '2030-10-26-00:00:00'
-              )
+      patient_name: "テスト",
+      sex: "男",
+      color: "a1",
+      note: "上顎１番",
+      metal: "クインテス",
+      content: "AC",
+      crown: "単冠",
+      first_try: '2030-03-15-00:00:00',
+      reception_date: '2030-03-03',
+      complete_day: '2030-10-26-00:00:00'
+    )
   end
 
   describe 'ログイン後' do
@@ -112,8 +112,8 @@ RSpec.describe 'Users', type: :system do
           expect(page).to have_selector("img[src$='/default.png']")
           expect(page).to have_selector 'strong', text: '医院名'
           expect(page).to have_selector 'strong', text: 'メールアドレス'
-          expect(page).to have_selector 'td', text: "#{ @user.name }"
-          expect(page).to have_selector 'td', text: "#{ @user.email }"
+          expect(page).to have_selector 'td', text: @user.name.to_s
+          expect(page).to have_selector 'td', text: @user.email.to_s
           expect(page).to have_link '編集'
           expect(page).to have_link '指示書作成'
           expect(page).to have_link '指示書一覧 (完)'

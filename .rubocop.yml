@@ -56,6 +56,9 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
 
+Metrics/ClassLength:
+  Enabled: false
+
 # ハッシュの記法はロケット記法ではなくruby1.9のハッシュ記法を使いますよ」ということを表します。
 HashSyntax:
   EnforcedStyle: ruby19

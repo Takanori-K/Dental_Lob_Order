@@ -5,17 +5,17 @@ RSpec.describe 'Users', type: :system do
     @user = FactoryBot.create(:user)
     @admin = FactoryBot.create(:admin)
     @order = @user.orders.create!(
-      patient_name: "テスト",
-      sex: "男",
-      color: "a1",
-      note: "上顎１番",
-      metal: "クインテス",
-      content: "AC",
-      crown: "単冠",
-      first_try: '2030-03-15-00:00:00',
-      reception_date: '2030-03-03',
-      complete_day: '2030-10-26-00:00:00'
-    )
+                patient_name: "テスト",
+                sex: "男",
+                color: "a1",
+                note: "上顎１番",
+                metal: "クインテス",
+                content: "AC",
+                crown: "単冠",
+                first_try: '2030-03-15-00:00:00',
+                reception_date: '2030-03-03',
+                complete_day: '2030-10-26-00:00:00'
+              )
   end
 
   describe 'ログイン後' do
@@ -102,6 +102,42 @@ RSpec.describe 'Users', type: :system do
         end
       end
     end
+
+    describe '歯科医院のアクセスできるページの要素検証' do
+      context "マイページに遷移" do
+        it "マイページの要素検証" do
+          visit user_path(@user)
+
+          expect(page).to have_selector 'h1', text: 'マイページ'
+          expect(page).to have_selector("img[src$='/default.png']")
+          expect(page).to have_selector 'strong', text: '医院名'
+          expect(page).to have_selector 'strong', text: 'メールアドレス'
+          expect(page).to have_selector 'td', text: "#{ @user.name }"
+          expect(page).to have_selector 'td', text: "#{ @user.email }"
+          expect(page).to have_link '編集'
+          expect(page).to have_link '指示書作成'
+          expect(page).to have_link '指示書一覧 (完)'
+          expect(page).to have_selector 'span', text: '申請中の技工物'
+          expect(page).to have_link 'ビデオ通話'
+          expect(page).to have_link 'Previous'
+          expect(page).to have_link 'Next'
+        end
+      end
+      context "指示書一覧（完了済）に遷移" do
+        it "指示書一覧（完了済）の要素検証" do
+          visit user_orders_path(user_id: @user.id)
+
+          expect(page).to have_selector 'h1', text: '指示書一覧（完了済）'
+          expect(page).to have_selector '.label', text: '患者名'
+          expect(page).to have_selector '.label', text: '日付'
+          expect(page).to have_button '検索'
+          expect(page).to have_selector 'th', text: '患者名'
+          expect(page).to have_selector 'th', text: '申請日'
+          expect(page).to have_selector 'th', text: '詳細'
+          expect(page).to have_link 'マイページ'
+        end
+      end
+    end
   end
 
   describe '管理者ログイン後' do
@@ -134,6 +170,23 @@ RSpec.describe 'Users', type: :system do
     end
 
     describe '管理者のアクセスできるページの要素検証' do
+      context "マイページに遷移" do
+        it "マイページの要素検証" do
+          visit user_path(@admin)
+
+          expect(page).to have_selector 'h1', text: 'マイページ'
+          expect(page).to have_selector("img[src$='/default.png']")
+          expect(page).to have_selector 'strong', text: '医院名'
+          expect(page).to have_selector 'strong', text: 'メールアドレス'
+          expect(page).to have_selector 'td', text: '管理者'
+          expect(page).to have_selector 'td', text: 'admin1@email.com'
+          expect(page).to have_link '編集'
+          expect(page).to have_link 'Previous'
+          expect(page).to have_link 'Next'
+          expect(page).to have_selector 'span', text: '新着技工物'
+          expect(page).to have_selector 'span', text: '歯科医院一覧'
+        end
+      end
       context "歯科医院一覧ページに遷移" do
         it "歯科医院一覧の要素検証" do
           visit users_path

@@ -63,6 +63,7 @@
 
 <script>
   const Peer = window.Peer;
+  const private = gon.skyway_key;
 
   (async function main() {
     const localLayout = document.getElementById('local-video');
@@ -125,7 +126,7 @@
 
     // eslint-disable-next-line require-atomic-updates
     const peer = (window.peer = new Peer({
-      key: "56ce0219-dc92-4ccb-98e3-4fe9bc9be693",
+      key: private,
       debug: 3,
     }));
 

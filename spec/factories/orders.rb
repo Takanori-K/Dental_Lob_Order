@@ -12,7 +12,7 @@ FactoryBot.define do
     complete_day            { DateTime.current + 10.day }
   end
 
-  factory :order2, class: Order do
+  factory :one_order, class: Order do
     association :user
     patient_name            { "テスト" }
     sex                     { "男" }

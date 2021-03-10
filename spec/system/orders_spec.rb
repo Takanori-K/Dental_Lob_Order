@@ -1,13 +1,26 @@
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :system do
-  let!(:admin) { create(:admin) }
   before do
     @user = FactoryBot.create(:user)
+    @admin = FactoryBot.create(:admin)
+    @order = @user.orders.create!(
+      patient_name: "テスト",
+      sex: "男",
+      color: "a1",
+      note: "上顎１番",
+      metal: "クインテス",
+      content: "AC",
+      crown: "単冠",
+      first_try: '2030-03-15-00:00:00',
+      reception_date: '2030-03-03',
+      complete_day: '2030-10-26-00:00:00'
+    )
   end
 
   describe 'ログイン後' do
     before { login(@user) }
+
     describe '指示書作成' do
       context "必須項目の入力値が正常" do
         it "指示書作成が成功" do
@@ -20,7 +33,9 @@ RSpec.describe 'Users', type: :system do
           fill_in 'order[first_try]', with: DateTime.current + 1.day
           fill_in 'order[complete_day]', with: DateTime.current + 2.day
           find('#reception', visible: false)
+
           click_button '指示書作成'
+
           expect(current_path).to eq user_path(@user)
           expect(page).to have_content '技工指示書を新規作成しました。'
         end
@@ -36,7 +51,9 @@ RSpec.describe 'Users', type: :system do
           fill_in 'order[first_try]', with: nil
           fill_in 'order[complete_day]', with: nil
           find('#reception', visible: false)
+
           click_button '指示書作成'
+
           expect(page).to have_content '患者名を入力してください'
           expect(page).to have_content '部位・注意事項を入力してください'
           expect(page).to have_content '注文内容にレ点チェックを入れてください。'
@@ -46,19 +63,6 @@ RSpec.describe 'Users', type: :system do
 
       context "作成された指示書が更新できるか" do
         it "指示書の更新ができる" do
-          @order = @user.orders.create!(
-            patient_name: "テスト",
-            sex: "男",
-            color: "a1",
-            note: "上顎１番",
-            metal: "クインテス",
-            content: "AC",
-            crown: "単冠",
-            first_try: '2030-03-15-00:00:00',
-            reception_date: '2030-03-03',
-            complete_day: '2030-10-26-00:00:00',
-          )
-
           visit edit_user_order_path(id: @order.id, user_id: @user.id)
 
           fill_in '患者名', with: '患者'
@@ -95,6 +99,52 @@ RSpec.describe 'Users', type: :system do
           expect(page).to have_content '07月03日(水) 00時00分'
           expect(page).to have_content '09月22日(日) 00時00分'
           expect(page).to have_content '10月23日(水) 00時00分'
+        end
+      end
+    end
+  end
+
+  describe '管理者ログイン後' do
+    before { login(@admin) }
+
+    describe '指示書の製作物の完成' do
+      context "必須項目にチェックがある" do
+        it "指示書が完了表示になる" do
+          visit user_order_path(id: @order.id, user_id: @user.id)
+          check 'admin-check'
+          fill_in 'order[weight]', with: '1.5'
+
+          click_button '技工物完了'
+
+          expect(current_path).to eq user_path(@admin)
+          expect(page).to have_content '技工物の製作が完了しました。'
+        end
+      end
+      context "必須項目にチェックがなし" do
+        it "指示書の完成表示が失敗" do
+          visit user_order_path(id: @order.id, user_id: @user.id)
+          uncheck 'admin-check'
+          fill_in 'order[weight]', with: '1.5'
+
+          click_button '技工物完了'
+
+          expect(page).to have_content '必須項目が空欄です。'
+        end
+      end
+    end
+
+    describe '管理者のアクセスできるページの要素検証' do
+      context "歯科医院一覧ページに遷移" do
+        it "歯科医院一覧の要素検証" do
+          visit users_path
+
+          expect(page).to have_selector 'h1', text: '歯科医院一覧'
+          expect(page).to have_selector("img[src$='/default.png']")
+          expect(page).to have_selector '.title', text: '歯科医院一覧'
+          expect(page).to have_link '指示書一覧 (完)'
+          expect(page).to have_link 'ビデオ通話'
+          expect(page).to have_link '編集'
+          expect(page).to have_link '削除'
         end
       end
     end

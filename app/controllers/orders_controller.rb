@@ -79,7 +79,7 @@ class OrdersController < ApplicationController
       flash.now[:alert] = "必須項目が空欄です。"
       render :show
     else
-      @order.update_attributes(order_params)
+      @order.update_attributes(admin_params)
       flash[:notice] = "技工物の製作が完了しました。"
       NotificationMailer.complete_order_mail(@user, @order, @admin).deliver
       redirect_to user_url(current_user)
@@ -103,6 +103,10 @@ class OrdersController < ApplicationController
     def edit_params
       params.require(:order).permit(:patient_name, :sex, :color, :note, { content: [] }, :content_other, :other_text, :crown, :metal, :weight, :first_try, :second_try,
                                     :complete_day, :reception_date, :finished, :image_1, :image_1_cache, :remove_image_1, :image_2, :image_2_cache, :remove_image_2, :image_3, :image_3_cache, :remove_image_3)
+    end
+
+    def admin_params
+      params.require(:order).permit(:weight, :finished)
     end
 
     def reservation_search_params

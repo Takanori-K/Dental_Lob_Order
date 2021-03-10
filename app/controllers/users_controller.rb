@@ -20,7 +20,9 @@ class UsersController < ApplicationController
     @new = Order.where(user_id: @user.id).where(finished: [nil, "false"])
   end
 
-  def video_room; end
+  def video_room
+    gon.skyway_key = ENV['SKYWAY_KEY']
+  end
 
   def new
     @user = User.new

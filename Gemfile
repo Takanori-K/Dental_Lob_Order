@@ -55,6 +55,10 @@ group :test do
   gem 'webdrivers'
 end
 
+group :production do
+  gem 'pg', '0.20.0'
+end
+
 # Windows環境ではtzinfo-dataというgemを含める必要があります
 # Mac環境でもこのままでOKです
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

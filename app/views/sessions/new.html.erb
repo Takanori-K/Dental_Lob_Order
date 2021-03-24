@@ -37,24 +37,10 @@
         <% end %>
 
         <p>
-          <%= link_to '/auth/facebook', class: "button is-link has-text-weight-semibold" do %>
-            <span class="icon">
-              <i class="fab fa-facebook"></i>
-            </span>
-            <span>
-              Facebookアカウントでログイン
-            </span>
-          <% end %>
+          <%= link_to "管理者ログイン", admin_guest_login_path, method: :post, class: "button admin-btn has-text-weight-semibold" %>
         </p></br>
         <P>
-          <%= link_to '/auth/line', class: "button is-success has-text-weight-semibold" do %>
-            <span class="icon">
-              <i class="fab fa-line"></i>
-            </span>
-            <span>
-              LINEアカウントでログイン
-            </span>
-          <% end %>
+          <%= link_to "ゲストログイン（歯科医院）", guest_login_path, method: :post, class: "button guest-btn has-text-weight-semibold" %>
         </P><br>
         <p class="has-text-weight-semibold">
           <font color="white">ユーザー登録がまだの場合は</font><%= link_to new_user_path, :style=>"background: #32CD32;  color: white;", class: "button" do %>

@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   # ログイン機能
   get    '/login', to: 'sessions#new'
   post   '/login', to: 'sessions#create'
+  post   '/guest_login', to: 'sessions#new_guest'
+  post   '/admin_guest_login', to: 'sessions#new_admin_guest'
   delete '/logout', to: 'sessions#destroy'
   resources :users do
     member do

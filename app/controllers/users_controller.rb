@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user,               only: %i[show video_room edit update destroy]
   before_action :logged_in_user,         only: %i[index show video_room edit update destroy]
+  before_action :ensure_normal_user,     only: :update
   before_action :admin_user,             only: %i[index destroy]
   before_action :logged_in_new_or_login, only: :new
   before_action :admin_or_correct_user,  only: %i[show video_room edit update]
@@ -80,5 +81,11 @@ class UsersController < ApplicationController
 
     def set_user
       @user = User.find(params[:id])
+    end
+
+    def ensure_normal_user
+      return unless params[:user][:email].downcase == "admin@email.com"
+
+      redirect_to user_path(current_user), alert: "管理者のアカウントは編集できません。"
     end
 end

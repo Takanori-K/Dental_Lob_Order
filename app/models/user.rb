@@ -78,6 +78,19 @@ class User < ApplicationRecord
     end
   end
 
+  def self.guest
+    find_or_create_by!(email: "guest@email.com") do |user|
+      user.name = "ゲストユーザー（歯科医院）"
+      user.password = "password"
+    end
+  end
+
+  def self.guest_admin
+    find_or_create_by!(email: "admin@email.com") do |user|
+      user.password = "password"
+    end
+  end
+
   def blank_uid?
     uid.blank? || provider.blank?
   end

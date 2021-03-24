@@ -23,6 +23,26 @@ span.sub-info {
   }
 }
 
+p {
+  .admin-btn {
+    color: #fff;
+    background-color: #F4A460;
+  }
+
+  .admin-btn:hover {
+    color: #fff;
+  }
+
+  .guest-btn {
+    color: #fff;
+    background-color: rgb(255, 153, 112);
+  }
+
+  .guest-btn:hover {
+    color: #fff;
+  }
+}
+
 @media screen and ( max-width: 1050px ) {
   #form-layout {
     width: 70%;

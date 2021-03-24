@@ -24,9 +24,21 @@ class SessionsController < ApplicationController
     end
   end
 
+  def new_guest
+    user = User.guest
+    log_in user
+    redirect_to user_url(user), notice: '（歯科医院）としてログインしました。'
+  end
+
+  def new_admin_guest
+    user = User.guest_admin
+    log_in user
+    redirect_to user_url(user), notice: '（管理者）としてログインしました。'
+  end
+
   def destroy
     log_out if logged_in?
     flash[:notice] = "ログアウトしました。"
-    redirect_to root_url
+    redirect_to root_path
   end
 end

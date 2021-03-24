@@ -1,8 +1,9 @@
 <% provide(:title, 'Order_edit') %>
 <%= form_with(model: @order, url: user_order_path(@user, @order), local: true, method: :patch) do |f| %>
 <section class="section">
-  <ul class="order-image">
-  </ul>
+
+  <ul class="order-image"></ul>
+
   <div class="container">
       <h1 class="title has-text-centered">
         指示書編集

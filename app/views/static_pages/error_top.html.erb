@@ -1,0 +1,27 @@
+<html id="html-error-layout">
+  <body id="error-body">
+    <ul class="error-top-background">
+    </ul>
+
+    <div class="error-container">
+      <h1 class="main-title">
+        Dental Lab Order
+      </h1>
+      <div class="error-layout">
+        <div class="layout-body">
+          <div class="container has-text-centered">
+            <h1 class="has-text-centered">
+              このページはご利用いただけません
+            </h1>
+            <p>
+              リンクに問題があるか、アクセス制限の可能性があります。
+            </p>
+            <span>
+              <%= link_to "マイページに戻る", user_path(current_user), data: {"turbolinks" => false} %>
+            </span>
+          </div>
+        </div>
+      </div>
+    <div>
+  </body>
+<html>

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'static_pages#top'
+  get 'error_top', to: "static_pages#error_top"
 
   # ログイン機能
   get    '/login', to: 'sessions#new'

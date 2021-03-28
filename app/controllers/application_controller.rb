@@ -20,24 +20,21 @@ class ApplicationController < ActionController::Base
   def admin_user_order_edit
     return unless current_user.admin?
 
-    flash[:danger] = "アクセス権限がありません。"
-    redirect_to root_url
+    redirect_to error_top_url
   end
 
   def admin_or_correct_user
     @user = User.find(params[:user_id]) if @user.blank?
     return if current_user?(@user) || current_user.admin?
 
-    flash[:alert] = "アクセス権限がありません。"
-    redirect_to(root_url)
+    redirect_to error_top_url
   end
 
   def correct_user_orders
     @user = User.find(params[:user_id]) if @user.blank?
     return if current_user?(@user)
 
-    flash[:alert] = "アクセス権限がありません。"
-    redirect_to(root_url)
+    redirect_to error_top_url
   end
 
     # アクセスしたユーザーが現在ログインしているユーザーか確認します。
@@ -45,15 +42,13 @@ class ApplicationController < ActionController::Base
     @user = User.find(params[:id])
     return if current_user?(@user)
 
-    flash[:alert] = "アクセス権限がありません。"
-    redirect_to(root_url)
+    redirect_to error_top_url
   end
 
   def admin_user
     return if current_user.admin?
 
-    flash[:alert] = "アクセス権限がありません。"
-    redirect_to(root_url)
+    redirect_to error_top_url
   end
 
   def finished_edit

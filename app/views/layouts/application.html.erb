@@ -19,7 +19,7 @@
     <%= render 'layouts/shim' %>
   </head>
   <body>
-    <%= render 'layouts/header' %>
+    <%= render 'layouts/header' unless current_page?(error_top_path) %>
 
     <% if flash[:notice] %>
       <div class="notification is-info">

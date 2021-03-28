@@ -3,11 +3,11 @@ require 'carrierwave/storage/file'
 require 'carrierwave/storage/fog'
 
 CarrierWave.configure do |config|
-  if Rails.env.production? # 本番環境の場合はS3へアップロード
+  #if Rails.env.production? # 本番環境の場合はS3へアップロード
     config.storage :fog
     config.fog_provider = 'fog/aws'
     config.fog_directory = ENV['AWS_S3_BUCKET'] # バケット名
-    config.asset_host = 'https://takanori-private-image.s3.amazonaws.com'
+    config.asset_host = 'https://s3-ap-northeast-1.amazonaws.com/takanori-private-image'
     config.fog_public = false
     config.fog_credentials = {
       provider: 'AWS',
@@ -16,8 +16,8 @@ CarrierWave.configure do |config|
       region: 'ap-northeast-1', # リージョン
       path_style: true
     }
-  else # 本番環境以外の場合はアプリケーション内にアップロード
-    config.storage :file
-    config.enable_processing = false if Rails.env.test?
-  end
+  #else # 本番環境以外の場合はアプリケーション内にアップロード
+    #config.storage :file
+    #config.enable_processing = false if Rails.env.test?
+  #end
 end

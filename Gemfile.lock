@@ -192,7 +192,6 @@ GEM
     parallel (1.20.1)
     parser (3.0.0.0)
       ast (~> 2.4.1)
-    pg (0.20.0)
     public_suffix (4.0.6)
     puma (3.12.6)
     racc (1.5.2)
@@ -363,7 +362,6 @@ DEPENDENCIES
   omniauth
   omniauth-facebook
   omniauth-line
-  pg (= 0.20.0)
   puma (~> 3.7)
   rails (~> 5.1.6)
   rails-i18n

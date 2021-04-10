@@ -1,6 +1,6 @@
 class NotificationMailer < ApplicationMailer
 
-  default from: "kaku.takanori.1026@gmail.com"
+  default from: ENV['USER_NAME']
 
   def complete_mail(user, order, admin)
     @user = user

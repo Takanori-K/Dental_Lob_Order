@@ -3,6 +3,13 @@
 # CircleCIのバージョン。最新が2.1
 version: 2.0
 
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build:
+          context: Dental-Lab-Order
+
 # 走らせるコンテナの指定。無料枠だと1つのみ
 jobs:
   # jobsが一つの場合は、名前がbuildの必要あり
@@ -17,7 +24,6 @@ jobs:
 
       # documented at https://circleci.com/docs/2.0/circleci-images/
       - image: circleci/mysql:5.7
-
     # 自身のアプリディレクトリ名を設定
     working_directory: ~/Dental_Lab_Order
 
@@ -25,7 +31,6 @@ jobs:
     steps:
       # CI環境上のworking_directoryの場所にgitリポジトリをコピーする
       - checkout
-
       # bundle install高速化のため、キャッシュを利用
       - restore_cache:
           keys:
@@ -57,6 +62,17 @@ jobs:
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
 
+      # rubocopテスト
+      - run:
+          name: run rubocop
+          command: bundle exec rubocop
+
+      - run:
+          name: "echo an env var that is part of our context"
+          command: |
+            echo $USER_NAME
+            echo $USER_PASSWORD
+
       # rspecテスト
       - run:
           name: run tests
@@ -76,11 +92,6 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
-
-      # rubocopテスト
-      - run:
-          name: run rubocop
-          command: bundle exec rubocop
 
       # capistranoのssh接続用秘密鍵の追加
     # - add_ssh_keys:

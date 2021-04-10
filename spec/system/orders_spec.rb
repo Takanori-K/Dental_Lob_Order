@@ -109,7 +109,7 @@ RSpec.describe 'Users', type: :system do
           visit user_path(@user)
 
           expect(page).to have_selector 'h1', text: 'マイページ'
-          expect(page).to have_selector("img[src$='/default.png']")
+          expect(page).to have_selector("img[src$='https://takanori-private-image.s3-ap-northeast-1.amazonaws.com/background-image/facility_default.png']")
           expect(page).to have_selector 'strong', text: '医院名'
           expect(page).to have_selector 'strong', text: 'メールアドレス'
           expect(page).to have_selector 'td', text: @user.name.to_s
@@ -175,7 +175,7 @@ RSpec.describe 'Users', type: :system do
           visit user_path(@admin)
 
           expect(page).to have_selector 'h1', text: 'マイページ'
-          expect(page).to have_selector("img[src$='/default.png']")
+          expect(page).to have_selector("img[src$='https://takanori-private-image.s3-ap-northeast-1.amazonaws.com/background-image/facility_default.png']")
           expect(page).to have_selector 'strong', text: '医院名'
           expect(page).to have_selector 'strong', text: 'メールアドレス'
           expect(page).to have_selector 'td', text: '管理者'
@@ -192,7 +192,7 @@ RSpec.describe 'Users', type: :system do
           visit users_path
 
           expect(page).to have_selector 'h1', text: '歯科医院一覧'
-          expect(page).to have_selector("img[src$='/default.png']")
+          expect(page).to have_selector("img[src$='https://takanori-private-image.s3-ap-northeast-1.amazonaws.com/background-image/facility_default.png']")
           expect(page).to have_selector '.title', text: '歯科医院一覧'
           expect(page).to have_link '指示書一覧 (完)'
           expect(page).to have_link 'ビデオ通話'

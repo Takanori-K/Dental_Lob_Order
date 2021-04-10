@@ -19,6 +19,7 @@ gem 'font-awesome-rails'
 gem 'carrierwave'
 gem 'fog-aws'
 gem 'mini_magick'
+gem "mimemagic", "~> 0.3.10"
 gem 'active_decorator'
 gem 'dotenv-rails'
 gem 'gon'
@@ -54,10 +55,6 @@ group :test do
   gem 'selenium-webdriver'
   gem 'webdrivers'
 end
-
-# group :production do
-  # gem 'pg', '0.20.0'
-# end
 
 # Windows環境ではtzinfo-dataというgemを含める必要があります
 # Mac環境でもこのままでOKです

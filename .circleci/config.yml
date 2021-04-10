@@ -31,13 +31,6 @@ jobs:
     steps:
       # CI環境上のworking_directoryの場所にgitリポジトリをコピーする
       - checkout
-
-      - run:
-          name: "echo an env var that is part of our context"
-          command: |
-            echo $USER_NAME
-            echo $USER_PASSWORD
-
       # bundle install高速化のため、キャッシュを利用
       - restore_cache:
           keys:
@@ -69,6 +62,17 @@ jobs:
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
 
+      # rubocopテスト
+      - run:
+          name: run rubocop
+          command: bundle exec rubocop
+
+      - run:
+          name: "echo an env var that is part of our context"
+          command: |
+            echo $USER_NAME
+            echo $USER_PASSWORD
+
       # rspecテスト
       - run:
           name: run tests
@@ -88,11 +92,6 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
-
-      # rubocopテスト
-      - run:
-          name: run rubocop
-          command: bundle exec rubocop
 
       # capistranoのssh接続用秘密鍵の追加
     # - add_ssh_keys:

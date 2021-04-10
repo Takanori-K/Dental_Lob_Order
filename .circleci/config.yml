@@ -4,7 +4,8 @@
 version: 2.0
 
 workflows:
-  test-env-vars:
+  version: 2
+  build_and_deploy:
     jobs:
       - build:
           context: Dental-Lab-Order

@@ -71,3 +71,4 @@ AllCops:
     - config/unicorn_staging.rb
     - tmp/**/*
     - 'test/test_helper.rb'
+    - "vendor/**/*"

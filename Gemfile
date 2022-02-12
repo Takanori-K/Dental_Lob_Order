@@ -23,7 +23,7 @@ gem "mimemagic", "~> 0.3.10"
 gem 'active_decorator'
 gem 'dotenv-rails'
 gem 'gon'
-gem 'puma',         '~> 3.7'
+gem 'puma',         '~> 4.3'
 gem 'sass-rails',   '~> 5.0'
 gem 'uglifier',     '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
